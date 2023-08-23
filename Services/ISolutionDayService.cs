@@ -5,15 +5,15 @@ namespace AdventOfCode.Services
         /// <summary>
         /// Execute this day's first half
         /// </summary>
-        /// <param name="send"></param>
+        /// <param name="example"></param>
         /// <returns></returns>
-        string FirstHalf();
+        string FirstHalf(bool example);
 
         /// <summary>
         /// Execute this day's second half
         /// </summary>
-        /// <param name="send"></param>
+        /// <param name="example"></param>
         /// <returns></returns>
-        string SecondHalf();
+        string SecondHalf(bool example);
     }
 }

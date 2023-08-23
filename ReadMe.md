@@ -28,14 +28,9 @@ Feel free to copy this template and generate your own solutions.
       - Visit `https://localhost:5001/swagger` in your browser
 
 ## Puzzle Helper
-This allows you to easily create the needed input files and services.
+This allows you to easily create the needed input files and services as well as submitting answers.
 
-If you would like to use this project's template for you own solution and inputs
-1. First delete the daily service files (This is all of the folders named after a year in the `Services` folder).
-1. Next in the `PuzzleHelper` folder, create a `Cookie.txt` file and add your own cookie that gets created when logging into the Advent of Code website. If you open the Network tab in your browser's Dev Tools while on the site, you'll see the cookie in the API calls that are made.
-1. Finally, run the project and use the Puzzle Helper API (`POST api/puzzle-helper`) to import your inputs and create fresh services
-
-The program is idempotent (You can run this multiple times as it will only add files if they are needed.)
+In the `PuzzleHelper` folder, create a `Cookie.txt` file and add your own cookie that gets created when logging into the Advent of Code website. If you open the Network tab in your browser's Dev Tools while on the site, you'll see the cookie in the API calls that are made.
 
 ### Automation
 The Puzzle Helper does follow the automation guidelines on the [/r/adventofcode community wiki](https://www.reddit.com/r/adventofcode/wiki/faqs/automation).
@@ -53,15 +48,18 @@ Specifically:
    - year (Ex. 2022) (Defaults to 2015)
    - day (Ex. 14) (Defaults to 1)
    - secondHalf (Ex. true) (Defaults to false)
-   - send (Ex. true) (Defaults to false)
+   - send (Ex. true) (Defaults to false) Submit the answer to the AoC website
+   - example (Ex. true) (Defaults to false) Use an example file instead of the regular input, you must add the example at `Inputs/<YYYY>/<DD>_example.txt`
 - Ex. `GET api/run-solution?year=2022&day=14&secondHalf=true&send=true`
 
-Runs a specific day's solution, posts the answer to Advent of Code, and returns the result from Advent of Code
+Runs a specific day's solution, and optionally posts the answer to Advent of Code and returns the result.
 
 ### POST `api/puzzle-helper`
 
 Imports all missing inputs from Advent of Code as well as creating missing service files.
 This can be run before the event starts to pre-emptively populate the service files for the upcoming advent as well as importing the past advent inputs.
+
+The program is idempotent (You can run this multiple times as it will only add files if they are needed.)
 
 ### POST `api/puzzle-helper-daily`
 - Query parameters
@@ -71,6 +69,8 @@ This can be run before the event starts to pre-emptively populate the service fi
 
 Imports the input from Advent of Code for a specific day. Useful when you want a streamlined version of the above call to only check for a specific day.
 
+The program is idempotent (You can run this multiple times as it will only add files if they are needed.)
+
 ### POST `api/init`
 
 Clears existing input files and services files and finally runs the `api/puzzle-helper` function to get fresh inputs and service files.
@@ -79,6 +79,3 @@ This only needs to be run once for a new user.
 ## Extra Notes
 - The admin of Advent of Code have requested that puzzle inputs be cached (To reduce load on the system) and not be made publically available (To make it harder to completely copy the site)
 - This puzzle helper currently does not use the leaderboard api, but if you choose to copy this template and talk to the leaderboard, make sure to throttle the and cache the calls to not overload the server
-
-## TODO
-- Add an easy way to switch between the example and real input

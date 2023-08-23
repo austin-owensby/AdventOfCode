@@ -20,12 +20,12 @@ namespace AdventOfCode.Services
         /// <param name="send"></param>
         /// <returns></returns>
         /// <exception cref="SolutionNotFoundException"></exception>
-        public async Task<string> GetSolution(int year, int day, bool secondHalf, bool send)
+        public async Task<string> GetSolution(int year, int day, bool secondHalf, bool send, bool example)
         {
             ISolutionDayService service = FindSolutionService(year, day);
 
             // Run the specific solution
-            string answer = secondHalf ? service.SecondHalf() : service.FirstHalf();
+            string answer = secondHalf ? service.SecondHalf(example) : service.FirstHalf(example);
 
             // Optionally submit the answer to AoC
             if (send) {

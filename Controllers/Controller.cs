@@ -18,11 +18,11 @@ namespace AdventOfCode.Controllers
         }
 
         [HttpGet("run-solution")]
-        public async Task<ActionResult<string>> GetSolution([FromQuery, BindRequired] int year = Globals.START_YEAR, [FromQuery, BindRequired] int day = 1, bool secondHalf = false, bool send = false)
+        public async Task<ActionResult<string>> GetSolution([FromQuery, BindRequired] int year = Globals.START_YEAR, [FromQuery, BindRequired] int day = 1, bool secondHalf = false, bool send = false, bool example = false)
         {
             try
             {
-                return await solutionService.GetSolution(year, day, secondHalf, send);
+                return await solutionService.GetSolution(year, day, secondHalf, send, example);
             }
             catch (SolutionNotFoundException e)
             {
