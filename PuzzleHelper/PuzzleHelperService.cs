@@ -148,35 +148,6 @@
         return output;
     }
 
-
-    /// <summary>
-    /// Run this once when initializing the project for the first time
-    /// This resets any existing input files and service files
-    /// </summary>
-    /// <returns></returns>
-    public async Task InitializeRepo() {
-        // Delete input files
-        DirectoryInfo di = new(Path.Combine(Environment.CurrentDirectory, "Inputs"));
-
-        foreach (DirectoryInfo dir in di.GetDirectories())
-        {
-            dir.Delete(true); 
-        }
-
-        // Delete service files
-        di = new(Path.Combine(Environment.CurrentDirectory, "Services"));
-
-        foreach (DirectoryInfo dir in di.GetDirectories())
-        {
-            if (int.TryParse(dir.Name, out int year)) {
-                dir.Delete(true); 
-            }
-        }
-
-        // Populate service files
-        await Run();
-    }
-
     /// <summary>
     /// Fetch and write the input file if it doesn't exist
     /// </summary>

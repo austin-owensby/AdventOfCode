@@ -71,11 +71,6 @@ Imports the input from Advent of Code for a specific day. Useful when you want a
 
 The program is idempotent (You can run this multiple times as it will only add files if they are needed.)
 
-### POST `api/init`
-
-Clears existing input files and services files and finally runs the `api/puzzle-helper` function to get fresh inputs and service files.
-This only needs to be run once for a new user.
-
 ## Extra Notes
 - The admin of Advent of Code have requested that puzzle inputs be cached (To reduce load on the system) and not be made publically available (To make it harder to completely copy the site)
 - This puzzle helper currently does not use the leaderboard api, but if you choose to copy this template and talk to the leaderboard, make sure to throttle the and cache the calls to not overload the server
