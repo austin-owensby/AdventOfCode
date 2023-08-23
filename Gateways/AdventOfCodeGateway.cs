@@ -35,7 +35,6 @@ public class AdventOfCodeGateway
     /// <param name="day"></param>
     /// <param name="secondHalf"></param>
     /// <param name="answer"></param>
-    /// <param name="send"></param>
     /// <returns></returns>
     public async Task<string> SubmitAnswer(int year, int day, bool secondHalf, string answer)
     {

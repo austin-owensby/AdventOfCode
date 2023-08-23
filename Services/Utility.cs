@@ -138,7 +138,6 @@ namespace AdventOfCode.Services
         /// <summary>
         /// A quick version of regex that assumes that each element of the list is 1 line and only want the first match
         /// </summary>
-        /// </summary>
         /// <param name="input"></param>
         /// <param name="regex"></param>
         /// <returns></returns>
@@ -218,6 +217,7 @@ namespace AdventOfCode.Services
         /// Mathematical mod (As opposed to C#'s remainder operator '%')
         /// </summary>
         /// <param name="num"></param>
+        /// <param name="mod"></param>
         /// <returns></returns>
         public static int Mod(int num, int mod) {
             if (num >= 0) {
@@ -232,6 +232,7 @@ namespace AdventOfCode.Services
         /// Mathematical mod (As opposed to C#'s remainder operator '%')
         /// </summary>
         /// <param name="num"></param>
+        /// <param name="mod"></param>
         /// <returns></returns>
         public static long Mod(long num, long mod) {
             if (num >= 0) {

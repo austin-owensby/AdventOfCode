@@ -18,6 +18,7 @@ namespace AdventOfCode.Services
         /// <param name="day"></param>
         /// <param name="secondHalf"></param>
         /// <param name="send"></param>
+        /// <param name="example"></param>
         /// <returns></returns>
         /// <exception cref="SolutionNotFoundException"></exception>
         public async Task<string> GetSolution(int year, int day, bool secondHalf, bool send, bool example)

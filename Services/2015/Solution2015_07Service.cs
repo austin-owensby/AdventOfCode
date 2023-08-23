@@ -199,7 +199,7 @@ namespace AdventOfCode.Services
             }
 
             // Use the value from the first half and set it to b
-            string[] response = FirstHalf().Split(" ");
+            string[] response = FirstHalf(example).Split(" ");
             string valueString = response[^1];
             string valueStringNoPeriod = valueString.Remove(valueString.Length - 1, 1);
             ushort calculatedValue = ushort.Parse(valueStringNoPeriod);
