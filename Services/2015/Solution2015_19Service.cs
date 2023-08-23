@@ -4,7 +4,7 @@ namespace AdventOfCode.Services
     {
         public Solution2015_19Service() { }
 
-        public string FirstHalf()
+        public string FirstHalf(bool example)
         {
             string data = File.ReadAllText(Path.Combine(Environment.CurrentDirectory, "Inputs", "2015", "19.txt"));
 
@@ -48,7 +48,7 @@ namespace AdventOfCode.Services
             return distinctMolecules.Count.ToString();
         }
 
-        public string SecondHalf()
+        public string SecondHalf(bool example)
         {
             string data = File.ReadAllText(Path.Combine(Environment.CurrentDirectory, "Inputs", "2015", "19.txt"));
 

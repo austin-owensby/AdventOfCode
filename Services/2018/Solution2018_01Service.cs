@@ -4,7 +4,7 @@ namespace AdventOfCode.Services
     {
         public Solution2018_01Service() { }
 
-        public string FirstHalf()
+        public string FirstHalf(bool example)
         {
             string[] data = File.ReadAllLines(Path.Combine(Environment.CurrentDirectory, "Inputs", "2018", "01.txt"));
             List<int> changes = data.Select(int.Parse).ToList();
@@ -14,7 +14,7 @@ namespace AdventOfCode.Services
             return resultingFrequency.ToString();
         }
 
-        public string SecondHalf()
+        public string SecondHalf(bool example)
         {
             string[] data = File.ReadAllLines(Path.Combine(Environment.CurrentDirectory, "Inputs", "2018", "01.txt"));
             List<int> changes = data.Select(int.Parse).ToList();

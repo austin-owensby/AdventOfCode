@@ -794,7 +794,7 @@ namespace AdventOfCode.Services
         /// <param name="day"></param>
         /// <param name="example"></param>
         /// <returns></returns>
-        private static List<string> GetInputLines(int year, int day, bool example = false) {
+        public static List<string> GetInputLines(int year, int day, bool example = false) {
             return File.ReadAllLines(Path.Combine(Environment.CurrentDirectory, "Inputs", year.ToString(), $"{day:D2}{(example ? "_example" : string.Empty)}.txt")).ToList();
         }
     }

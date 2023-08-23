@@ -12,9 +12,9 @@ namespace AdventOfCode.Services
             public string Var2 { get; set;} = string.Empty;
         }
 
-        public string FirstHalf()
+        public string FirstHalf(bool example)
         {
-            List<string> lines = File.ReadAllLines(Path.Combine(Environment.CurrentDirectory, "Inputs", "2022", "21.txt")).ToList();
+            List<string> lines = Utility.GetInputLines(2022, 21, example);
 
             List<MonkeyRiddle> riddles = new();
 
@@ -63,9 +63,9 @@ namespace AdventOfCode.Services
             return answer.ToString();
         }
 
-        public string SecondHalf()
+        public string SecondHalf(bool example)
         {
-            List<string> lines = File.ReadAllLines(Path.Combine(Environment.CurrentDirectory, "Inputs", "2022", "21.txt")).ToList();
+            List<string> lines = Utility.GetInputLines(2022, 21, example);
 
             List<MonkeyRiddle> riddles = new();
 

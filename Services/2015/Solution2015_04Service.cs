@@ -7,7 +7,7 @@ namespace AdventOfCode.Services
     {
         public Solution2015_04Service() { }
 
-        public string FirstHalf()
+        public string FirstHalf(bool example)
         {
             string data = File.ReadAllText(Path.Combine(Environment.CurrentDirectory, "Inputs", "2015", "04.txt"));
             data = data.Remove(data.Length - 1, 1); // Remove the newline character
@@ -44,7 +44,7 @@ namespace AdventOfCode.Services
             return data;
         }
 
-        public string SecondHalf()
+        public string SecondHalf(bool example)
         {
             string data = File.ReadAllText(Path.Combine(Environment.CurrentDirectory, "Inputs", "2015", "04.txt"));
             data = data.Remove(data.Length - 1, 1); // Remove the newline character

@@ -28,9 +28,9 @@ namespace AdventOfCode.Services
             public int TimeLeft { get; set; }
         }
 
-        public string FirstHalf()
+        public string FirstHalf(bool example)
         {
-            List<string> data = File.ReadAllLines(Path.Combine(Environment.CurrentDirectory, "Inputs", "2018", "07.txt")).ToList();
+            List<string> data = Utility.GetInputLines(2018, 07, example);
 
             List<Instruction> instructions = data.Select(d => new Instruction(d)).ToList();
 
@@ -69,9 +69,9 @@ namespace AdventOfCode.Services
             return order.ToString();
         }
 
-        public string SecondHalf()
+        public string SecondHalf(bool example)
         {
-            List<string> data = File.ReadAllLines(Path.Combine(Environment.CurrentDirectory, "Inputs", "2018", "07.txt")).ToList();
+            List<string> data = Utility.GetInputLines(2018, 07, example);
 
             List<Instruction> instructions = data.Select(d => new Instruction(d)).ToList();
 

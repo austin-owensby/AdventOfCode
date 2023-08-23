@@ -18,9 +18,9 @@ namespace AdventOfCode.Services
             public long Size { get; set; }
         }
 
-        public string FirstHalf()
+        public string FirstHalf(bool example)
         {
-            List<string> lines = File.ReadAllLines(Path.Combine(Environment.CurrentDirectory, "Inputs", "2022", "07.txt")).ToList();
+            List<string> lines = Utility.GetInputLines(2022, 07, example);
 
             List<Directory> directories = new(){
                 new() {
@@ -136,9 +136,9 @@ namespace AdventOfCode.Services
             return answer.ToString();
         }
 
-        public string SecondHalf()
+        public string SecondHalf(bool example)
         {
-            List<string> lines = File.ReadAllLines(Path.Combine(Environment.CurrentDirectory, "Inputs", "2022", "07.txt")).ToList();
+            List<string> lines = Utility.GetInputLines(2022, 07, example);
 
             List<Directory> directories = new(){
                 new() {

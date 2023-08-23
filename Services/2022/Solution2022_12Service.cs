@@ -12,9 +12,9 @@ namespace AdventOfCode.Services
             public int DistanceTraveled { get; set; }
         }
 
-        public string FirstHalf()
+        public string FirstHalf(bool example)
         {
-            List<string> lines = File.ReadAllLines(Path.Combine(Environment.CurrentDirectory, "Inputs", "2022", "12.txt")).ToList();
+            List<string> lines = Utility.GetInputLines(2022, 12, example);
 
             string startLine = lines.First(line => line.Contains("S"));
             string endLine = lines.First(line => line.Contains("E"));
@@ -166,10 +166,10 @@ namespace AdventOfCode.Services
             return answer.ToString();
         }
 
-        public string SecondHalf()
+        public string SecondHalf(bool example)
         {
 
-            List<string> lines = File.ReadAllLines(Path.Combine(Environment.CurrentDirectory, "Inputs", "2022", "12.txt")).ToList();
+            List<string> lines = Utility.GetInputLines(2022, 12, example);
 
             string endLine = lines.First(line => line.Contains("E"));
 

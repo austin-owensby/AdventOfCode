@@ -4,7 +4,7 @@ namespace AdventOfCode.Services
     {
         public Solution2015_02Service() { }
 
-        public string FirstHalf()
+        public string FirstHalf(bool example)
         {
             int total = 0;
 
@@ -32,7 +32,7 @@ namespace AdventOfCode.Services
             return total.ToString();
         }
 
-        public string SecondHalf()
+        public string SecondHalf(bool example)
         {
             int total = 0;
 

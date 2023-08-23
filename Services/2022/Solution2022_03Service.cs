@@ -4,9 +4,9 @@ namespace AdventOfCode.Services
     {
         public Solution2022_03Service() { }
 
-        public string FirstHalf()
+        public string FirstHalf(bool example)
         {
-            List<string> lines = File.ReadAllLines(Path.Combine(Environment.CurrentDirectory, "Inputs", "2022", "03.txt")).ToList();
+            List<string> lines = Utility.GetInputLines(2022, 03, example);
 
             int sum = lines.Sum(line =>
             {
@@ -21,9 +21,9 @@ namespace AdventOfCode.Services
             return sum.ToString();
         }
 
-        public string SecondHalf()
+        public string SecondHalf(bool example)
         {
-            List<string> lines = File.ReadAllLines(Path.Combine(Environment.CurrentDirectory, "Inputs", "2022", "03.txt")).ToList();
+            List<string> lines = Utility.GetInputLines(2022, 03, example);
 
             int sum = lines.Chunk(3).Sum(c =>
             {

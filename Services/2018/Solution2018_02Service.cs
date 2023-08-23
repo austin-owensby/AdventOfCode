@@ -4,7 +4,7 @@ namespace AdventOfCode.Services
     {
         public Solution2018_02Service() { }
 
-        public string FirstHalf()
+        public string FirstHalf(bool example)
         {
             string[] lines = File.ReadAllLines(Path.Combine(Environment.CurrentDirectory, "Inputs", "2018", "02.txt"));
 
@@ -50,7 +50,7 @@ namespace AdventOfCode.Services
             return checksum.ToString();
         }
 
-        public string SecondHalf()
+        public string SecondHalf(bool example)
         {
             string[] lines = File.ReadAllLines(Path.Combine(Environment.CurrentDirectory, "Inputs", "2018", "02.txt"));
 

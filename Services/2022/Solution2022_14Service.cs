@@ -4,9 +4,9 @@ namespace AdventOfCode.Services
     {
         public Solution2022_14Service() { }
 
-        public string FirstHalf()
+        public string FirstHalf(bool example)
         {
-            List<string> lines = File.ReadAllLines(Path.Combine(Environment.CurrentDirectory, "Inputs", "2022", "14.txt")).ToList();
+            List<string> lines = Utility.GetInputLines(2022, 14, example);
 
             List<List<Point>> rockLines = lines.Select(line => line.SplitSubstring(" -> ").QuickRegex(@"(\d+),(\d+)").ToInts().Select(l => new Point()
             {
@@ -135,9 +135,9 @@ namespace AdventOfCode.Services
             return answer.ToString();
         }
 
-        public string SecondHalf()
+        public string SecondHalf(bool example)
         {
-            List<string> lines = File.ReadAllLines(Path.Combine(Environment.CurrentDirectory, "Inputs", "2022", "14.txt")).ToList();
+            List<string> lines = Utility.GetInputLines(2022, 14, example);
 
             List<List<Point>> rockLines = lines.Select(line => line.SplitSubstring(" -> ").QuickRegex(@"(\d+),(\d+)").ToInts().Select(l => new Point()
             {

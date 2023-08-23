@@ -4,9 +4,9 @@ namespace AdventOfCode.Services
     {
         public Solution2022_04Service() { }
 
-        public string FirstHalf()
+        public string FirstHalf(bool example)
         {
-            List<string> lines = File.ReadAllLines(Path.Combine(Environment.CurrentDirectory, "Inputs", "2022", "04.txt")).ToList();
+            List<string> lines = Utility.GetInputLines(2022, 04, example);
 
             int matches = lines.Select(line => line.QuickRegex(@"(\d+)-(\d+),(\d+)-(\d+)").ToInts()).Sum(digits =>
             {
@@ -28,9 +28,9 @@ namespace AdventOfCode.Services
             return matches.ToString();
         }
 
-        public string SecondHalf()
+        public string SecondHalf(bool example)
         {
-            List<string> lines = File.ReadAllLines(Path.Combine(Environment.CurrentDirectory, "Inputs", "2022", "04.txt")).ToList();
+            List<string> lines = Utility.GetInputLines(2022, 04, example);
 
             int matches = lines.Select(line => line.QuickRegex(@"(\d+)-(\d+),(\d+)-(\d+)").ToInts()).Sum(digits =>
             {

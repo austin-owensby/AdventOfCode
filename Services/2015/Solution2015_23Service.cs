@@ -4,7 +4,7 @@ namespace AdventOfCode.Services
     {
         public Solution2015_23Service() { }
 
-        public string FirstHalf()
+        public string FirstHalf(bool example)
         {
             string data = File.ReadAllText(Path.Combine(Environment.CurrentDirectory, "Inputs", "2015", "23.txt"));
             List<string> lines = data.Split('\n').ToList();
@@ -155,7 +155,7 @@ namespace AdventOfCode.Services
             return regB.ToString();
         }
 
-        public string SecondHalf()
+        public string SecondHalf(bool example)
         {
             string data = File.ReadAllText(Path.Combine(Environment.CurrentDirectory, "Inputs", "2015", "23.txt"));
             List<string> lines = data.Split('\n').ToList();

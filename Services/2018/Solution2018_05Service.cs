@@ -4,7 +4,7 @@ namespace AdventOfCode.Services
     {
         public Solution2018_05Service() { }
 
-        public string FirstHalf()
+        public string FirstHalf(bool example)
         {
             string data = File.ReadAllText(Path.Combine(Environment.CurrentDirectory, "Inputs", "2018", "05.txt"));
             data = data.Replace("\n", "").Replace("\r", "");
@@ -52,7 +52,7 @@ namespace AdventOfCode.Services
             return data.Length.ToString();
         }
 
-        public string SecondHalf()
+        public string SecondHalf(bool example)
         {
             string originalData = File.ReadAllText(Path.Combine(Environment.CurrentDirectory, "Inputs", "2018", "05.txt"));
             originalData = originalData.Replace("\n", "").Replace("\r", "");

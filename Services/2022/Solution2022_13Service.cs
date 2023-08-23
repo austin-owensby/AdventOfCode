@@ -4,9 +4,9 @@ namespace AdventOfCode.Services
     {
         public Solution2022_13Service() { }
 
-        public string FirstHalf()
+        public string FirstHalf(bool example)
         {
-            List<string> lines = File.ReadAllLines(Path.Combine(Environment.CurrentDirectory, "Inputs", "2022", "13.txt")).ToList();
+            List<string> lines = Utility.GetInputLines(2022, 13, example);
 
             List<List<string>> packets = lines.ChunkByExclusive(string.IsNullOrEmpty);
 
@@ -25,9 +25,9 @@ namespace AdventOfCode.Services
             return answer.ToString();
         }
 
-        public string SecondHalf()
+        public string SecondHalf(bool example)
         {
-            List<string> lines = File.ReadAllLines(Path.Combine(Environment.CurrentDirectory, "Inputs", "2022", "13.txt")).ToList();
+            List<string> lines = Utility.GetInputLines(2022, 13, example);
             lines = lines.Where(line => !string.IsNullOrEmpty(line)).ToList();
             lines.Add("[[2]]");
             lines.Add("[[6]]");

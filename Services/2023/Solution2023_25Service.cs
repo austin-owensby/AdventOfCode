@@ -4,9 +4,9 @@ namespace AdventOfCode.Services
     {
         public Solution2023_25Service() { }
 
-        public string FirstHalf()
+        public string FirstHalf(bool example)
         {
-            List<string> lines =  File.ReadAllLines(Path.Combine(Environment.CurrentDirectory, "Inputs", "2023", "25.txt")).ToList();
+            List<string> lines =  Utility.GetInputLines(2023, 25, example);
 
             int answer = 0;
 
@@ -17,7 +17,7 @@ namespace AdventOfCode.Services
             return answer.ToString();
         }
 
-        public string SecondHalf()
+        public string SecondHalf(bool example)
         {
             return "There is no problem for Day 25 part 2, solve all other problems to get the last star.";
         }

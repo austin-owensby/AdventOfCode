@@ -4,7 +4,7 @@ namespace AdventOfCode.Services
     {
         public Solution2018_03Service() { }
 
-        public string FirstHalf()
+        public string FirstHalf(bool example)
         {
             string[] lines = File.ReadAllLines(Path.Combine(Environment.CurrentDirectory, "Inputs", "2018", "03.txt"));
 
@@ -37,7 +37,7 @@ namespace AdventOfCode.Services
             return duplicateSquares.ToString();
         }
 
-        public string SecondHalf()
+        public string SecondHalf(bool example)
         {
             string[] lines = File.ReadAllLines(Path.Combine(Environment.CurrentDirectory, "Inputs", "2018", "03.txt"));
 

@@ -4,18 +4,18 @@ namespace AdventOfCode.Services
     {
         public Solution2022_01Service() { }
 
-        public string FirstHalf()
+        public string FirstHalf(bool example)
         {
-            List<string> lines = File.ReadAllLines(Path.Combine(Environment.CurrentDirectory, "Inputs", "2022", "01.txt")).ToList();
+            List<string> lines = Utility.GetInputLines(2022, 01, example);
 
             int answer = lines.ChunkByExclusive(string.IsNullOrWhiteSpace).Select(elf => elf.ToInts().Sum()).Max();
 
             return answer.ToString();
         }
 
-        public string SecondHalf()
+        public string SecondHalf(bool example)
         {
-            List<string> lines = File.ReadAllLines(Path.Combine(Environment.CurrentDirectory, "Inputs", "2022", "01.txt")).ToList();
+            List<string> lines = Utility.GetInputLines(2022, 01, example);
 
             List<int> calories = lines.ChunkByExclusive(string.IsNullOrWhiteSpace).Select(elf => elf.ToInts().Sum()).ToList();
 

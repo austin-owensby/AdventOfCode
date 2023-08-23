@@ -97,9 +97,9 @@ namespace AdventOfCode.Services
             return options.Any() ? options.Min() : (int.MaxValue / 2);
         } 
 
-        public string FirstHalf()
+        public string FirstHalf(bool example)
         {
-            List<string> lines = File.ReadAllLines(Path.Combine(Environment.CurrentDirectory, "Inputs", "2015", "22.txt")).ToList();
+            List<string> lines = Utility.GetInputLines(2015, 22, example);
 
             int bossHitPoints = lines.First().QuickRegex(@"Hit Points: (\d+)").ToInts().First();
             int bossDamage = lines.Last().QuickRegex(@"Damage: (\d+)").ToInts().First();
@@ -112,9 +112,9 @@ namespace AdventOfCode.Services
             return answer.ToString();
         }
 
-        public string SecondHalf()
+        public string SecondHalf(bool example)
         {
-            List<string> lines = File.ReadAllLines(Path.Combine(Environment.CurrentDirectory, "Inputs", "2015", "22.txt")).ToList();
+            List<string> lines = Utility.GetInputLines(2015, 22, example);
 
             int bossHitPoints = lines.First().QuickRegex(@"Hit Points: (\d+)").ToInts().First();
             int bossDamage = lines.Last().QuickRegex(@"Damage: (\d+)").ToInts().First();

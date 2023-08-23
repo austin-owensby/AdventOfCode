@@ -4,9 +4,9 @@ namespace AdventOfCode.Services
     {
         public Solution2022_02Service() { }
 
-        public string FirstHalf()
+        public string FirstHalf(bool example)
         {
-            List<string> lines = File.ReadAllLines(Path.Combine(Environment.CurrentDirectory, "Inputs", "2022", "02.txt")).ToList();
+            List<string> lines = Utility.GetInputLines(2022, 02, example);
 
             int score = 0;
 
@@ -61,9 +61,9 @@ namespace AdventOfCode.Services
             return score.ToString();
         }
 
-        public string SecondHalf()
+        public string SecondHalf(bool example)
         {
-            List<string> lines = File.ReadAllLines(Path.Combine(Environment.CurrentDirectory, "Inputs", "2022", "02.txt")).ToList();
+            List<string> lines = Utility.GetInputLines(2022, 02, example);
             int score = 0;
 
             foreach (string line in lines)

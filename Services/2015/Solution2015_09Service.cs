@@ -4,7 +4,7 @@ namespace AdventOfCode.Services
     {
         public Solution2015_09Service() { }
 
-        public string FirstHalf()
+        public string FirstHalf(bool example)
         {
             string data = File.ReadAllText(Path.Combine(Environment.CurrentDirectory, "Inputs", "2015", "09.txt"));
 
@@ -53,7 +53,7 @@ namespace AdventOfCode.Services
             return minDistance.ToString();
         }
 
-        public string SecondHalf()
+        public string SecondHalf(bool example)
         {
             string data = File.ReadAllText(Path.Combine(Environment.CurrentDirectory, "Inputs", "2015", "09.txt"));
 

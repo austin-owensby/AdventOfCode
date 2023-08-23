@@ -4,9 +4,9 @@ namespace AdventOfCode.Services
     {
         public Solution2019_02Service() { }
 
-        public string FirstHalf()
+        public string FirstHalf(bool example)
         {
-            List<string> lines = File.ReadAllLines(Path.Combine(Environment.CurrentDirectory, "Inputs", "2019", "02.txt")).ToList();
+            List<string> lines = Utility.GetInputLines(2019, 02, example);
             List<int> program = lines.First().Split(",").ToInts();
 
             // Fix 1202 program alarm from puzzle
@@ -47,9 +47,9 @@ namespace AdventOfCode.Services
             return answer.ToString();
         }
 
-        public string SecondHalf()
+        public string SecondHalf(bool example)
         {
-            List<string> lines = File.ReadAllLines(Path.Combine(Environment.CurrentDirectory, "Inputs", "2019", "02.txt")).ToList();
+            List<string> lines = Utility.GetInputLines(2019, 02, example);
 
             int answer = 0;
 

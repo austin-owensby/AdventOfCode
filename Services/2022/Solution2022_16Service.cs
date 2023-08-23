@@ -144,9 +144,9 @@ namespace AdventOfCode.Services
             return maxPressureReleased;
         }
 
-        public string FirstHalf()
+        public string FirstHalf(bool example)
         {
-            List<string> lines = File.ReadAllLines(Path.Combine(Environment.CurrentDirectory, "Inputs", "2022", "16.txt")).ToList();
+            List<string> lines = Utility.GetInputLines(2022, 16, example);
 
             // Parse the file into a list of valves
             Valves = lines.QuickRegex(@"Valve (.+) has flow rate=(\d+); tunnels? leads? to valves? (.+)").Select(valve => new Valve(){
@@ -177,9 +177,9 @@ namespace AdventOfCode.Services
             return answer.ToString();
         }
 
-        public string SecondHalf()
+        public string SecondHalf(bool example)
         {
-            List<string> lines = File.ReadAllLines(Path.Combine(Environment.CurrentDirectory, "Inputs", "2022", "16.txt")).ToList();
+            List<string> lines = Utility.GetInputLines(2022, 16, example);
 
             // Parse the file into a list of valves
             Valves = lines.QuickRegex(@"Valve (.+) has flow rate=(\d+); tunnels? leads? to valves? (.+)").Select(valve => new Valve(){

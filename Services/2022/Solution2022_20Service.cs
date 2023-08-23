@@ -9,7 +9,7 @@ namespace AdventOfCode.Services
             public int OriginalIndex {get; set;}
         }
 
-        public string FirstHalf()
+        public string FirstHalf(bool example)
         {
             List<int> lines = File.ReadAllLines(Path.Combine(Environment.CurrentDirectory, "Inputs", "2022", "20.txt")).ToInts();
 
@@ -47,7 +47,7 @@ namespace AdventOfCode.Services
             return answer.ToString();
         }
 
-        public string SecondHalf()
+        public string SecondHalf(bool example)
         {
             List<long> lines = File.ReadAllLines(Path.Combine(Environment.CurrentDirectory, "Inputs", "2022", "20.txt")).ToLongs();
 

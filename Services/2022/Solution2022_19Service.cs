@@ -80,9 +80,9 @@ namespace AdventOfCode.Services
             return newGeodes;
         }
 
-        public string FirstHalf()
+        public string FirstHalf(bool example)
         {
-            List<string> lines = File.ReadAllLines(Path.Combine(Environment.CurrentDirectory, "Inputs", "2022", "19.txt")).ToList();
+            List<string> lines = Utility.GetInputLines(2022, 19, example);
 
             List<Blueprint> blueprints = lines.QuickRegex(@"Blueprint (\d+): Each ore robot costs (\d+) ore\. Each clay robot costs (\d+) ore\. Each obsidian robot costs (\d+) ore and (\d+) clay\. Each geode robot costs (\d+) ore and (\d+) obsidian\.")
                 .ToInts()
@@ -101,9 +101,9 @@ namespace AdventOfCode.Services
             return answer.ToString();
         } 
 
-        public string SecondHalf()
+        public string SecondHalf(bool example)
         {
-            List<string> lines = File.ReadAllLines(Path.Combine(Environment.CurrentDirectory, "Inputs", "2022", "19.txt")).ToList();
+            List<string> lines = Utility.GetInputLines(2022, 19, example);
 
             List<Blueprint> blueprints = lines.Take(3).QuickRegex(@"Blueprint (\d+): Each ore robot costs (\d+) ore\. Each clay robot costs (\d+) ore\. Each obsidian robot costs (\d+) ore and (\d+) clay\. Each geode robot costs (\d+) ore and (\d+) obsidian\.")
                 .ToInts()

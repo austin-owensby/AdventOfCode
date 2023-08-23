@@ -6,7 +6,7 @@ namespace AdventOfCode.Services
     {
         public Solution2018_04Service() { }
 
-        public string FirstHalf()
+        public string FirstHalf(bool example)
         {
             List<string> data = File.ReadAllLines(Path.Combine(Environment.CurrentDirectory, "Inputs", "2018", "04.txt")).OrderBy(s => s).ToList();
 
@@ -99,7 +99,7 @@ namespace AdventOfCode.Services
             return (guardId * mostFrequentTime.Minute).ToString();
         }
 
-        public string SecondHalf()
+        public string SecondHalf(bool example)
         {
             List<string> data = File.ReadAllLines(Path.Combine(Environment.CurrentDirectory, "Inputs", "2018", "04.txt")).OrderBy(s => s).ToList();
 

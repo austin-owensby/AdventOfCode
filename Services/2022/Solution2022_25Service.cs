@@ -4,9 +4,9 @@ namespace AdventOfCode.Services
     {
         public Solution2022_25Service() { }
 
-        public string FirstHalf()
+        public string FirstHalf(bool example)
         {
-            List<string> lines = File.ReadAllLines(Path.Combine(Environment.CurrentDirectory, "Inputs", "2022", "25.txt")).ToList();
+            List<string> lines = Utility.GetInputLines(2022, 25, example);
 
             long answerDecimal = 0;
 
@@ -78,9 +78,9 @@ namespace AdventOfCode.Services
             return answer.ToString();
         }
 
-        public string SecondHalf()
+        public string SecondHalf(bool example)
         {
-            List<string> lines = File.ReadAllLines(Path.Combine(Environment.CurrentDirectory, "Inputs", "2022", "25.txt")).ToList();
+            List<string> lines = Utility.GetInputLines(2022, 25, example);
 
             int answer = 0;
 

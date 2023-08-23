@@ -19,9 +19,9 @@ namespace AdventOfCode.Services
             }
         }
 
-        public string FirstHalf()
+        public string FirstHalf(bool example)
         {
-            List<string> data = File.ReadAllLines(Path.Combine(Environment.CurrentDirectory, "Inputs", "2018", "06.txt")).ToList();
+            List<string> data = Utility.GetInputLines(2018, 06, example);
 
             List<Point> origins = data.Select(d => new Point(d)).ToList();
 
@@ -62,9 +62,9 @@ namespace AdventOfCode.Services
             return largestArea.ToString();
         }
 
-        public string SecondHalf()
+        public string SecondHalf(bool example)
         {
-            List<string> data = File.ReadAllLines(Path.Combine(Environment.CurrentDirectory, "Inputs", "2018", "06.txt")).ToList();
+            List<string> data = Utility.GetInputLines(2018, 06, example);
 
             List<Point> origins = data.Select(d => new Point(d)).ToList();
 

@@ -4,7 +4,7 @@ namespace AdventOfCode.Services
     {
         public Solution2015_01Service() { }
 
-        public string FirstHalf()
+        public string FirstHalf(bool example)
         {
             string data = File.ReadAllText(Path.Combine(Environment.CurrentDirectory, "Inputs", "2015", "01.txt"));
 
@@ -25,7 +25,7 @@ namespace AdventOfCode.Services
             return floor.ToString();
         }
 
-        public string SecondHalf()
+        public string SecondHalf(bool example)
         {
             string data = File.ReadAllText(Path.Combine(Environment.CurrentDirectory, "Inputs", "2015", "01.txt"));
 
