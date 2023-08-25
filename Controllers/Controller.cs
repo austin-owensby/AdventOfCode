@@ -44,7 +44,6 @@ namespace AdventOfCode.Controllers
         /// </summary>
         /// <remarks>
         /// Useful when a new year has started to preemptively generate the service files for the calendar year before the advent starts.
-        /// This will also attempt to import missing inputs files.
         /// </remarks> 
         /// <response code="200">A string describing the updated solution folders/files.</response>
         [HttpPost("puzzle-helper")]

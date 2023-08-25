@@ -28,7 +28,7 @@ Feel free to copy this template and generate your own solutions.
       - Visit `https://localhost:5001/swagger` in your browser
 
 ## Puzzle Helper
-This allows you to easily create the needed input files and services as well as submitting answers.
+This allows you to easily create the needed services as well as submitting answers.
 
 In the `PuzzleHelper` folder, create a `Cookie.txt` file and add your own cookie that gets created when logging into the Advent of Code website. If you open the Network tab in your browser's Dev Tools while on the site, you'll see the cookie in the API calls that are made.
 
@@ -56,7 +56,7 @@ Runs a specific day's solution, and optionally posts the answer to Advent of Cod
 
 ### POST `api/puzzle-helper`
 
-Imports all missing inputs from Advent of Code as well as creating missing service files.
+Creates missing service files.
 This can be run before the event starts to pre-emptively populate the service files for the upcoming advent as well as importing the past advent inputs.
 
 The program is idempotent (You can run this multiple times as it will only add files if they are needed.)

@@ -7,7 +7,7 @@
     }
 
     /// <summary>
-    /// Generates solution files and imports year input files.
+    /// Generates solution files.
     /// </summary>
     /// <returns></returns>
     public async Task<string> Run()
@@ -91,16 +91,6 @@
                     Console.WriteLine($"Created solution file for Year: {year}, Day: {day}.");
                     output += $"Created solution file for Year: {year}, Day: {day}.\n";
                     update = true;
-                }
-
-                // Only import the file if it is available
-                if (year < latestPuzzleYear || (year == latestPuzzleYear && day <= latestPuzzleDay))
-                {
-                    update |= await WriteInputFile(year, day);
-
-                    if (update) {
-                        output += $"Created input file for Year: {year}, Day: {day}.\n";
-                    }
                 }
             }
         }
