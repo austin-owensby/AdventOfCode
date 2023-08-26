@@ -34,7 +34,7 @@ namespace AdventOfCode.Services
             // If the 1st option was not fiexed we would get repeated permutations since we're in a ciruclar table
             string[] keys = values.Keys.Skip(1).ToArray();
 
-            IEnumerable<IEnumerable<string>> permutations = keys.GetPermutations(keys.Length);
+            IEnumerable<IEnumerable<string>> permutations = keys.GetPermutations();
 
             List<List<string>> options = new();
             foreach (IEnumerable<string> permutation in permutations)
@@ -105,7 +105,7 @@ namespace AdventOfCode.Services
 
             keys = keys.Append("Me").ToArray();
 
-            IEnumerable<IEnumerable<string>> permutations = keys.GetPermutations(keys.Length);
+            IEnumerable<IEnumerable<string>> permutations = keys.GetPermutations();
 
             List<List<string>> options = new();
             foreach (IEnumerable<string> permutation in permutations)

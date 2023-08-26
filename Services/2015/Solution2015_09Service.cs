@@ -22,7 +22,7 @@ namespace AdventOfCode.Services
 
             IEnumerable<string> townsDistinct = towns.Distinct();
 
-            IEnumerable<IEnumerable<string>> permutations = townsDistinct.GetPermutations(townsDistinct.Count());
+            IEnumerable<IEnumerable<string>> permutations = townsDistinct.GetPermutations();
 
             int minDistance = int.MaxValue;
             foreach (IEnumerable<string> permutation in permutations)
@@ -71,7 +71,7 @@ namespace AdventOfCode.Services
 
             IEnumerable<string> townsDistinct = towns.Distinct();
 
-            IEnumerable<IEnumerable<string>> permutations = townsDistinct.GetPermutations(townsDistinct.Count());
+            IEnumerable<IEnumerable<string>> permutations = townsDistinct.GetPermutations();
 
             int maxDistance = 0;
             foreach (IEnumerable<string> permutation in permutations)

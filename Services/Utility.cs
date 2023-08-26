@@ -247,6 +247,18 @@ namespace AdventOfCode.Services
         /// Get all permutations for the list
         /// </summary>
         /// <param name="list"></param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public static IEnumerable<IEnumerable<T>> GetPermutations<T>(this IEnumerable<T> list)
+        {
+            return GetPermutations(list, list.Count());
+        }
+
+        /// <summary>
+        /// Get all permutations for the list with a certain length
+        /// Ex. {1, 2}, {1, 3}, {2, 1}, {2, 3}, {3, 1}, {3, 2}
+        /// </summary>
+        /// <param name="list"></param>
         /// <param name="length"></param>
         /// <returns></returns>
         public static IEnumerable<IEnumerable<T>> GetPermutations<T>(this IEnumerable<T> list, int length)
@@ -255,6 +267,23 @@ namespace AdventOfCode.Services
                 ? list.Select(t => new T[] { t })
                 : list.GetPermutations(length - 1)
                 .SelectMany(t => list.Where(e => !t.Contains(e)),
+                    (t1, t2) => t1.Concat(new T[] { t2 }));
+        }
+
+        /// <summary>
+        /// Get all combinations for the list
+        /// Ex. {1, 2}, {1, 3}, {2, 3}
+        /// </summary>
+        /// <param name="list"></param>
+        /// <param name="length"></param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public static IEnumerable<IEnumerable<T>> GetCombinations<T>(this IEnumerable<T> list, int length) where T : IComparable
+        {
+            return length == 1
+                ?  list.Select(t => new T[] { t })
+                :  list.GetCombinations(length - 1)
+                .SelectMany(t => list.Where(o => o.CompareTo(t.Last()) > 0), 
                     (t1, t2) => t1.Concat(new T[] { t2 }));
         }
         
