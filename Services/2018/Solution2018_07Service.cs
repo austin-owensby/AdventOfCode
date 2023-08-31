@@ -13,17 +13,15 @@ namespace AdventOfCode.Services
 
             public Instruction(string data)
             {
-                Regex rx = new(@"Step (.) must be finished before step (.) can begin\.");
-                MatchCollection matches = rx.Matches(data);
-                Match match = matches.First();
+                List<string> steps = data.QuickRegex(@"Step (.) must be finished before step (.) can begin\.");
 
-                First = match.Groups[1].Value[0];
-                Next = match.Groups[2].Value[0];
+                First = steps[0][0];
+                Next = steps[1][0];
             }
         }
 
         private class Worker
-        {
+        { 
             public char? Step { get; set; }
             public int TimeLeft { get; set; }
         }
@@ -82,47 +80,54 @@ namespace AdventOfCode.Services
             PriorityQueue<char, char> availableSteps = new();
             availableSteps.EnqueueRange(startingSteps.Where(s => !endSteps.Contains(s)).Select(s => (s, s)));
 
-            List<char> history = startingSteps.Where(s => !endSteps.Contains(s)).ToList();
+            List<char> startedSteps = new();
+            List<char> finishedSteps = new();  
 
             int timeSpent = 0;
 
-            List<Worker> workers = new() { new(), new(), new(), new(), new() };
+            List<Worker> workers = new(){ new(), new(), new(), new(), new() };
 
-            bool keepLooping = true;
-
-            while (keepLooping)
+            while (availableSteps.Count > 0 || workers.Any(w => w.TimeLeft != 0))
             {
-                timeSpent++;
+                List<char> recentlyFinishedSteps = new();
 
-                foreach (Worker worker in workers)
-                {
+                foreach (Worker worker in workers) {
+                    // The worker needs work, get the next step from the queue
+                    if (worker.Step == null && availableSteps.Count > 0)
+                    {
+                        worker.Step = availableSteps.Dequeue();
+                        worker.TimeLeft = (int)worker.Step - 'A' + 1 + 60;
+                        startedSteps.Add((char)worker.Step);
+                    }
+                    
+                    // The worker does work on their step
                     if (worker.TimeLeft > 0)
                     {
                         worker.TimeLeft--;
                     }
 
+                    // The worker just completed work for their step
                     if (worker.TimeLeft == 0 && worker.Step != null)
                     {
-                        history.Add((char)worker.Step);
+                        finishedSteps.Add((char)worker.Step);
+                        recentlyFinishedSteps.Add((char)worker.Step);
                         worker.Step = null;
                     }
+                }
 
-                    if (worker.Step == null && availableSteps.Count > 0)
+                List<char> nextSteps = instructions.Where(i => recentlyFinishedSteps.Contains(i.First)).Select(i => i.Next).Distinct().ToList();
+
+                foreach (char nextStep in nextSteps)
+                {
+                    // Check if the next step has all of it's requirements met
+                    List<char> requiredStepsForNextStep = instructions.Where(i => i.Next == nextStep).Select(s => s.First).ToList();
+                    if (requiredStepsForNextStep.All(finishedSteps.Contains))
                     {
-                        worker.Step = availableSteps.Dequeue();
-                        worker.TimeLeft = (int)worker.Step - 'A' + 1 + 60;
+                        availableSteps.Enqueue(nextStep, nextStep);
                     }
                 }
 
-                /*
-                // Calculate new available steps
-                availableSteps = p
-                // Starts w/ starting letter
-
-                if () {
-                    keepLooping = false;
-                }
-                */
+                timeSpent++;
             }
 
             return timeSpent.ToString();
