@@ -44,6 +44,7 @@ namespace AdventOfCode.Services
         /// </summary>
         /// <param name="input"></param>
         /// <param name="split"></param>
+        /// <remarks>Ex. SplitSubstring("ABC, DEF, GHI", ", ") would return a list with ["ABC", "DEF", "GHI"]</remarks>
         /// <returns></returns>
         public static List<string> SplitSubstring(this string input, string split) {
             return input.Split(split).Where(l => l != split).ToList();
@@ -55,6 +56,7 @@ namespace AdventOfCode.Services
         /// <typeparam name="T"></typeparam>
         /// <param name="list"></param>
         /// <param name="predicate"></param>
+        /// <remarks>Ex. ["A", "B", "1", "C", "D", "E"].ChunkByExclusive(x => x == "1") would return a list with [["A", "B"], ["C", "D", "E"]]</remarks>
         /// <returns></returns>
         public static List<List<T>> ChunkByExclusive<T>(this IEnumerable<T> list, Func<T, bool> predicate)
         {
@@ -67,6 +69,7 @@ namespace AdventOfCode.Services
         /// <typeparam name="T"></typeparam>
         /// <param name="list"></param>
         /// <param name="predicate"></param>
+        /// <remarks>Ex. ["A", "B", "1", "C", "D", "E"].ChunkByInclusive(x => x == "1") would return a list with [["A", "B", "1"], ["C", "D", "E"]]</remarks>
         /// <returns></returns>
         public static List<List<T>> ChunkByInclusive<T>(this IEnumerable<T> list, Func<T, bool> predicate)
         {
@@ -110,6 +113,7 @@ namespace AdventOfCode.Services
         /// </summary>
         /// <param name="input"></param>
         /// <param name="regex"></param>
+        /// <remarks>Ex. "ABC12DEF".QuickRegex("([A-Za-z]+)\d+([A-Za-z]+)") returns ["ABC", "DEF"]</remarks>
         /// <returns></returns>
         public static List<string> QuickRegex(this string input, string regex)
         {
@@ -140,6 +144,7 @@ namespace AdventOfCode.Services
         /// </summary>
         /// <param name="input"></param>
         /// <param name="regex"></param>
+        /// <remarks>Ex. ["ABC12DEF", "G63HIJK"].QuickRegex("([A-Za-z]+)\d+([A-Za-z]+)") returns [["ABC", "DEF"],["G", "HIJK"]]</remarks>
         /// <returns></returns>
         public static List<List<string>> QuickRegex(this IEnumerable<string> input, string regex)
         {
@@ -170,6 +175,7 @@ namespace AdventOfCode.Services
         /// Parses a string to a list of ints where each char becomes an int
         /// </summary>
         /// <param name="input"></param>
+        /// <remarks>Ex. "15234".ToInts() returns [1, 5, 2, 3, 4]</remarks>
         /// <returns></returns>
         public static List<int> ToInts(this string input) {
             return input.Select(i => i.ToString()).ToInts();
@@ -190,6 +196,7 @@ namespace AdventOfCode.Services
         /// </summary>
         /// <param name="list"></param>
         /// <typeparam name="T"></typeparam>
+        /// <remarks>Ex. [[1,2],[3,4],[5,6]].Pivot() returns [[1, 3, 5], [2, 4, 6]]</remarks>
         /// <returns></returns>
         public static List<List<T>> Pivot<T>(this IEnumerable<IEnumerable<T>> list)
         {
@@ -218,6 +225,7 @@ namespace AdventOfCode.Services
         /// </summary>
         /// <param name="num"></param>
         /// <param name="mod"></param>
+        /// <remarks>This is only needed if you'll be dealing with negative numbers. Ex. Mod(-5, 4) returns -3 while -5 % 4 returns -1</remarks>
         /// <returns></returns>
         public static int Mod(int num, int mod) {
             if (num >= 0) {
@@ -233,6 +241,7 @@ namespace AdventOfCode.Services
         /// </summary>
         /// <param name="num"></param>
         /// <param name="mod"></param>
+        /// <remarks>This is only needed if you'll be dealing with negative numbers. Ex. Mod(-5, 4) returns -3 while -5 % 4 returns -1</remarks>
         /// <returns></returns>
         public static long Mod(long num, long mod) {
             if (num >= 0) {
@@ -248,6 +257,7 @@ namespace AdventOfCode.Services
         /// </summary>
         /// <param name="list"></param>
         /// <typeparam name="T"></typeparam>
+        /// <remarks>Ex. [1, 2, 3].GetPermutations() returns  [[1, 2, 3], [1, 3, 2], [2, 1, 3], [2, 3, 1], [3, 1, 2], [3, 2, 1]]</remarks>
         /// <returns></returns>
         public static IEnumerable<IEnumerable<T>> GetPermutations<T>(this IEnumerable<T> list)
         {
@@ -256,10 +266,10 @@ namespace AdventOfCode.Services
 
         /// <summary>
         /// Get all permutations for the list with a certain length
-        /// Ex. {1, 2}, {1, 3}, {2, 1}, {2, 3}, {3, 1}, {3, 2}
         /// </summary>
         /// <param name="list"></param>
         /// <param name="length"></param>
+        /// <remarks>Ex. [1, 2, 3].GetPermutations(2) returns  [[1, 2], [1, 3], [2, 1], [2, 3], [3, 1], [3, 2]]</remarks>
         /// <returns></returns>
         public static IEnumerable<IEnumerable<T>> GetPermutations<T>(this IEnumerable<T> list, int length)
         {
@@ -272,11 +282,11 @@ namespace AdventOfCode.Services
 
         /// <summary>
         /// Get all combinations for the list
-        /// Ex. {1, 2}, {1, 3}, {2, 3}
         /// </summary>
         /// <param name="list"></param>
         /// <param name="length"></param>
         /// <typeparam name="T"></typeparam>
+        /// <remarks>Ex. [1, 2, 3].GetCombinations(2) returns [[1, 2], [1, 3], [2, 3]]</remarks>
         /// <returns></returns>
         public static IEnumerable<IEnumerable<T>> GetCombinations<T>(this IEnumerable<T> list, int length) where T : IComparable
         {
@@ -291,6 +301,7 @@ namespace AdventOfCode.Services
         /// Simplified ToString for char array
         /// </summary>
         /// <param name="chars"></param>
+        /// <remarks>Ex. ['A', 'B', 'C'].CharsToString() returns "ABC"</remarks>
         /// <returns></returns>
         public static string CharsToString(this char[] chars) {
             return new string(chars);
@@ -300,6 +311,7 @@ namespace AdventOfCode.Services
         /// Simplified ToString for char list
         /// </summary>
         /// <param name="chars"></param>
+        /// <remarks>Ex. ['A', 'B', 'C'].CharsToString() returns "ABC"</remarks>
         /// <returns></returns>
         public static string CharsToString(this IEnumerable<char> chars) {
             return new string(chars.ToArray());
@@ -311,6 +323,7 @@ namespace AdventOfCode.Services
         /// <param name="list"></param>
         /// <param name="predicate"></param>
         /// <typeparam name="T"></typeparam>
+        /// <remarks>Ex. [1, 2, 3, 4, 6].FindIndexes(x => x % 2 == 0) returns [1, 3, 4]</remarks>
         /// <returns></returns>
         public static List<int> FindIndexes<T>(this IEnumerable<T> list, Func<T, bool> predicate) {
             List<int> indexes = new();
@@ -328,6 +341,12 @@ namespace AdventOfCode.Services
             return indexes;
         }
 
+        /// <summary>
+        /// Repeats a function a certain amount of times
+        /// </summary>
+        /// <param name="count"></param>
+        /// <param name="action"></param>
+        /// <remarks>Ex. Utility.Repeat(3, () => {i++;}) would increase i by 3</remarks>
         public static void Repeat(int count, Action action) {
             for (int i = 0; i < count; i++) {
                 action.Invoke();
@@ -341,6 +360,7 @@ namespace AdventOfCode.Services
         /// <param name="height"></param>
         /// <param name="emptyChar"></param>
         /// <param name="textChar"></param>
+        /// <remarks>Currently this only parses for heights 6 and 10 and these heights are not complete for the full alphabet</remarks>
         /// <returns></returns>
         public static string ParseASCIILetters(IEnumerable<char> characters, int height, char emptyChar = '.', char textChar = '#') {
             string text = string.Join(string.Empty, characters);
@@ -354,13 +374,9 @@ namespace AdventOfCode.Services
         /// <param name="height"></param>
         /// <param name="emptyChar"></param>
         /// <param name="textChar"></param>
+        /// <remarks>Currently this only parses for heights 6 and 10 and these heights are not complete for the full alphabet</remarks>
         /// <returns></returns>
         public static string ParseASCIILetters(string characters, int height, char emptyChar = '.', char textChar = '#') {
-            List<int> availableHeights = new(){6, 10};
-            if (!availableHeights.Contains(height)) {
-                throw new Exception($"There is no mapping for height: {height}, only {string.Join(", ", availableHeights)}.");
-            }
-
             string formattedOutput = characters.Replace(emptyChar, '.').Replace(textChar, '#');
             IEnumerable<char[]> outputRows = formattedOutput.Chunk(characters.Length/height);
 
@@ -373,11 +389,15 @@ namespace AdventOfCode.Services
             IEnumerable<string> pivotedOutput = outputRows.Pivot().Select(r => r.CharsToString());
             List<List<string>> rotatedLetters = pivotedOutput.ChunkByExclusive(x => x == new string('.', height));
             List<List<string>> letters = rotatedLetters.Select(x => x.Pivot().Select(y => y.CharsToString()).ToList()).ToList();
+            
+            Dictionary<string, char> mapping = height switch
+            {
+                6 => ASCIIMap6,
+                10 => ASCIIMap10,
+                _ => throw new Exception($"There is no mapping for height: {height}, only 6 and 10."),
+            };
 
             string parsedOutput = "";
-
-            Dictionary<string, char> mapping = height == 6 ? ASCIIMap6 : ASCIIMap10;
-
             foreach (List<string> letter in letters) {
                 string key = string.Join(string.Empty, letter);
 
@@ -828,7 +848,8 @@ namespace AdventOfCode.Services
         /// </summary>
         /// <param name="year"></param>
         /// <param name="day"></param>
-        /// <param name="example"></param>
+        /// <param name="example">Defaults to false, if true will pull an example file you've manually added</param>
+        /// <remarks>Ex. GetInputLines(2017, 2) reads the data from "/Inputs/2017/02.txt". GetInputLines(2019, 5) reads the data from "/Inputs/2019/05_example.txt"</remarks>
         /// <returns></returns>
         public static List<string> GetInputLines(int year, int day, bool example = false) {
             return File.ReadAllLines(Path.Combine(Environment.CurrentDirectory, "Inputs", year.ToString(), $"{day:D2}{(example ? "_example" : string.Empty)}.txt")).ToList();

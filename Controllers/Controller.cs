@@ -18,13 +18,13 @@ namespace AdventOfCode.Controllers
         }
 
         /// <summary>
-        /// Run a specific solution.
+        /// Runs a specific day's solution, and optionally posts the answer to Advent of Code and returns the result.
         /// </summary>
         /// <param name="year"></param>
         /// <param name="day"></param>
         /// <param name="secondHalf"></param>
         /// <param name="send">Submit the result to Advent of Code</param>
-        /// <param name="example">Use the example text file instead of the problem's.</param>
+        /// <param name="example">Use an example file instead of the regular input, you must add the example at `Inputs/<YYYY>/<DD>_example.txt`</param>
         /// <response code="200">The result of running the solution. If submitting the solution, also returns the response from Advent of Code.</response>
         [HttpGet("run-solution")]
         public async Task<ActionResult<string>> GetSolution([FromQuery, BindRequired] int year = Globals.START_YEAR, [FromQuery, BindRequired] int day = 1, bool secondHalf = false, bool send = false, bool example = false)
@@ -40,10 +40,11 @@ namespace AdventOfCode.Controllers
         }
 
         /// <summary>
-        /// Add missing service folders and files.
+        /// Creates missing service files.
         /// </summary>
         /// <remarks>
         /// Useful when a new year has started to preemptively generate the service files for the calendar year before the advent starts.
+        /// The program is idempotent (You can run this multiple times as it will only add files if they are needed.)
         /// </remarks> 
         /// <response code="200">A string describing the updated solution folders/files.</response>
         [HttpPost("puzzle-helper")]
@@ -53,10 +54,11 @@ namespace AdventOfCode.Controllers
         }
 
         /// <summary>
-        /// For a specific puzzle, import the missing input file.
+        /// Imports the input from Advent of Code for a specific day.
         /// </summary>
         /// <remarks>
-        /// This is useful when a puzzle first opens and you want to quickly download it's input.
+        /// Useful when you want a streamlined version of the above call to only check for a specific day.
+        /// The program is idempotent (You can run this multiple times as it will only add files if they are needed.)
         /// </remarks>
         /// <param name="year"></param>
         /// <param name="day"></param>
