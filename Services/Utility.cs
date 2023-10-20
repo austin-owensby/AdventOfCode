@@ -8,6 +8,13 @@ namespace AdventOfCode.Services
         public int X { get; set; }
         public int Y { get; set; }
         public int Value { get; set; }
+
+        public Point(){}
+
+        public Point(int x, int y) {
+            X = x;
+            Y = y;
+        }
     }
     #endregion
 
@@ -105,7 +112,7 @@ namespace AdventOfCode.Services
                 resultList.Add(result);
             }
 
-            return resultList;
+            return resultList.Where(x => x.Any()).ToList();
         }
 
         /// <summary>
