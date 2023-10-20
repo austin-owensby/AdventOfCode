@@ -328,6 +328,12 @@ namespace AdventOfCode.Services
             return indexes;
         }
 
+        public static void Repeat(int count, Action action) {
+            for (int i = 0; i < count; i++) {
+                action.Invoke();
+            }
+        }
+
         /// <summary>
         /// Given a string and desired height, print the ASCII and map it to a readable string
         /// </summary>

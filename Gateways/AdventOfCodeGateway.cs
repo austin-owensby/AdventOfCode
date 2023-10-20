@@ -2,13 +2,11 @@ using HtmlAgilityPack;
 
 public class AdventOfCodeGateway
 {
-    private readonly HttpClient client;
+    private HttpClient? client;
     private readonly int throttleInMinutes = 3;
     private DateTimeOffset? lastCall = null;
 
-    public AdventOfCodeGateway(HttpClient client) {
-        this.client = client;
-    }
+    public AdventOfCodeGateway() {}
 
     /// <summary>
     /// For a given year and day, get the user's puzzle input
@@ -22,7 +20,11 @@ public class AdventOfCodeGateway
 
         HttpRequestMessage message = new(HttpMethod.Get, $"/{year}/day/{day}/input");
 
-        HttpResponseMessage result = await client.SendAsync(message);
+        if (client == null) {
+            InitializeClient();
+        }
+
+        HttpResponseMessage result = await client!.SendAsync(message);
         string response = await GetSuccessfulResponseContent(result);
 
         return response;
@@ -48,21 +50,31 @@ public class AdventOfCodeGateway
 
         HttpContent request = new FormUrlEncodedContent(data);
 
-        HttpResponseMessage result = await client.PostAsync($"/{year}/day/{day}/answer", request);
+        if (client == null) {
+            InitializeClient();
+        }
+
+        HttpResponseMessage result = await client!.PostAsync($"/{year}/day/{day}/answer", request);
 
         string response = await GetSuccessfulResponseContent(result);
 
-        try
-        {
-            // Find article component
-            HtmlDocument doc = new();
-            doc.LoadHtml(response);
-            HtmlNode article = doc.DocumentNode.SelectSingleNode("//article/p");
-            response = article.InnerHtml;
+        if (response.Contains("please identify yourself")) {
+            // We tried to submit an answer, but our token has expired
+            response = "Your cookie has expired, view the ReadMe for instructions on how to update it.";
         }
-        catch (Exception)
-        {
-            Console.WriteLine("Error parsing html response.");
+        else {
+            try
+            {
+                // Find article component
+                HtmlDocument doc = new();
+                doc.LoadHtml(response);
+                HtmlNode article = doc.DocumentNode.SelectSingleNode("//article/p");
+                response = article.InnerHtml;
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Error parsing html response.");
+            }
         }
 
         return response;
@@ -73,7 +85,7 @@ public class AdventOfCodeGateway
     /// </summary>
     /// <param name="result"></param>
     /// <returns></returns>
-    private async Task<string> GetSuccessfulResponseContent(HttpResponseMessage result) {
+    private static async Task<string> GetSuccessfulResponseContent(HttpResponseMessage result) {
         result.EnsureSuccessStatusCode();
         return await result.Content.ReadAsStringAsync();
     }
@@ -88,6 +100,27 @@ public class AdventOfCodeGateway
         }
         else {
             lastCall = DateTimeOffset.Now;
+        }
+    }
+
+    /// <summary>
+    /// Initialize the Http Client using the user's cookie
+    /// </summary>
+    private void InitializeClient() {
+        // We're waiting to do this until the last moment in case someone want's to use the code base without setting up the cookie
+        client = new HttpClient
+        {
+            BaseAddress = new Uri("https://adventofcode.com")
+        };
+        
+        client.DefaultRequestHeaders.UserAgent.ParseAdd($".NET 7.0 (+via https://github.com/austin-owensby/AdventOfCode by austin_owensby@hotmail.com)");
+    
+        try {
+            string cookie = File.ReadAllText(Path.Combine(Environment.CurrentDirectory, "PuzzleHelper/Cookie.txt"));
+            client.DefaultRequestHeaders.Add("Cookie", cookie);
+        }
+        catch (Exception) {
+            throw new Exception("Unable to read Cookie.txt. Make sure that it exists in the PuzzleHelper folder. See the ReadMe for more.");
         }
     }
 }

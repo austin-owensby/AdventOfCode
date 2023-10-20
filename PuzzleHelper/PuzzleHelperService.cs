@@ -14,10 +14,6 @@
     {
         string output = string.Empty;
 
-        Tuple<int, int> latestResults = GetLatestYearAndDate();
-        int latestPuzzleYear = latestResults.Item1;
-        int latestPuzzleDay = latestResults.Item2;
-
         bool update = false;
 
         // Create a folder for each year that is missing one
@@ -183,7 +179,7 @@
     /// Based on today's date, calculate the latest AOC year and day available
     /// </summary>
     /// <returns></returns>
-    private Tuple<int, int> GetLatestYearAndDate() {
+    private static Tuple<int, int> GetLatestYearAndDate() {
         DateTime now = DateTime.UtcNow.AddHours(Globals.SERVER_UTC_OFFSET);
         int latestPuzzleYear, latestPuzzleDay;
 

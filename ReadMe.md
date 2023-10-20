@@ -30,7 +30,7 @@ Feel free to copy this template and generate your own solutions.
 ## Puzzle Helper
 This allows you to easily create the needed services as well as submitting answers.
 
-In the `PuzzleHelper` folder, create a `Cookie.txt` file and add your own cookie that gets created when logging into the Advent of Code website. If you open the Network tab in your browser's Dev Tools while on the site, you'll see the cookie in the API calls that are made.
+In the `PuzzleHelper` folder, create a `Cookie.txt` file and add your own cookie that gets created when logging into the Advent of Code website. If you open the Network tab in your browser's Dev Tools while on the site, you'll see the cookie in the API calls that are made. This typically expires after a month so you'll need to update it each year.
 
 ### Automation
 The Puzzle Helper does follow the automation guidelines on the [/r/adventofcode community wiki](https://www.reddit.com/r/adventofcode/wiki/faqs/automation).
