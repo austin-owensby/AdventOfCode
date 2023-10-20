@@ -24,7 +24,7 @@ namespace AdventOfCode.Controllers
         /// <param name="day"></param>
         /// <param name="secondHalf"></param>
         /// <param name="send">Submit the result to Advent of Code</param>
-        /// <param name="example">Use an example file instead of the regular input, you must add the example at `Inputs/<YYYY>/<DD>_example.txt`</param>
+        /// <param name="example">Use an example file instead of the regular input, you must add the example at `Inputs/YYYY/DD_example.txt`</param>
         /// <response code="200">The result of running the solution. If submitting the solution, also returns the response from Advent of Code.</response>
         [HttpGet("run-solution")]
         public async Task<ActionResult<string>> GetSolution([FromQuery, BindRequired] int year = Globals.START_YEAR, [FromQuery, BindRequired] int day = 1, bool secondHalf = false, bool send = false, bool example = false)

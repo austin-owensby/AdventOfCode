@@ -21,7 +21,12 @@ public class AdventOfCodeGateway
         HttpRequestMessage message = new(HttpMethod.Get, $"/{year}/day/{day}/input");
 
         if (client == null) {
-            InitializeClient();
+            try {
+                InitializeClient();
+            }
+            catch {
+                return "Unable to read Cookie.txt. Make sure that it exists in the PuzzleHelper folder. See the ReadMe for more.";
+            }
         }
 
         HttpResponseMessage result = await client!.SendAsync(message);
@@ -51,7 +56,12 @@ public class AdventOfCodeGateway
         HttpContent request = new FormUrlEncodedContent(data);
 
         if (client == null) {
-            InitializeClient();
+            try {
+                InitializeClient();
+            }
+            catch {
+                return "Unable to read Cookie.txt. Make sure that it exists in the PuzzleHelper folder. See the ReadMe for more.";
+            }
         }
 
         HttpResponseMessage result = await client!.PostAsync($"/{year}/day/{day}/answer", request);
