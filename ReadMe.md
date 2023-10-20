@@ -5,9 +5,9 @@
 ![](https://img.shields.io/badge/2021-20%20stars-6e621d)
 ![](https://img.shields.io/badge/2020-21%20stars-6b651e)
 ![](https://img.shields.io/badge/2019-5%20stars-ae3919)
-![](https://img.shields.io/badge/2018-13%20stars-87521c)
+![](https://img.shields.io/badge/2018-18%20stars-755e1d)
 ![](https://img.shields.io/badge/2017-0%20stars-ef0f14)
-![](https://img.shields.io/badge/2016-0%20stars-ef0f14)
+![](https://img.shields.io/badge/2016-2%20stars-c62917)
 ![](https://img.shields.io/badge/2015-50%20stars-239323)
 <!-- end-year-badge -->
 This repository serves to hold my own solutions to the [Advent of Code](https://adventofcode.com/).
