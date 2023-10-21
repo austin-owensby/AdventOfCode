@@ -68,7 +68,6 @@ The program is idempotent (You can run this multiple times as it will only add f
 - Ex. `POST api/puzzle-helper-daily?year=2022&day=14`
 
 Imports the input from Advent of Code for a specific day.
-Useful when you want a streamlined version of the above call to only check for a specific day.
 
 The program is idempotent (You can run this multiple times as it will only add files if they are needed.)
 

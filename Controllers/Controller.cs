@@ -61,7 +61,6 @@ namespace AdventOfCode.Controllers
         /// Imports the input from Advent of Code for a specific day.
         /// </summary>
         /// <remarks>
-        /// Useful when you want a streamlined version of the above call to only check for a specific day.
         /// The program is idempotent (You can run this multiple times as it will only add files if they are needed.)
         /// </remarks>
         /// <param name="year"></param>
