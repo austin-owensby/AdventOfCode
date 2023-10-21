@@ -199,6 +199,16 @@ namespace AdventOfCode.Services
         }
 
         /// <summary>
+        /// Parses a list of ints into a list of longs
+        /// </summary>
+        /// <param name="ints"></param>
+        /// <returns></returns>
+        public static List<long> ToLongs(this IEnumerable<int> ints)
+        {
+            return ints.Select(i => (long)i).ToList();
+        }
+
+        /// <summary>
         /// Pivot's a 2D list
         /// </summary>
         /// <param name="list"></param>
@@ -358,6 +368,34 @@ namespace AdventOfCode.Services
             for (int i = 0; i < count; i++) {
                 action.Invoke();
             }
+        }
+
+        /// <summary>
+        /// Removes and returns the last element of the list
+        /// </summary>
+        /// <param name="list"></param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public static T Pop<T>(this List<T> list) {
+            T last = list.Last();
+
+            list.Remove(last);
+
+            return last;
+        }
+
+        /// <summary>
+        /// Removes and returns the first element 
+        /// </summary>
+        /// <param name="list"></param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public static T Shift<T>(this List<T> list) {
+            T first = list.First();
+
+            list.Remove(first);
+
+            return first;
         }
 
         /// <summary>
