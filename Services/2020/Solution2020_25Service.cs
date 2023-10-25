@@ -4,7 +4,7 @@ namespace AdventOfCode.Services
     {
         public string FirstHalf(bool example)
         {
-            List<string> lines = Utility.GetInputLines(2020,25, example);
+            List<string> lines = Utility.GetInputLines(2020, 25, example);
 
             int answer = 0;
 

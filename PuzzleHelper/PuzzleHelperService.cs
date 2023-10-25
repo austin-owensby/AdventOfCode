@@ -47,7 +47,7 @@
             {
                 public string FirstHalf(bool example)
                 {
-                    List<string> lines = Utility.GetInputLines({{year}},{{day}}, example);
+                    List<string> lines = Utility.GetInputLines({{year}}, {{day}}, example);
 
                     int answer = 0;
 
@@ -66,7 +66,7 @@
                         return "There is no problem for Day 25 part 2, solve all other problems to get the last star.";
                         """ :
                         $$"""
-                        List<string> lines = Utility.GetInputLines({{year}},{{day}}, example);
+                        List<string> lines = Utility.GetInputLines({{year}}, {{day}}, example);
 
                                     int answer = 0;
 
@@ -108,7 +108,7 @@
     {
         string output = string.Empty;
 
-        Tuple<int, int> latestResults = PuzzleHelperService.GetLatestYearAndDate();
+        Tuple<int, int> latestResults = GetLatestYearAndDate();
         int latestPuzzleYear = latestResults.Item1;
         int latestPuzzleDay = latestResults.Item2;
 
