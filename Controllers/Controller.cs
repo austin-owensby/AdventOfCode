@@ -33,6 +33,10 @@ namespace AdventOfCode.Controllers
                 return BadRequest("You're attempting to submit your answer to AOC while using an example input, this is likely a mistake.");
             }
 
+            if (day == 25 && secondHalf) {
+                return NotFound("There is no problem for Day 25 part 2, solve all other problems to get the last star.");
+            }
+
             try
             {
                 return await solutionService.GetSolution(year, day, secondHalf, send, example);
