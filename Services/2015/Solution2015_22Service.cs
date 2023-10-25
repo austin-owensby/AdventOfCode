@@ -2,9 +2,7 @@ namespace AdventOfCode.Services
 {
     public class Solution2015_22Service : ISolutionDayService
     {
-        public Solution2015_22Service() { }
-
-        private int bestSoFar {get; set;} = 0;
+                private int bestSoFar {get; set;} = 0;
 
         private int GetMinManaUsed(int playerHealth, int bossHealth, int bossDamage, int armor, int mana, int poisonTimer, int rechargeTimer, int shieldTimer, bool playerTurn, bool hardMode = false) {
             int newPlayerHealth = playerHealth;

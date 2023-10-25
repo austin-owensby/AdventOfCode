@@ -2,9 +2,7 @@ namespace AdventOfCode.Services
 {
     public class Solution2018_06Service : ISolutionDayService
     {
-        public Solution2018_06Service() { }
-
-        private class Point
+                private class Point
         {
             public int X { get; set; }
             public int Y { get; set; }

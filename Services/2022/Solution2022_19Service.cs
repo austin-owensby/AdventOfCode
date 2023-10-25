@@ -2,9 +2,7 @@ namespace AdventOfCode.Services
 {
     public class Solution2022_19Service : ISolutionDayService
     {
-        public Solution2022_19Service() { }
-
-        private class Blueprint {
+                private class Blueprint {
             public int Id {get; set;}
             public int OreCost {get; set;}
             public int ClayOreCost {get; set;}

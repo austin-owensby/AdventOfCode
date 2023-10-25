@@ -23,8 +23,6 @@ namespace AdventOfCode.Services
             Right
         }
 
-        public Solution2018_13Service() { }
-
         public string FirstHalf(bool example)
         {
             List<List<char>> map = Utility.GetInputLines(2018, 13, example).Select(l => l.ToList()).ToList();

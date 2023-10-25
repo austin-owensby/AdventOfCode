@@ -2,8 +2,6 @@ namespace AdventOfCode.Services
 {
     public class Solution2020_16Service : ISolutionDayService
     {
-        public Solution2020_16Service() { }
-
         public string FirstHalf(bool example)
         {
             List<string> lines = Utility.GetInputLines(2020, 16, example);

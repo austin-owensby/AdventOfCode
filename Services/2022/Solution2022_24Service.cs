@@ -2,9 +2,7 @@ namespace AdventOfCode.Services
 {
     public class Solution2022_24Service : ISolutionDayService
     {
-        public Solution2022_24Service() { }
-
-        private enum Direction {
+                private enum Direction {
             Up,
             Down,
             Left,

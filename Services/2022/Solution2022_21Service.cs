@@ -2,9 +2,7 @@ namespace AdventOfCode.Services
 {
     public class Solution2022_21Service : ISolutionDayService
     {
-        public Solution2022_21Service() { }
-
-        private class MonkeyRiddle {
+                private class MonkeyRiddle {
             public long? Answer {get; set;}
             public string Name {get; set;} = string.Empty;
             public string Op {get; set;} = string.Empty;

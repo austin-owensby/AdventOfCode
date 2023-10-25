@@ -2,9 +2,7 @@ namespace AdventOfCode.Services
 {
     public class Solution2022_16Service : ISolutionDayService
     {
-        public Solution2022_16Service() { }
-
-        private class Valve {
+                private class Valve {
             public string Name {get; set;} = string.Empty;
             public int FlowRate {get; set;}
             public List<string> ConnectedValves {get; set;} = new();

@@ -2,11 +2,9 @@ namespace AdventOfCode.Services
 {
     public class Solution2023_19Service : ISolutionDayService
     {
-        public Solution2023_19Service() { }
-
         public string FirstHalf(bool example)
         {
-            List<string> lines =  Utility.GetInputLines(2023, 19, example);
+            List<string> lines = Utility.GetInputLines(2023,19, example);
 
             int answer = 0;
 
@@ -19,7 +17,7 @@ namespace AdventOfCode.Services
 
         public string SecondHalf(bool example)
         {
-            List<string> lines =  Utility.GetInputLines(2023, 19, example);
+            List<string> lines = Utility.GetInputLines(2023,19, example);
 
             int answer = 0;
 

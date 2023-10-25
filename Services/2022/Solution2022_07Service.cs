@@ -2,9 +2,7 @@ namespace AdventOfCode.Services
 {
     public class Solution2022_07Service : ISolutionDayService
     {
-        public Solution2022_07Service() { }
-
-        private class Directory
+                private class Directory
         {
             public long Size { get; set; }
             public string Name { get; set; } = string.Empty;

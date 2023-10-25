@@ -2,8 +2,6 @@ namespace AdventOfCode.Services
 {
     public class Solution2018_01Service : ISolutionDayService
     {
-        public Solution2018_01Service() { }
-
         public string FirstHalf(bool example)
         {
             string[] data = File.ReadAllLines(Path.Combine(Environment.CurrentDirectory, "Inputs", "2018", "01.txt"));

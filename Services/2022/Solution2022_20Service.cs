@@ -2,9 +2,7 @@ namespace AdventOfCode.Services
 {
     public class Solution2022_20Service : ISolutionDayService
     {
-        public Solution2022_20Service() { }
-
-        private class FileValue {
+                private class FileValue {
             public long Value {get; set;}
             public int OriginalIndex {get; set;}
         }

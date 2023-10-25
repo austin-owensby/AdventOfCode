@@ -2,9 +2,7 @@ namespace AdventOfCode.Services
 {
     public class Solution2022_11Service : ISolutionDayService
     {
-        public Solution2022_11Service() { }
-
-        private class Monkey
+                private class Monkey
         {
             public List<long> Items { get; set; } = new();
             public int? AddAmount { get; set; }

@@ -4,8 +4,6 @@ namespace AdventOfCode.Services
 {
     public class Solution2018_04Service : ISolutionDayService
     {
-        public Solution2018_04Service() { }
-
         public string FirstHalf(bool example)
         {
             List<string> data = File.ReadAllLines(Path.Combine(Environment.CurrentDirectory, "Inputs", "2018", "04.txt")).OrderBy(s => s).ToList();

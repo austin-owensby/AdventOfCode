@@ -2,8 +2,6 @@ namespace AdventOfCode.Services
 {
     public class Solution2018_12Service : ISolutionDayService
     {
-        public Solution2018_12Service() { }
-
         public string FirstHalf(bool example)
         {
             List<string> lines = Utility.GetInputLines(2018, 12, example).Where(l => !string.IsNullOrWhiteSpace(l)).ToList();

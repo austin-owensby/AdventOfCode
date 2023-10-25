@@ -4,9 +4,7 @@ namespace AdventOfCode.Services
 {
     public class Solution2018_07Service : ISolutionDayService
     {
-        public Solution2018_07Service() { }
-
-        private class Instruction
+                private class Instruction
         {
             public char First { get; set; }
             public char Next { get; set; }

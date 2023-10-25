@@ -2,8 +2,6 @@ namespace AdventOfCode.Services
 {
     public class Solution2015_02Service : ISolutionDayService
     {
-        public Solution2015_02Service() { }
-
         public string FirstHalf(bool example)
         {
             int total = 0;

@@ -2,9 +2,7 @@ namespace AdventOfCode.Services
 {
     public class Solution2022_15Service : ISolutionDayService
     {
-        public Solution2022_15Service() { }
-
-        private class SensorBeaconPair {
+                private class SensorBeaconPair {
             public int SensorX {get; set;}
             public int SensorY {get; set;}
             public int BeaconX {get; set;}

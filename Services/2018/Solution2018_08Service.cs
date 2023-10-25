@@ -2,9 +2,7 @@ namespace AdventOfCode.Services
 {
     public class Solution2018_08Service : ISolutionDayService
     {
-        public Solution2018_08Service() { }
-
-        private int SumMetadata(ref int index, List<int> numbers) {
+                private int SumMetadata(ref int index, List<int> numbers) {
             int answer = 0;
 
             int numberOfChildren = numbers[index++];
