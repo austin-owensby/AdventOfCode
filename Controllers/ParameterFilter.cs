@@ -18,13 +18,12 @@ namespace AdventOfCode.Controllers
                 parameter.Schema.Enum = daysInDecember.Select(d => new OpenApiString(d.ToString())).ToList<IOpenApiAny>();
             }
 
-            // Ensure that the input year is a valid value (2015-Latest year with an active event)
+            // Ensure that the input year is a valid value (2015 - this year)
             if (parameter.Name.Equals("year", StringComparison.InvariantCultureIgnoreCase))
             {
                 DateTime now = DateTime.UtcNow.AddHours(Globals.SERVER_UTC_OFFSET);
-                int latestPuzzleYear = now.Year - (now.Month == Globals.DECEMBER ? 0 : 1);
 
-                List<int> daysInDecember = Enumerable.Range(Globals.START_YEAR, latestPuzzleYear - Globals.START_YEAR + 1).ToList();
+                List<int> daysInDecember = Enumerable.Range(Globals.START_YEAR, now.Year - Globals.START_YEAR + 1).ToList();
                 parameter.Schema.Enum = daysInDecember.Select(d => new OpenApiString(d.ToString())).ToList<IOpenApiAny>();
             }
         }
