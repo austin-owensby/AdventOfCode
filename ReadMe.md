@@ -14,7 +14,7 @@ This repository serves to hold my own solutions to the [Advent of Code](https://
 Feel free to copy this template and generate your own solutions.
 
 ## Setup
-1. If not already installed, install [.NET 7.0 SDK](https://dotnet.microsoft.com/en-us/download)
+1. If not already installed, install [.NET 8.0 SDK](https://dotnet.microsoft.com/en-us/download)
 1. Run the program
    - If using Visual Studio or VSCode, use the play button to build and run the code
    - If using a CLI, run `dotnet run` from the repo's base folder
