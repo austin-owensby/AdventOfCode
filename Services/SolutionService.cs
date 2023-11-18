@@ -1,3 +1,5 @@
+using AdventOfCode.Gateways;
+
 namespace AdventOfCode.Services
 {
     public class SolutionService(IServiceProvider serviceProvider, AdventOfCodeGateway adventOfCodeGateway)

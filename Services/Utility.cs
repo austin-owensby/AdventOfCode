@@ -84,12 +84,12 @@ namespace AdventOfCode.Services
             }
 
             // Add the last chunk if needed
-            if (result.Any())
+            if (result.Count != 0)
             {
                 resultList.Add(result);
             }
 
-            return resultList.Where(x => x.Any()).ToList();
+            return resultList.Where(x => x.Count != 0).ToList();
         }
 
         /// <summary>
@@ -249,7 +249,7 @@ namespace AdventOfCode.Services
 
             MatchCollection match = rx.Matches(input);
 
-            if (match.Any())
+            if (match.Count != 0)
             {
                 GroupCollection groups = match.First().Groups;
 
@@ -485,9 +485,9 @@ namespace AdventOfCode.Services
             {
                 string key = string.Join(string.Empty, letter);
 
-                if (mapping.ContainsKey(key))
+                if (mapping.TryGetValue(key, out char value))
                 {
-                    parsedOutput += mapping[key];
+                    parsedOutput += value;
                 }
                 else
                 {

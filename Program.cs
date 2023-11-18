@@ -1,4 +1,6 @@
 using AdventOfCode.Controllers;
+using AdventOfCode.Gateways;
+using AdventOfCode.PuzzleHelper;
 using AdventOfCode.Services;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
@@ -24,9 +26,7 @@ builder.Services.AddSingleton<AdventOfCodeGateway>();
 builder.Services.AddTransient<SolutionService>();
 builder.Services.AddTransient<PuzzleHelperService>();
 
-// This is a collapsable region so that I can hide my shameful, unintuitive, lazy, "clever", and unreadable code :'(
-#region Here be dragons!
-// Here be dragons! ( Especially lazy dragons ;) )
+#region Setup Daily Solution Services
 // Get a list of assembly types for the whole app
 Type[] assemblyTypes = Assembly.GetAssembly(typeof(Program))?.GetTypes() ?? [];
 

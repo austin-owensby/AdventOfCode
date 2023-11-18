@@ -1,4 +1,5 @@
-﻿using AdventOfCode.Services;
+﻿using AdventOfCode.PuzzleHelper;
+using AdventOfCode.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
