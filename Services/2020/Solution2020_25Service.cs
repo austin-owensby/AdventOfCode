@@ -8,7 +8,8 @@ namespace AdventOfCode.Services
 
             int answer = 0;
 
-            foreach (string line in lines) {
+            foreach (string line in lines)
+            {
 
             }
 

@@ -1,16 +1,12 @@
-﻿public class PuzzleHelperService
+﻿public class PuzzleHelperService(AdventOfCodeGateway adventOfCodeGateway)
 {
-    private readonly AdventOfCodeGateway adventOfCodeGateway;
-
-    public PuzzleHelperService(AdventOfCodeGateway adventOfCodeGateway) {
-        this.adventOfCodeGateway = adventOfCodeGateway;
-    }
+    private readonly AdventOfCodeGateway adventOfCodeGateway = adventOfCodeGateway;
 
     /// <summary>
     /// Generates solution files.
     /// </summary>
     /// <returns></returns>
-    public async Task<string> Run()
+    public async Task<string> GenerateMissingSolutionServiceFiles()
     {
         string output = string.Empty;
 
@@ -51,7 +47,8 @@
 
                     int answer = 0;
 
-                    foreach (string line in lines) {
+                    foreach (string line in lines)
+                    {
 
                     }
 
@@ -70,7 +67,8 @@
 
                                     int answer = 0;
 
-                                    foreach (string line in lines) {
+                                    foreach (string line in lines)
+                                    {
 
                                     }
 
@@ -97,14 +95,14 @@
 
         return output;
     }
-    
+
     /// <summary>
     /// Imports the day's input file.
     /// </summary>
     /// <param name="year"></param>
     /// <param name="day"></param>
     /// <returns></returns>
-    public async Task<string> RunDaily(int year, int day)
+    public async Task<string> ImportInputFile(int year, int day)
     {
         string output = string.Empty;
 
@@ -112,14 +110,17 @@
         int latestPuzzleYear = latestResults.Item1;
         int latestPuzzleDay = latestResults.Item2;
 
-        if (latestPuzzleYear < year || latestPuzzleYear == year && latestPuzzleDay < day) {
+        if (latestPuzzleYear < year || (latestPuzzleYear == year && latestPuzzleDay < day))
+        {
             Console.WriteLine("No updates applied.");
             output += "No updates applied.\n";
         }
-        else {
+        else
+        {
             bool update = await WriteInputFile(year, day);
 
-            if (update) {
+            if (update)
+            {
                 output = $"Created input file for Year: {year}, Day: {day}.";
             }
             else
@@ -141,7 +142,7 @@
     private async Task<bool> WriteInputFile(int year, int day)
     {
         bool update = false;
-        
+
         string yearFolderPath = Path.Combine(Environment.CurrentDirectory, $"Inputs/{year}");
 
         if (!Directory.Exists(yearFolderPath))
@@ -158,7 +159,8 @@
             {
                 response = await adventOfCodeGateway.ImportInput(year, day);
             }
-            catch (Exception) {
+            catch (Exception)
+            {
                 Console.WriteLine("An error occured while getting the puzzle input from Advent of Code");
                 throw;
             }
@@ -177,7 +179,8 @@
     /// Based on today's date, calculate the latest AOC year and day available
     /// </summary>
     /// <returns></returns>
-    private static Tuple<int, int> GetLatestYearAndDate() {
+    private static Tuple<int, int> GetLatestYearAndDate()
+    {
         DateTime now = DateTime.UtcNow.AddHours(Globals.SERVER_UTC_OFFSET);
         int latestPuzzleYear, latestPuzzleDay;
 

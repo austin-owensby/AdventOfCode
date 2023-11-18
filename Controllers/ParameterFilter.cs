@@ -6,8 +6,6 @@ namespace AdventOfCode.Controllers
 {
     public class ParameterFilter : IParameterFilter
     {
-        public ParameterFilter() { }
-
         public void Apply(OpenApiParameter parameter, ParameterFilterContext context)
         {
             // Ensure that the input day is a valid value (1 - 25)

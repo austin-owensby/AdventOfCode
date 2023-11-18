@@ -11,8 +11,8 @@ builder.Services.AddSwaggerGen(c =>
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "AdventOfCode", Version = "v1" });
     c.ParameterFilter<ParameterFilter>();
 
-    var filePath = Path.Combine(AppContext.BaseDirectory, "AdventOfCode.xml");
-     c.IncludeXmlComments(filePath);
+    string filePath = Path.Combine(AppContext.BaseDirectory, "AdventOfCode.xml");
+    c.IncludeXmlComments(filePath);
 });
 
 // Add the gateway as singleton since almost all API calls use it and it sets up a client that we'd like to keep configured
@@ -28,7 +28,7 @@ builder.Services.AddTransient<PuzzleHelperService>();
 #region Here be dragons!
 // Here be dragons! ( Especially lazy dragons ;) )
 // Get a list of assembly types for the whole app
-Type[] assemblyTypes = Assembly.GetAssembly(typeof(Program))?.GetTypes() ?? Array.Empty<Type>();
+Type[] assemblyTypes = Assembly.GetAssembly(typeof(Program))?.GetTypes() ?? [];
 
 // Get only the types for the classes that inherit from the ISolutionDayService
 IEnumerable<Type> solutionDayServiceTypes = assemblyTypes.Where(x => !x.IsInterface && x.GetInterface(nameof(ISolutionDayService)) != null);

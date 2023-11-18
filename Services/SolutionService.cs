@@ -1,15 +1,9 @@
 namespace AdventOfCode.Services
 {
-    public class SolutionService
+    public class SolutionService(IServiceProvider serviceProvider, AdventOfCodeGateway adventOfCodeGateway)
     {
-        private readonly IServiceProvider serviceProvider;
-        private readonly AdventOfCodeGateway adventOfCodeGateway;
-
-        public SolutionService(IServiceProvider serviceProvider, AdventOfCodeGateway adventOfCodeGateway)
-        {
-            this.serviceProvider = serviceProvider;
-            this.adventOfCodeGateway = adventOfCodeGateway;
-        }
+        private readonly IServiceProvider serviceProvider = serviceProvider;
+        private readonly AdventOfCodeGateway adventOfCodeGateway = adventOfCodeGateway;
 
         /// <summary>
         /// Execute the specific solution based on the passed in parameters
@@ -29,12 +23,15 @@ namespace AdventOfCode.Services
             string answer = secondHalf ? service.SecondHalf(example) : service.FirstHalf(example);
 
             // Optionally submit the answer to AoC
-            if (send) {
-                try {
+            if (send)
+            {
+                try
+                {
                     string response = await adventOfCodeGateway.SubmitAnswer(year, day, secondHalf, answer);
                     answer = $"Submitted answer: {answer}.\nAdvent of Code response: {response}";
                 }
-                catch (Exception) {
+                catch (Exception)
+                {
                     Console.WriteLine("An error occured while submitting the answer to Advent of Code");
                     throw;
                 }
@@ -49,7 +46,8 @@ namespace AdventOfCode.Services
         /// <param name="year"></param>
         /// <param name="day"></param>
         /// <returns></returns>
-        private ISolutionDayService FindSolutionService(int year, int day) {
+        private ISolutionDayService FindSolutionService(int year, int day)
+        {
             IEnumerable<ISolutionDayService> services = serviceProvider.GetServices<ISolutionDayService>();
 
             // Use ':D2' to front pad 0s to single digit days to match the formatting
