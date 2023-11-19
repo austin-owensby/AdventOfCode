@@ -35,6 +35,7 @@ You may also reference the `aowensby-solutions` branch which contains my own sol
       - The browser should open by default, to change this behavior, update the `Properties/launchSettings.json`
    - VSCode
       - Use the `Launch (web)` or `Launch (web - no browser)` to toggle if you want the broswer to open automatically
+      - If you'd prefer to remain within VSCode to make the API calls, I've used the [Thunder Client](https://marketplace.visualstudio.com/items?itemName=rangav.vscode-thunder-client) extension.
    - Other
       - Visit `https://localhost:5001/swagger` in your browser
 
