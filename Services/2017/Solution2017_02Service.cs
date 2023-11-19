@@ -10,7 +10,9 @@ namespace AdventOfCode.Services
 
             foreach (string line in lines)
             {
+                List<int> values = line.Split('\t').ToInts();
 
+                answer += values.Max() - values.Min();
             }
 
             return answer.ToString();
@@ -24,6 +26,27 @@ namespace AdventOfCode.Services
 
             foreach (string line in lines)
             {
+                List<int> values = line.Split('\t').ToInts();
+
+                bool matchFound = false;
+                for (int i = 0; i < values.Count - 1; i++) {
+                    for (int j = i + 1; j < values.Count; j++) {
+                        if (values[i] % values[j] == 0) {
+                            answer += values[i] / values[j];
+                            matchFound = true;
+                            break;
+                        }
+                        else if (values[j] % values[i] == 0) {
+                            answer += values[j] / values[i];
+                            matchFound = true;
+                            break;
+                        }
+                    }
+
+                    if (matchFound) {
+                        break;
+                    }
+                }
 
             }
 
