@@ -35,7 +35,7 @@ You may also reference the `aowensby-solutions` branch which contains my own sol
       - The browser should open by default, to change this behavior, update the `Properties/launchSettings.json`
    - VSCode
       - Use the `Launch (web)` or `Launch (web - no browser)` to toggle if you want the broswer to open automatically
-      - If you'd prefer to remain within VSCode to make the API calls, I've used the [Thunder Client](https://marketplace.visualstudio.com/items?itemName=rangav.vscode-thunder-client) extension.
+      - If you'd prefer to remain within VSCode to make the API calls, I've used the [Thunder Client](https://marketplace.visualstudio.com/items?itemName=rangav.vscode-thunder-client) extension. You can inport the collection provided at `thunder_collection_AoC.json`.
    - Other
       - Visit `https://localhost:5001/swagger` in your browser
 
@@ -69,13 +69,6 @@ Specifically:
 
 Runs a specific day's solution, and optionally posts the answer to Advent of Code and returns the result.
 
-### POST `api/generate-service-files`
-
-Creates missing daily solution service files.
-Useful when a new year has started to preemptively generate the service files for the calendar year before the advent starts.
-
-The program is idempotent (You can run this multiple times as it will only add files if they are needed.)
-
 ### POST `api/import-input-file`
 - Query parameters
    - year (Ex. 2022) (Defaults to 2015)
@@ -85,6 +78,15 @@ The program is idempotent (You can run this multiple times as it will only add f
 Imports the input from Advent of Code for a specific day.
 
 The program is idempotent (You can run this multiple times as it will only add a file if it is needed.)
+
+### POST `api/generate-service-files`
+
+Creates missing daily solution service files.
+Useful when a new year has started to preemptively generate the service files for the calendar year before the advent starts.
+
+You'll likely only need to use this once per year and only if either your source code has gotten out of sync from the `main` branch or I haven't kept it up to date.
+
+The program is idempotent (You can run this multiple times as it will only add files if they are needed.)
 
 ## Extra Notes
 - The admin of Advent of Code have requested that puzzle inputs be cached (To reduce load on the system) and not be made publically available (To make it harder to completely copy the site)

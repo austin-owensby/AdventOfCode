@@ -45,20 +45,6 @@ namespace AdventOfCode.Controllers
         }
 
         /// <summary>
-        /// Creates missing daily solution service files.
-        /// </summary>
-        /// <remarks>
-        /// Useful when a new year has started to preemptively generate the service files for the calendar year before the advent starts.
-        /// The program is idempotent (You can run this multiple times as it will only add files if they are needed.)
-        /// </remarks> 
-        /// <response code="200">A string describing the updated solution folders/files.</response>
-        [HttpPost("generate-service-files")]
-        public async Task<string> GenerateMissingSolutionServiceFiles()
-        {
-            return await puzzleHelperService.GenerateMissingSolutionServiceFiles();
-        }
-
-        /// <summary>
         /// Imports the input from Advent of Code for a specific day.
         /// </summary>
         /// <remarks>
@@ -71,6 +57,22 @@ namespace AdventOfCode.Controllers
         public async Task<string> ImportInputFile([FromQuery, BindRequired] int year = Globals.START_YEAR, [FromQuery, BindRequired] int day = 1)
         {
             return await puzzleHelperService.ImportInputFile(year, day);
+        }
+
+        /// <summary>
+        /// Creates missing daily solution service files.
+        /// </summary>
+        /// <remarks>
+        /// Useful when a new year has started to preemptively generate the service files for the calendar year before the advent starts.
+        /// The program is idempotent (You can run this multiple times as it will only add files if they are needed.)
+        /// 
+        /// You'll likely only need to use this once per year and only if either your source code has gotten out of sync from the `main` branch or I haven't kept it up to date.
+        /// </remarks> 
+        /// <response code="200">A string describing the updated solution folders/files.</response>
+        [HttpPost("generate-service-files")]
+        public async Task<string> GenerateMissingSolutionServiceFiles()
+        {
+            return await puzzleHelperService.GenerateMissingSolutionServiceFiles();
         }
     }
 }
