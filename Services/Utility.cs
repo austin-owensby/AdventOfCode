@@ -1,4 +1,5 @@
 using System.Text.RegularExpressions;
+using System.Numerics;
 
 namespace AdventOfCode.Services
 {
@@ -177,7 +178,7 @@ namespace AdventOfCode.Services
         {
             List<int> indexes = [];
 
-            for (int i = 0; i < list.Count(); i++)
+            foreach (int i in list.Count())
             {
                 T item = list.ElementAt(i);
 
@@ -423,12 +424,38 @@ namespace AdventOfCode.Services
         /// </summary>
         /// <param name="count"></param>
         /// <param name="action"></param>
-        /// <remarks>Ex. Utility.Repeat(3, () => {i++;}) would increase i by 3</remarks>
-        public static void Repeat(int count, Action action)
+        /// <remarks>Ex. 3.ForEach(() => {i++;}) would increase i by 3</remarks>
+        public static void ForEach<T>(this T count, Action action) where T : notnull, INumber<T>
         {
-            for (int i = 0; i < count; i++)
-            {
+            foreach (T i in count) {
                 action.Invoke();
+            }
+        }
+
+        /// <summary>
+        /// Repeats a function a certain amount of times where the first parameter is the index
+        /// </summary>
+        /// <param name="count"></param>
+        /// <param name="action"></param>
+        /// <remarks>Ex. 3.ForEach((i) => Console.Write(i)) would print 012</remarks>
+        public static void ForEach<T>(this T count, Action<T> action) where T : notnull, INumber<T>
+        {
+            foreach (T i in count) {
+                action.Invoke(i);
+            }
+        }
+        
+        /// <summary>
+        /// An extension to non-null numbers to allow use of simpler foreach syntax
+        /// </summary>
+        /// <param name="count"></param>
+        /// <typeparam name="T"></typeparam>
+        /// <remarks>Ex. foreach(int i in 10) { Console.Write(i) } would print 012</remarks>
+        /// <returns></returns>
+        public static IEnumerator<T> GetEnumerator<T>(this T count) where T : notnull, INumber<T>
+        {
+            for (T i = default!; i < count; i++) {
+                yield return i;
             }
         }
         #endregion
