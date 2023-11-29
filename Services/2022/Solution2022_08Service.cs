@@ -10,12 +10,12 @@ namespace AdventOfCode.Services
 
             List<List<Point>> points = new();
 
-            for (int i = 0; i < grid.Count(); i++)
+            foreach (int i in grid.Count())
             {
                 List<int> row = grid[i];
                 List<Point> pointRow = new();
 
-                for (int j = 0; j < row.Count(); j++)
+                foreach (int j in row.Count())
                 {
                     pointRow.Add(new()
                     {
@@ -108,12 +108,12 @@ namespace AdventOfCode.Services
 
             List<List<Point>> points = new();
 
-            for (int i = 0; i < grid.Count(); i++)
+            foreach (int i in grid.Count())
             {
                 List<int> row = grid[i];
                 List<Point> pointRow = new();
 
-                for (int j = 0; j < row.Count(); j++)
+                foreach (int j in row.Count())
                 {
                     pointRow.Add(new()
                     {

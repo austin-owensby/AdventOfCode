@@ -30,8 +30,8 @@ namespace AdventOfCode.Services
             List<char> cartValues = new(){'^', '>', 'v', '<'};
             List<Cart> carts = new();
 
-            for (int y = 0; y < map.Count; y++) {
-                for (int x = 0; x < map[0].Count; x++) {
+            foreach (int y in map.Count) {
+                foreach (int x in map[0].Count) {
                     if (cartValues.Contains(map[y][x])) {
                         Cart cart = new() {
                             X = x,
@@ -174,8 +174,8 @@ namespace AdventOfCode.Services
             List<char> cartValues = new(){'^', '>', 'v', '<'};
             List<Cart> carts = new();
 
-            for (int y = 0; y < map.Count; y++) {
-                for (int x = 0; x < map[0].Count; x++) {
+            foreach (int y in map.Count) {
+                foreach (int x in map[0].Count) {
                     if (cartValues.Contains(map[y][x])) {
                         Cart cart = new() {
                             X = x,

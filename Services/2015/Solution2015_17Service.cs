@@ -10,11 +10,11 @@ namespace AdventOfCode.Services
             int targetTotal = 150;
             int totalCombinations = 0;
 
-            for (int i = 0; i < Math.Pow(2, 20); i++)
+            foreach (int i in Math.Pow(2, 20))
             {
                 int continerSum = 0;
 
-                for (int j = 0; j < containers.Count; j++)
+                foreach (int j in containers.Count)
                 {
                     int binaryPower = (int)Math.Pow(2, j);
                     if ((i & binaryPower) == binaryPower)
@@ -41,12 +41,12 @@ namespace AdventOfCode.Services
             int totalCombinations = 0;
             int minRequiredContainers = int.MaxValue;
 
-            for (int i = 0; i < Math.Pow(2, 20); i++)
+            foreach (int i in Math.Pow(2, 20))
             {
                 int continerSum = 0;
                 int containersUsed = 0;
 
-                for (int j = 0; j < containers.Count; j++)
+                foreach (int j in containers.Count)
                 {
                     int binaryPower = (int)Math.Pow(2, j);
                     if ((i & binaryPower) == binaryPower)

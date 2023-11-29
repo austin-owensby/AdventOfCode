@@ -9,7 +9,7 @@ namespace AdventOfCode.Services
 
             int answer = values.Last() == values.First() ? values.First() : 0;
 
-            for (int i = 0; i < values.Count - 1; i++)
+            foreach (int i in values.Count - 1)
             {
                 if (values[i] == values[i + 1]) {
                     answer += values[i];
@@ -26,7 +26,7 @@ namespace AdventOfCode.Services
 
             int answer = 0;
 
-            for (int i = 0; i < values.Count - 1; i++)
+            foreach (int i in values.Count - 1)
             {
                 int nextIndex = (i + values.Count / 2) % values.Count;
                 if (values[i] == values[nextIndex]) {

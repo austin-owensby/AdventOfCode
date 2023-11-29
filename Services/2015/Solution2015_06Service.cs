@@ -45,9 +45,9 @@ namespace AdventOfCode.Services
 
             int lightOnCount = 0;
 
-            for (int x = 0; x < lightArray.GetLength(0); x++)
+            foreach (int x in lightArray.GetLength(0))
             {
-                for (int y = 0; y < lightArray.GetLength(1); y++)
+                foreach (int y in lightArray.GetLength(1))
                 {
                     if (lightArray[x, y])
                     {
@@ -102,9 +102,9 @@ namespace AdventOfCode.Services
 
             int totalBrightness = 0;
 
-            for (int x = 0; x < lightArray.GetLength(0); x++)
+            foreach (int x in lightArray.GetLength(0))
             {
-                for (int y = 0; y < lightArray.GetLength(1); y++)
+                foreach (int y in lightArray.GetLength(1))
                 {
                     totalBrightness += lightArray[x, y];
                 }

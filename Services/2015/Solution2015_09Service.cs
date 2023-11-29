@@ -27,7 +27,7 @@ namespace AdventOfCode.Services
             {
                 int distance = 0;
 
-                for (int i = 0; i < permutation.Count() - 1; i++)
+                foreach (int i in permutation.Count() - 1)
                 {
                     string key1 = $"{permutation.ElementAt(i)} to {permutation.ElementAt(i + 1)}";
                     string key2 = $"{permutation.ElementAt(i + 1)} to {permutation.ElementAt(i)}";
@@ -76,7 +76,7 @@ namespace AdventOfCode.Services
             {
                 int distance = 0;
 
-                for (int i = 0; i < permutation.Count() - 1; i++)
+                foreach (int i in permutation.Count() - 1)
                 {
                     string key1 = $"{permutation.ElementAt(i)} to {permutation.ElementAt(i + 1)}";
                     string key2 = $"{permutation.ElementAt(i + 1)} to {permutation.ElementAt(i)}";

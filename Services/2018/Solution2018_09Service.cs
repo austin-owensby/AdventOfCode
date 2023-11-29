@@ -11,7 +11,7 @@ namespace AdventOfCode.Services
             int players = values.First();
             int lastMarble = values.Last();
 
-            List<int> marbles = new() {0};
+            List<int> marbles = [0];
             List<int> scores = Enumerable.Repeat(0, players).ToList();
 
             int currentPlayer = 0;
@@ -24,7 +24,7 @@ namespace AdventOfCode.Services
                 if (currentMarble % 23 == 0) {
                     scores[currentPlayer] += currentMarble;
 
-                    Utility.Repeat(7, () => { current = current.Previous ?? list.Last!;});
+                    7.ForEach(() => { current = current.Previous ?? list.Last!;});
 
                     scores[currentPlayer] += current.Value;
                     current = current.Next ?? list.First!;
@@ -52,7 +52,7 @@ namespace AdventOfCode.Services
             int players = values.First();
             int lastMarble = values.Last() * 100;
 
-            List<int> marbles = new() {0};
+            List<int> marbles = [0];
             List<long> scores = Enumerable.Repeat((long)0, players).ToList();
 
             int currentPlayer = 0;
@@ -65,7 +65,7 @@ namespace AdventOfCode.Services
                 if (currentMarble % 23 == 0) {
                     scores[currentPlayer] += currentMarble;
 
-                    Utility.Repeat(7, () => { current = current.Previous ?? list.Last!;});
+                    7.ForEach(() => { current = current.Previous ?? list.Last!;});
 
                     scores[currentPlayer] += current.Value;
                     current = current.Next ?? list.First!;

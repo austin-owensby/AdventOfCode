@@ -13,7 +13,7 @@ namespace AdventOfCode.Services
 
             List<FileValue> fileValues = new();
 
-            for (int i = 0; i < lines.Count; i++)
+            foreach (int i in lines.Count)
             {
                 fileValues.Add(new(){
                     Value = lines[i],
@@ -51,7 +51,7 @@ namespace AdventOfCode.Services
 
             List<FileValue> fileValues = new();
 
-            for (int i = 0; i < lines.Count; i++)
+            foreach (int i in lines.Count)
             {
                 fileValues.Add(new(){
                     Value = lines[i] * 811589153,
@@ -64,7 +64,7 @@ namespace AdventOfCode.Services
                 OriginalIndex = l.OriginalIndex
             }).ToList();
 
-            for (int i = 0; i < 10; i++) {
+            foreach (int i in 10) {
                 foreach (FileValue value in fileValues) {
                     int currentIndex = copy.FindIndex(c => c.OriginalIndex == value.OriginalIndex);
 

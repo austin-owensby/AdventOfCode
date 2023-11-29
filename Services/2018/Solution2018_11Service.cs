@@ -27,8 +27,8 @@ namespace AdventOfCode.Services
             int maxPowerLevel = 0;
             string answer = string.Empty;
 
-            for (int y = 0; y < 297; y++) {
-                for (int x = 0; x < 297; x++) {
+            foreach (int y in 297) {
+                foreach (int x in 297) {
                     int powerLevel = cells[y][x] + cells[y][x+1] + cells[y][x+2] + cells[y+1][x] + cells[y+1][x+1] + cells[y+1][x+2] + cells[y+2][x] + cells[y+2][x+1] + cells[y+2][x+2];
 
                     if (powerLevel > maxPowerLevel) {
@@ -67,11 +67,11 @@ namespace AdventOfCode.Services
             string answer = string.Empty;
 
             for (int size = 1; size <= 300; size++) {
-                for (int y = 0; y < 300 - size; y++) {
-                    for (int x = 0; x < 300 - size; x++) {
+                foreach (int y in 300 - size) {
+                    foreach (int x in 300 - size) {
                         int powerLevel = 0;
-                        for (int i = 0; i < size; i++) {
-                            for (int j = 0; j < size; j++) {
+                        foreach (int i in size) {
+                            foreach (int j in size) {
                                 powerLevel += cells[y + i][x + j];
                             }
                         }

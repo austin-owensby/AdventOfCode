@@ -21,7 +21,7 @@ namespace AdventOfCode.Services
 
             long answer = 20151125;
 
-            for (int i = 0; i < item - 1; i++) {
+            foreach (int i in item - 1) {
                 answer = answer * (long)252533 % (long)33554393;
             }
 

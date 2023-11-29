@@ -49,7 +49,7 @@ namespace AdventOfCode.Services
             }
 
             // Handle monkey business
-            for (int i = 0; i < 20; i++)
+            foreach (int i in 20)
             {
                 foreach (Monkey monkey in monkies)
                 {
@@ -132,7 +132,7 @@ namespace AdventOfCode.Services
             long lcm = monkies.Select(m => m.divisorTest).Aggregate((a, b) => a * b);
 
             // Handle monkey business
-            for (int i = 0; i < 10000; i++)
+            foreach (int i in 10000)
             {
                 foreach (Monkey monkey in monkies)
                 {

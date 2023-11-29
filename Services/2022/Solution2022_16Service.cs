@@ -161,7 +161,7 @@ namespace AdventOfCode.Services
             valves.Add("AA");
             valves = valves.Order().ToList();
 
-            for (int i = 0; i < valves.Count; i++) {
+            foreach (int i in valves.Count) {
                 for (int j = i + 1; j < valves.Count; j++) {
                     string node1 = valves[i];
                     string node2 = valves[j];
@@ -194,7 +194,7 @@ namespace AdventOfCode.Services
             valves.Add("AA");
             valves = valves.Order().ToList();
 
-            for (int i = 0; i < valves.Count; i++) {
+            foreach (int i in valves.Count) {
                 for (int j = i + 1; j < valves.Count; j++) {
                     string node1 = valves[i];
                     string node2 = valves[j];

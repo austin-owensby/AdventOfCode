@@ -110,7 +110,7 @@ namespace AdventOfCode.Services
 
             int result = 0;
 
-            for (int i = 0; i < Math.Max(packet1Elements.Count, packet2Elements.Count); i++)
+            foreach (int i in Math.Max(packet1Elements.Count, packet2Elements.Count))
             {
                 if (packet1Elements.Count - 1 < i && packet1Elements.Count != packet2Elements.Count)
                 {

@@ -35,7 +35,7 @@ namespace AdventOfCode.Services
                 string direction = instruction[0];
                 int amount = int.Parse(instruction[1]);
 
-                for (int i = 0; i < amount; i++)
+                foreach (int i in amount)
                 {
                     if (direction == "U")
                     {
@@ -159,7 +159,7 @@ namespace AdventOfCode.Services
                 // Move the head of the rope
                 Point headCoordinate = rope.First();
 
-                for (int i = 0; i < amount; i++)
+                foreach (int i in amount)
                 {
                     if (direction == "U")
                     {

@@ -14,7 +14,7 @@ namespace AdventOfCode.Services
                 bool twoPairFound = false;
                 bool threePairFound = false;
 
-                for (int i = 0; i < line.Length - 1; i++)
+                foreach (int i in line.Length - 1)
                 {
                     char letter = line[i];
 
@@ -55,7 +55,7 @@ namespace AdventOfCode.Services
             List<char> commonLetters = new();
 
             // Loop over each id
-            for (int i = 0; i < lines.Count() - 1; i++)
+            foreach (int i in lines.Count() - 1)
             {
                 // If this is not empty, we've found the answer and should stop
                 if (commonLetters.Any())
@@ -72,7 +72,7 @@ namespace AdventOfCode.Services
                     int numberOfDifferences = 0;
 
                     // Compare the two ids char by char
-                    for (int k = 0; k < id1.Count(); k++)
+                    foreach (int k in id1.Count())
                     {
                         // If we've found more than 1 difference then this is not the answer, continue to the next pair of ids
                         if (numberOfDifferences > 1)

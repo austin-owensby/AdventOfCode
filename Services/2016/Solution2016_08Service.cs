@@ -33,8 +33,8 @@ namespace AdventOfCode.Services
                 int width = coordinates.First();
                 int height = coordinates.Last();
 
-                for (int x = 0; x < width; x++) {
-                    for (int y = 0; y < height; y++) {
+                foreach (int x in width) {
+                    foreach (int y in height) {
                         screen[x + y * screenLength] = '#';
                     }
                 }
@@ -109,8 +109,8 @@ namespace AdventOfCode.Services
                 int width = coordinates.First();
                 int height = coordinates.Last();
 
-                for (int x = 0; x < width; x++) {
-                    for (int y = 0; y < height; y++) {
+                foreach (int x in width) {
+                    foreach (int y in height) {
                         screen[x + y * screenLength] = '#';
                     }
                 }

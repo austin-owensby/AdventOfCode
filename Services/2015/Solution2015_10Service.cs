@@ -10,12 +10,12 @@ namespace AdventOfCode.Services
             List<int> newList = new();
             int numberOfLoops = 40;
 
-            for (int i = 0; i < numberOfLoops; i++)
+            foreach (int i in numberOfLoops)
             {
                 int currentNumber = currentList[0];
                 int currentLength = 0;
 
-                for (int j = 0; j < currentList.Count; j++)
+                foreach (int j in currentList.Count)
                 {
                     int number = currentList[j];
 
@@ -53,12 +53,12 @@ namespace AdventOfCode.Services
             List<int> newList = new();
             int numberOfLoops = 50;
 
-            for (int i = 0; i < numberOfLoops; i++)
+            foreach (int i in numberOfLoops)
             {
                 int currentNumber = currentList[0];
                 int currentLength = 0;
 
-                for (int j = 0; j < currentList.Count; j++)
+                foreach (int j in currentList.Count)
                 {
                     int number = currentList[j];
 

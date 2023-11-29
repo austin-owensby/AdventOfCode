@@ -18,11 +18,11 @@ namespace AdventOfCode.Services
 
                 string[] splits = molecule.Split(source);
 
-                for (int i = 0; i < splits.Length - 1; i++)
+                foreach (int i in splits.Length - 1)
                 {
                     string newMolecule = "";
 
-                    for (int j = 0; j < i; j++)
+                    foreach (int j in i)
                     {
                         newMolecule += $"{splits[j]}{source}";
                     }

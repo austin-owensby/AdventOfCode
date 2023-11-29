@@ -8,7 +8,7 @@ namespace AdventOfCode.Services
             List<int> currentState = lines.Shift().Remove(0, "initial state: ".Length).FindIndexes(c => c == '#');
             Dictionary<string, string> rules = lines.QuickRegex(@"([\.#]{5}) => ([\.#])").ToDictionary(l => l.First(), l => l.Last());
 
-            for (int i = 0; i < 20; i++) {
+            foreach (int i in 20) {
                 List<int> nextState = new();
 
                 int minIndex = currentState.Min() - 2;
@@ -42,7 +42,7 @@ namespace AdventOfCode.Services
 
             long answer = 0;
 
-            for (long i = 0; i < 50000000000; i++) {
+            foreach (long i in 50000000000) {
                 List<long> nextState = new();
 
                 long minIndex = currentState.Min() - 2;
@@ -63,7 +63,7 @@ namespace AdventOfCode.Services
                 // The generations eventually stabilize meaning that the next state is identical to the previous advanced by 1 place
                 if (currentState.Count == nextState.Count) {
                     bool stabilized = true;
-                    for (long j = 0; j < currentState.Count; j++) {
+                    foreach (long j in currentState.Count) {
                         if (nextState.ElementAt((int)j) - currentState[(int)j] != 1) {
                             stabilized = false;
                             break;

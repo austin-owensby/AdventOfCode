@@ -29,7 +29,7 @@ namespace AdventOfCode.Services
                 List<int> values = line.Split('\t').ToInts();
 
                 bool matchFound = false;
-                for (int i = 0; i < values.Count - 1; i++) {
+                foreach (int i in values.Count - 1) {
                     for (int j = i + 1; j < values.Count; j++) {
                         if (values[i] % values[j] == 0) {
                             answer += values[i] / values[j];

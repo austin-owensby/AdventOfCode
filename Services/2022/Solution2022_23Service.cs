@@ -24,9 +24,9 @@ namespace AdventOfCode.Services
 
             List<Elf> elves = new();
 
-            for (int y = 0; y < lines.Count; y++) {
+            foreach (int y in lines.Count) {
                 string line = lines[y];
-                for (int x = 0; x < line.Length; x++) {
+                foreach (int x in line.Length) {
                     if (line[x] == '#') {
                         elves.Add(new(){
                             X = x,
@@ -39,7 +39,7 @@ namespace AdventOfCode.Services
             Direction direction = Direction.North;
 
             // Check answer after 10 rounds
-            for (int round = 0; round < 10; round++) {
+            foreach (int round in 10) {
                 foreach (Elf elf in elves) {
                     // Reset old suggestion
                     elf.SuggestedX = null;
@@ -163,9 +163,9 @@ namespace AdventOfCode.Services
 
             List<Elf> elves = new();
 
-            for (int y = 0; y < lines.Count; y++) {
+            foreach (int y in lines.Count) {
                 string line = lines[y];
-                for (int x = 0; x < line.Length; x++) {
+                foreach (int x in line.Length) {
                     if (line[x] == '#') {
                         elves.Add(new(){
                             X = x,

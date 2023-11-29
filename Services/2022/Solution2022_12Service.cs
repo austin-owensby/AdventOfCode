@@ -180,7 +180,7 @@ namespace AdventOfCode.Services
 
             List<Node> startNodes = new();
 
-            for (int i = 0; i < lines.Count; i++)
+            foreach (int i in lines.Count)
             {
                 string line = lines[i];
 

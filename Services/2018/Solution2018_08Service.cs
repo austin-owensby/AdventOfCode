@@ -8,11 +8,11 @@ namespace AdventOfCode.Services
             int numberOfChildren = numbers[index++];
             int numberOfMetaData = numbers[index++];
 
-            for (int child = 0; child < numberOfChildren; child++) {
+            foreach (int child in numberOfChildren) {
                 answer += SumMetadata(ref index, numbers);
             }
 
-            for (int metaData = 0; metaData < numberOfMetaData; metaData++) {
+            foreach (int metaData in numberOfMetaData) {
                 answer += numbers[index++];
             }
 
@@ -39,11 +39,11 @@ namespace AdventOfCode.Services
 
             List<int> childSums = new();
 
-            for (int child = 0; child < numberOfChildren; child++) {
+            foreach (int child in numberOfChildren) {
                 childSums.Add(SumNode(ref index, numbers));
             }
 
-            for (int metaData = 0; metaData < numberOfMetaData; metaData++) {
+            foreach (int metaData in numberOfMetaData) {
                 int metaDataIndex = numbers[index++];
 
                 if (!childSums.Any()) {

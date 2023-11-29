@@ -9,11 +9,11 @@ namespace AdventOfCode.Services
             string[] nextState = new string[100];
             int numberOfStages = 100;
 
-            for (int i = 0; i < numberOfStages; i++)
+            foreach (int i in numberOfStages)
             {
-                for (int j = 0; j < lights.Length; j++)
+                foreach (int j in lights.Length)
                 {
-                    for (int k = 0; k < lights[j].Length; k++)
+                    foreach (int k in lights[j].Length)
                     {
                         int liveNeighbors = GetNumberOfLiveNeighbors(j, k, lights);
                         if (lights[j][k] == '#')
@@ -79,11 +79,11 @@ namespace AdventOfCode.Services
             lastRow[firstRow.Length - 1] = '#';
             lights[^1] = new string(lastRow);
 
-            for (int i = 0; i < numberOfStages; i++)
+            foreach (int i in numberOfStages)
             {
-                for (int j = 0; j < lights.Length; j++)
+                foreach (int j in lights.Length)
                 {
-                    for (int k = 0; k < lights[j].Length; k++)
+                    foreach (int k in lights[j].Length)
                     {
                         int liveNeighbors = GetNumberOfLiveNeighbors(j, k, lights);
 

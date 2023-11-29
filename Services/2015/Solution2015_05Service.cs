@@ -65,7 +65,7 @@ namespace AdventOfCode.Services
             {
                 // Check for dupklicate letters spaced by 1
                 bool duplicateFound = false;
-                for (int i = 0; i < line.Length - 2; i++)
+                foreach (int i in line.Length - 2)
                 {
                     if (line[i] == line[i + 2])
                     {
@@ -77,7 +77,7 @@ namespace AdventOfCode.Services
                 if (duplicateFound)
                 {
                     bool duplicatePairFound = false;
-                    for (int i = 0; i < line.Length - 3; i++)
+                    foreach (int i in line.Length - 3)
                     {
                         string currentString = $"{line[i]}{line[i + 1]}";
 

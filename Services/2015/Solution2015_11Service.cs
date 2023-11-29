@@ -20,7 +20,7 @@ namespace AdventOfCode.Services
                     bool sequenceFound = false;
 
                     // Find a sequence of 3 consecuitve letters
-                    for (int i = 0; i < currentPassword.Length - 2; i++)
+                    foreach (int i in currentPassword.Length - 2)
                     {
                         if (currentPassword[i] + 1 == currentPassword[i + 1] && currentPassword[i] + 2 == currentPassword[i + 2])
                         {
@@ -36,7 +36,7 @@ namespace AdventOfCode.Services
                         int firstPairsIndex = 0;
 
                         // Find 2 pairs of duplciate letters
-                        for (int i = 0; i < currentPassword.Length - 1; i++)
+                        foreach (int i in currentPassword.Length - 1)
                         {
                             if (currentPassword[i] == currentPassword[i + 1])
                             {
@@ -88,7 +88,7 @@ namespace AdventOfCode.Services
                     bool sequenceFound = false;
 
                     // Find a sequence of 3 consecuitve letters
-                    for (int i = 0; i < currentPassword.Length - 2; i++)
+                    foreach (int i in currentPassword.Length - 2)
                     {
                         if (currentPassword[i] + 1 == currentPassword[i + 1] && currentPassword[i] + 2 == currentPassword[i + 2])
                         {
@@ -104,7 +104,7 @@ namespace AdventOfCode.Services
                         int firstPairsIndex = 0;
 
                         // Find 2 pairs of duplciate letters
-                        for (int i = 0; i < currentPassword.Length - 1; i++)
+                        foreach (int i in currentPassword.Length - 1)
                         {
                             if (currentPassword[i] == currentPassword[i + 1])
                             {

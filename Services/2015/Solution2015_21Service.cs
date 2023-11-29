@@ -45,9 +45,9 @@ namespace AdventOfCode.Services
             {
                 foreach (Item armor in armors)
                 {
-                    for (int i = 0; i < rings.Count; i++)
+                    foreach (int i in rings.Count)
                     {
-                        for (int j = 0; j < rings.Count; j++)
+                        foreach (int j in rings.Count)
                         {
                             if (i == j)
                             {
@@ -136,9 +136,9 @@ namespace AdventOfCode.Services
             {
                 foreach (Item armor in armors)
                 {
-                    for (int i = 0; i < rings.Count; i++)
+                    foreach (int i in rings.Count)
                     {
-                        for (int j = 0; j < rings.Count; j++)
+                        foreach (int j in rings.Count)
                         {
                             if (i == j)
                             {

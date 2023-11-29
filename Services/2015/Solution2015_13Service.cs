@@ -49,7 +49,7 @@ namespace AdventOfCode.Services
             {
                 int netValue = 0;
 
-                for (int i = 0; i < option.Count - 1; i++)
+                foreach (int i in option.Count - 1)
                 {
                     string person1 = option[i];
                     string person2 = option[i + 1];
@@ -120,7 +120,7 @@ namespace AdventOfCode.Services
             {
                 int netValue = 0;
 
-                for (int i = 0; i < option.Count - 1; i++)
+                foreach (int i in option.Count - 1)
                 {
                     string person1 = option[i];
                     string person2 = option[i + 1];

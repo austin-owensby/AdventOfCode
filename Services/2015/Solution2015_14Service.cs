@@ -26,7 +26,7 @@ namespace AdventOfCode.Services
                 bool flying = true;
                 int distance = 0;
 
-                for (int i = 0; i < raceLength; i++)
+                foreach (int i in raceLength)
                 {
                     if (flying)
                     {
@@ -86,7 +86,7 @@ namespace AdventOfCode.Services
                 bool flying = true;
                 int distance = 0;
 
-                for (int i = 0; i < raceLength; i++)
+                foreach (int i in raceLength)
                 {
                     if (flying)
                     {
@@ -121,11 +121,11 @@ namespace AdventOfCode.Services
 
 
 
-            for (int i = 0; i < raceLength; i++)
+            foreach (int i in raceLength)
             {
                 int max = distances.Select(d => d[i]).Max();
 
-                for (int j = 0; j < distances.Count; j++)
+                foreach (int j in distances.Count)
                 {
                     if (distances[j][i] == max)
                     {

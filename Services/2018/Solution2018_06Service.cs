@@ -110,7 +110,7 @@ namespace AdventOfCode.Services
             int minDistance = int.MaxValue;
             char minPointName = ' ';
 
-            for (int i = 0; i < origins.Count; i++)
+            foreach (int i in origins.Count)
             {
                 int distance = GetDistance(point, origins[i]);
 

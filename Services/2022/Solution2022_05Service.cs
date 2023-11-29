@@ -21,7 +21,7 @@ namespace AdventOfCode.Services
             {
                 List<int> nums = line.QuickRegex(@"move (\d+) from (\d+) to (\d+)").ToInts();
 
-                for (int i = 0; i < nums[0]; i++)
+                foreach (int i in nums[0])
                 {
                     string box = crates[nums[1] - 1].Pop();
                     crates[nums[2] - 1].Push(box);
@@ -54,7 +54,7 @@ namespace AdventOfCode.Services
 
                 List<string> moved = new();
 
-                for (int i = 0; i < nums[0]; i++)
+                foreach (int i in nums[0])
                 {
                     string box = crates[nums[1] - 1].Pop();
                     moved.Add(box);

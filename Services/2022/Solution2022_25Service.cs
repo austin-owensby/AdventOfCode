@@ -10,7 +10,7 @@ namespace AdventOfCode.Services
 
             foreach (string line in lines)
             {
-                for (int i = 0; i < line.Length; i++) {
+                foreach (int i in line.Length) {
                     long value = 0;
 
                     switch (line[i]) {
@@ -42,7 +42,7 @@ namespace AdventOfCode.Services
 
             // Convert number to SNAFU
             long answerSoFar = 0;
-            for (int i = 0; i < Math.Ceiling(Math.Log(answerDecimal, 5)); i++) {
+            foreach (int i in Math.Ceiling(Math.Log(answerDecimal, 5))) {
                 long value = ((answerDecimal - answerSoFar) / (long)Math.Pow(5, i)) % 5;
 
                 switch (value) {
