@@ -10,9 +10,7 @@
             "request": "launch",
             "preLaunchTask": "build",
             "program": "${workspaceFolder}/bin/Debug/net8.0/AdventOfCode.dll",
-            "args": [],
             "cwd": "${workspaceFolder}",
-            "stopAtEntry": false,
             "serverReadyAction": {
                 "action": "openExternally",
                 "pattern": "\\bNow listening on:\\s+(https?://\\S+)",
@@ -24,7 +22,7 @@
             "logging": {
                 "moduleLoad": false
             },
-            "console":"integratedTerminal"
+            "console": "integratedTerminal"
         },
         {
             "name": "Launch (web - no browser)",
@@ -32,16 +30,14 @@
             "request": "launch",
             "preLaunchTask": "build",
             "program": "${workspaceFolder}/bin/Debug/net8.0/AdventOfCode.dll",
-            "args": [],
             "cwd": "${workspaceFolder}",
-            "stopAtEntry": false,
             "env": {
                 "ASPNETCORE_ENVIRONMENT": "Development"
             },
             "logging": {
                 "moduleLoad": false
             },
-            "console":"integratedTerminal"
-        }
+            "console": "integratedTerminal"
+        },
     ]
 }
