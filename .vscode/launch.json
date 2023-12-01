@@ -39,5 +39,21 @@
             },
             "console": "integratedTerminal"
         },
+        {
+            "type": "dotnetwatchattach",
+            "request": "launch",
+            "name": ".NET Watch Attach",
+            "args": { // Args to pass to coreclr attach,
+                "env": {
+                    "ASPNETCORE_ENVIRONMENT": "Development"
+                },
+                "logging": {
+                    "moduleLoad": false
+                },
+                "console": "integratedTerminal"
+            },
+            "task": "watch",
+            "program": "AdventOfCode.exe" // for windows Or "AdventOfCode" for linux
+        },
     ]
 }
