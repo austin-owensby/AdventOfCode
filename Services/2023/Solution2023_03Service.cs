@@ -14,11 +14,11 @@ namespace AdventOfCode.Services
                 int? parsedNumber = null;
                 foreach (int x in lines[y].Length)
                 {
-                    if (char.IsNumber(lines[y][x])) {
+                    if (char.IsDigit(lines[y][x])) {
                         int charNumber = lines[y][x].ToInt();
 
                         if (parsedNumber == null) {
-                            parsedNumber  = charNumber;
+                            parsedNumber = charNumber;
                         }
                         else {
                             parsedNumber = parsedNumber * 10 + charNumber;
@@ -26,59 +26,13 @@ namespace AdventOfCode.Services
 
                         if (!isPartNumber) {
                             // Check if this new char is a part number
-                            if (y > 0) {
-                                if (lines[y - 1][x] != '.' && !char.IsNumber(lines[y - 1][x])) {
+                            List<Point> neighbors = lines.Select(line => line.ToList()).ToList().GetNeighbors(x, y, true);
+
+                            foreach (Point neighbor in neighbors) {
+                                char value = lines[neighbor.Y][neighbor.X];
+                                if (value != '.' && !char.IsDigit(value)) {
                                     isPartNumber = true;
-                                    continue;
-                                }
-
-                                if (x > 0) {
-                                    if (lines[y - 1][x - 1] != '.' && !char.IsNumber(lines[y - 1][x - 1])) {
-                                        isPartNumber = true;
-                                        continue;
-                                    }
-                                }
-
-                                if (x < lines[y].Length - 1) {
-                                    if (lines[y - 1][x + 1] != '.' && !char.IsNumber(lines[y - 1][x + 1])) {
-                                        isPartNumber = true;
-                                        continue;
-                                    }
-                                }
-                            }
-
-                            if (y < lines.Count - 1) {
-                                if (lines[y + 1][x] != '.' && !char.IsNumber(lines[y + 1][x])) {
-                                    isPartNumber = true;
-                                    continue;
-                                }
-
-                                if (x > 0) {
-                                    if (lines[y + 1][x - 1] != '.' && !char.IsNumber(lines[y + 1][x - 1])) {
-                                        isPartNumber = true;
-                                        continue;
-                                    }
-                                }
-
-                                if (x < lines[y].Length - 1) {
-                                    if (lines[y + 1][x + 1] != '.' && !char.IsNumber(lines[y + 1][x + 1])) {
-                                        isPartNumber = true;
-                                        continue;
-                                    }
-                                }
-                            }
-
-                            if (x > 0) {
-                                if (lines[y][x - 1] != '.' && !char.IsNumber(lines[y][x - 1])) {
-                                    isPartNumber = true;
-                                    continue;
-                                }
-                            }
-
-                            if (x < lines.Count - 1) {
-                                if (lines[y][x + 1] != '.' && !char.IsNumber(lines[y][x + 1])) {
-                                    isPartNumber = true;
-                                    continue;
+                                    break;
                                 }
                             }
                         }
@@ -107,7 +61,7 @@ namespace AdventOfCode.Services
         {
             List<string> lines = Utility.GetInputLines(2023, 3, example);
 
-            Dictionary<string, Tuple<int,int>> gears = new();
+            Dictionary<string, Tuple<int,int>> gears = [];
 
             foreach (int y in lines.Count) {
                 foreach (int x in lines[y].Length)
@@ -120,12 +74,11 @@ namespace AdventOfCode.Services
 
             foreach (int y in lines.Count)
             {
-                bool isPartNumber = false;
                 int? parsedNumber = null;
                 string? gearKey = null;
                 foreach (int x in lines[y].Length)
                 {
-                    if (char.IsNumber(lines[y][x])) {
+                    if (char.IsDigit(lines[y][x])) {
                         int charNumber = lines[y][x].ToInt();
 
                         if (parsedNumber == null) {
@@ -135,85 +88,15 @@ namespace AdventOfCode.Services
                             parsedNumber = parsedNumber * 10 + charNumber;
                         }
 
-                        if (!isPartNumber && gearKey == null) {
-                            // Check if this new char is a part number
-                            if (y > 0) {
-                                if (lines[y - 1][x] != '.' && !char.IsNumber(lines[y - 1][x])) {
-                                    isPartNumber = true;
+                        if (gearKey == null) {
+                            // Check if this new char is adjacent to a gear
+                            List<Point> neighbors = lines.Select(line => line.ToList()).ToList().GetNeighbors(x, y, true);
 
-                                    if (lines[y - 1][x] == '*') {
-                                        gearKey = $"{x},{y - 1}";
-                                    }
-                                }
-
-                                if (x > 0) {
-                                    if (lines[y - 1][x - 1] != '.' && !char.IsNumber(lines[y - 1][x - 1])) {
-                                        isPartNumber = true;
-
-                                        if (lines[y - 1][x - 1] == '*') {
-                                            gearKey = $"{x - 1},{y - 1}";
-                                        }
-                                    }
-                                }
-
-                                if (x < lines[y].Length - 1) {
-                                    if (lines[y - 1][x + 1] != '.' && !char.IsNumber(lines[y - 1][x + 1])) {
-                                        isPartNumber = true;
-
-                                        if (lines[y - 1][x + 1] == '*') {
-                                            gearKey = $"{x + 1},{y - 1}";
-                                        }
-                                    }
-                                }
-                            }
-
-                            if (y < lines.Count - 1) {
-                                if (lines[y + 1][x] != '.' && !char.IsNumber(lines[y + 1][x])) {
-                                    isPartNumber = true;
-
-                                    if (lines[y + 1][x] == '*') {
-                                        gearKey = $"{x},{y + 1}";
-                                    }
-                                }
-
-                                if (x > 0) {
-                                    if (lines[y + 1][x - 1] != '.' && !char.IsNumber(lines[y + 1][x - 1])) {
-                                        isPartNumber = true;
-
-                                        if (lines[y + 1][x - 1] == '*') {
-                                            gearKey = $"{x - 1},{y + 1}";
-                                        }
-                                    }
-                                }
-
-                                if (x < lines[y].Length - 1) {
-                                    if (lines[y + 1][x + 1] != '.' && !char.IsNumber(lines[y + 1][x + 1])) {
-                                        isPartNumber = true;
-
-                                        if (lines[y + 1][x + 1] == '*') {
-                                            gearKey = $"{x + 1},{y + 1}";
-                                        }
-                                    }
-                                }
-                            }
-
-                            if (x > 0) {
-                                if (lines[y][x - 1] != '.' && !char.IsNumber(lines[y][x - 1])) {
-                                    isPartNumber = true;
-
-                                    if (lines[y][x - 1] == '*') {
-                                        gearKey = $"{x - 1},{y}";
-                                    }
-                                }
-                            }
-
-                            if (x < lines.Count - 1) {
-                                if (lines[y][x + 1] != '.' && !char.IsNumber(lines[y][x + 1])) {
-                                    isPartNumber = true;
-
-                                    if (lines[y][x + 1] == '*') {
-                                        gearKey = $"{x + 1},{y}";
-                                    }
+                            foreach (Point neighbor in neighbors) {
+                                char value = lines[neighbor.Y][neighbor.X];
+                                if (lines[neighbor.Y][neighbor.X] == '*') {
+                                    gearKey = $"{neighbor.X},{neighbor.Y}";
+                                    break;
                                 }
                             }
                         }
@@ -228,7 +111,6 @@ namespace AdventOfCode.Services
                             }
                         }
                         gearKey = null;
-                        isPartNumber = false;
                         parsedNumber = null;
                     }
                 }
@@ -243,11 +125,10 @@ namespace AdventOfCode.Services
                 }
 
                 gearKey = null;
-                isPartNumber = false;
                 parsedNumber = null;
             }
 
-            int answer = gears.Sum(gear => gear.Value.Item1 * gear.Value.Item2);
+            int answer = gears.Select(gear => gear.Value).Sum(gear => gear.Item1 * gear.Item2);
 
             return answer.ToString();
         }
