@@ -1,12 +1,13 @@
 # Advent Of Code
 <!-- Generated via https://github.com/alexandru-dinu/advent-of-code/blob/main/.scripts/gen_badges.py -->
+![](https://img.shields.io/badge/2023-6%20stars-a83d19)
 ![](https://img.shields.io/badge/2022-50%20stars-239323)
 ![](https://img.shields.io/badge/2021-20%20stars-6e621d)
 ![](https://img.shields.io/badge/2020-21%20stars-6b651e)
 ![](https://img.shields.io/badge/2019-5%20stars-ae3919)
 ![](https://img.shields.io/badge/2018-28%20stars-56721f)
-![](https://img.shields.io/badge/2017-0%20stars-ef0f14)
-![](https://img.shields.io/badge/2016-2%20stars-c62917)
+![](https://img.shields.io/badge/2017-4%20stars-b53418)
+![](https://img.shields.io/badge/2016-6%20stars-a83d19)
 ![](https://img.shields.io/badge/2015-50%20stars-239323)
 
 This repository is setup to assist with solving challenges from the [Advent of Code](https://adventofcode.com/).

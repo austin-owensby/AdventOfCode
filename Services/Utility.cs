@@ -121,6 +121,7 @@ namespace AdventOfCode.Services
 
             return list.ToList();
         }
+        
         /// <summary>
         /// Get all permutations for the list
         /// </summary>
@@ -219,6 +220,63 @@ namespace AdventOfCode.Services
             list.Remove(first);
 
             return first;
+        }
+        
+        /// <summary>
+        /// Returns a list of points of available neighbors based on an initial coordinate.
+        /// Assumes that each row has a consistent length
+        /// </summary>
+        /// <param name="grid"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="includeDiagonal"></param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public static List<Point> GetNeighbors<T>(this List<List<T>> grid, int x, int y, bool includeDiagonal = false) {
+            List<Point> neighbors = [];
+            
+            bool yNotMin = y > 0;
+            bool xNotMin = x > 0;
+            bool yNotMax = y < grid.Count - 1;
+            bool xNotMax = x < grid.First().Count - 1;
+
+            if (xNotMin) {
+                neighbors.Add(new Point(x - 1, y));
+
+                if (includeDiagonal) {
+                    if (yNotMin) {
+                        neighbors.Add(new Point(x - 1, y - 1));
+                    }
+
+                    if (yNotMax) {
+                        neighbors.Add(new Point(x - 1, y + 1));
+                    }
+                }
+            }
+
+            if (xNotMax) {
+                neighbors.Add(new Point(x + 1, y));
+
+                if (includeDiagonal) {
+                    if (yNotMin) {
+                        neighbors.Add(new Point(x + 1, y - 1));
+                    }
+
+                    if (yNotMax) {
+                        neighbors.Add(new Point(x + 1, y + 1));
+                    }
+                }
+            }
+
+            if (yNotMin) {
+                neighbors.Add(new Point(x, y - 1));
+            }
+
+            if (yNotMax) {
+                neighbors.Add(new Point(x, y + 1));
+            }
+
+            return neighbors;
         }
         #endregion
 
