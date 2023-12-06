@@ -6,11 +6,25 @@ namespace AdventOfCode.Services
         {
             List<string> lines = Utility.GetInputLines(2023, 6, example);
 
-            int answer = 0;
+            List<int> times = lines.First().QuickRegex(@"Time:\s+(.*)").First().Split(' ').Where(x => x.Length > 0).ToInts();
+            List<int> distances = lines.Last().QuickRegex(@"Distance:\s+(.*)").First().Split(' ').Where(x => x.Length > 0).ToInts();
 
-            foreach (string line in lines)
+            int answer = 1;
+
+            foreach (int i in times.Count)
             {
+                int time = times[i];
+                int distance = distances[i];
 
+                int raceWins = 0;
+
+                foreach (int t in time) {
+                    if ((time - t) * t > distance) {
+                        raceWins++;
+                    }
+                }
+
+                answer *= raceWins;
             }
 
             return answer.ToString();
@@ -20,11 +34,15 @@ namespace AdventOfCode.Services
         {
             List<string> lines = Utility.GetInputLines(2023, 6, example);
 
-            int answer = 0;
+            long time = int.Parse(new string(lines.First().QuickRegex(@"Time:\s+(.*)").First().Where(x => x != ' ').ToArray()));
+            long distance = long.Parse(new string(lines.Last().QuickRegex(@"Distance:\s+(.*)").First().Where(x => x != ' ').ToArray()));
 
-            foreach (string line in lines)
-            {
+            long answer = 0;
 
+            foreach (long t in time) {
+                if ((time - t) * t > distance) {
+                    answer++;
+                }
             }
 
             return answer.ToString();
