@@ -1,5 +1,6 @@
 using System.Text.RegularExpressions;
 using System.Numerics;
+using System.Runtime.CompilerServices;
 
 namespace AdventOfCode.Services
 {
@@ -373,6 +374,38 @@ namespace AdventOfCode.Services
                 return num + (long)Math.Ceiling((double)Math.Abs(num) / mod) * mod;
             }
         }
+
+        public static int LCM(int a, int b)
+        {
+            return a / GCF(a, b) * b;
+        }
+
+        public static int GCF(int a, int b)
+        {
+            while (b != 0)
+            {
+                int temp = b;
+                b = a % b;
+                a = temp;
+            }
+            return a;
+        }
+        public static long LCM(long a, long b)
+        {
+            return a / GCF(a, b) * b;
+        }
+
+        public static long GCF(long a, long b)
+        {
+            while (b != 0)
+            {
+                long temp = b;
+                b = a % b;
+                a = temp;
+            }
+            return a;
+        }
+
         #endregion
 
         #region Conversion
