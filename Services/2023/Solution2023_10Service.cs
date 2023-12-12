@@ -5,51 +5,111 @@ namespace AdventOfCode.Services
         public string FirstHalf(bool example)
         {
             List<string> lines = Utility.GetInputLines(2023, 10, example);
+            List<List<char>> grid = lines.Select(line => line.ToList()).ToList();
 
             List<Point> path = [];
-            int y = lines.FindIndex(line => line.Contains('S'));
-            int x = lines[y].ToList().FindIndex(x => x == 'S');
-            path.Add(new Point(x, y));
 
-            int answer = 0;
+            // Find the starting point
+            int startY = grid.FindIndex(line => line.Contains('S'));
+            int startX = grid[startY].FindIndex(x => x == 'S');
+            Point startPoint = new (startX, startY);
+            path.Add(startPoint);
 
-            while (path.Count == 1 || path.Count > 1 && !(path.First().X == path.Last().X && path.First().Y == path.Last().Y)) {
+            List<char> downValues = ['J', 'L', '|'];
+            List<char> rightValues = ['J', '7', '-'];
+            List<char> upValues = ['F', '7', '|'];
+            List<char> leftValues = ['L', 'F', '-'];
+
+            // Replace the starting point
+            List<Point> startNeighbors = grid.GetNeighbors(startX, startY);
+            bool canMoveUp = false;
+            bool canMoveRight = false;
+            bool canMoveDown = false;
+            bool canMoveLeft = false;
+
+            foreach (Point neighbor in startNeighbors) {
+                char neightborValue = grid[neighbor.Y][neighbor.X];
+                // Consider moving down
+                if (neighbor.Y - 1 == startPoint.Y && neighbor.X == startPoint.X) {
+                    if (downValues.Contains(neightborValue)) {
+                        canMoveDown = true;
+                    }
+                }
+                // Consider moving right
+                else if (neighbor.Y == startPoint.Y && neighbor.X - 1 == startPoint.X) {
+                    if (rightValues.Contains(neightborValue)) {
+                        canMoveRight = true;
+                    }
+                }
+                // Consider moving up
+                else if (neighbor.Y + 1 == startPoint.Y && neighbor.X == startPoint.X) {
+                    if (upValues.Contains(neightborValue)) {
+                        canMoveUp = true;
+                    }
+                }
+                // Consider moving left
+                else if (neighbor.Y == startPoint.Y && neighbor.X + 1 == startPoint.X) {
+                    if (leftValues.Contains(neightborValue)) {
+                        canMoveLeft = true;
+                    }
+                }
+            }
+
+            if (canMoveUp && canMoveDown) {
+                grid[startY][startX] = '|';
+            }
+            else if (canMoveRight && canMoveLeft) {
+                grid[startY][startX] = '-';
+            }
+            else if (canMoveRight && canMoveUp) {
+                grid[startY][startX] = 'L';
+            }
+            else if (canMoveLeft && canMoveUp) {
+                grid[startY][startX] = 'J';
+            }
+            else if (canMoveRight && canMoveDown) {
+                grid[startY][startX] = 'F';
+            }
+            else if (canMoveLeft && canMoveDown) {
+                grid[startY][startX] = '7';
+            }
+
+            do {
                 Point currentPoint = path.Last();
-                char currentValue = lines[currentPoint.Y][currentPoint.X];
-                List<Point> neighbors = lines.Select(line => line.ToList()).ToList().GetNeighbors(currentPoint.X, currentPoint.Y);
-
                 Point previousPoint = path.Count == 1 ? currentPoint : path.TakeLast(2).First();
+
+                char currentValue = grid[currentPoint.Y][currentPoint.X];
+                List<Point> neighbors = grid.GetNeighbors(currentPoint.X, currentPoint.Y);
+
+                // Loop over each potential neighbor an evaluate which step to take
                 foreach (Point neighbor in neighbors) {
-                    char neightborValue = lines[neighbor.Y][neighbor.X];
+                    char neightborValue = grid[neighbor.Y][neighbor.X];
+                    // Don't consider the previous point as a neighbor
                     if (!(previousPoint.X == neighbor.X && previousPoint.Y == neighbor.Y)) {
+                        // Consider moving down
                         if (neighbor.Y - 1 == currentPoint.Y && neighbor.X == currentPoint.X) {
-                            List<char> moveDownValues = ['J', 'L', '|', 'S'];
-                            List<char> canMoveDownValues = ['|', 'F', '7', 'S'];
-                            if (moveDownValues.Contains(neightborValue) && canMoveDownValues.Contains(currentValue)) {
+                            if (downValues.Contains(neightborValue) && upValues.Contains(currentValue)) {
                                 path.Add(neighbor);
                                 break;
                             }
                         }
+                        // Consider moving right
                         else if (neighbor.Y == currentPoint.Y && neighbor.X - 1 == currentPoint.X) {
-                            List<char> moveRightValues = ['J', '7', '-', 'S'];
-                            List<char> canMoveRightValues = ['-', 'F', 'L', 'S'];
-                            if (moveRightValues.Contains(neightborValue) && canMoveRightValues.Contains(currentValue)) {
+                            if (rightValues.Contains(neightborValue) && leftValues.Contains(currentValue)) {
                                 path.Add(neighbor);
                                 break;
                             }
                         }
+                        // Consider moving up
                         else if (neighbor.Y + 1 == currentPoint.Y && neighbor.X == currentPoint.X) {
-                            List<char> moveUpValues = ['F', '7', '|', 'S'];
-                            List<char> canMoveUpValues = ['|', 'J', 'L', 'S'];
-                            if (moveUpValues.Contains(neightborValue) && canMoveUpValues.Contains(currentValue)) {
+                            if (upValues.Contains(neightborValue) && downValues.Contains(currentValue)) {
                                 path.Add(neighbor);
                                 break;
                             }
                         }
+                        // Consider moving left
                         else if (neighbor.Y == currentPoint.Y && neighbor.X + 1 == currentPoint.X) {
-                            List<char> moveLeftValues = ['L', 'F', '-', 'S'];
-                            List<char> canMoveLeftValues = ['-', 'J', '7', 'S'];
-                            if (moveLeftValues.Contains(neightborValue) && canMoveLeftValues.Contains(currentValue)) {
+                            if (leftValues.Contains(neightborValue) && rightValues.Contains(currentValue)) {
                                 path.Add(neighbor);
                                 break;
                             }
@@ -57,8 +117,11 @@ namespace AdventOfCode.Services
                     }
                 }
             }
+            // Keep looping until we get back to the start point
+            while (!(path.First().X == path.Last().X && path.First().Y == path.Last().Y));
 
-            answer = (path.Count - 1) / 2;
+            // Calculate the halfway point of the path
+            int answer = (path.Count - 1) / 2;
 
             return answer.ToString();
         }
