@@ -2,11 +2,12 @@ namespace AdventOfCode.Services
 {
     public class Solution2023_12Service : ISolutionDayService
     {
+        public Dictionary<string, ulong> mappings = [];
         public string FirstHalf(bool example)
         {
             List<string> lines = Utility.GetInputLines(2023, 12, example);
 
-            int answer = 0;
+            ulong answer = 0;
 
             foreach (string line in lines) {
                 string[] parts = line.Split(' ');
@@ -23,7 +24,7 @@ namespace AdventOfCode.Services
         {            
             List<string> lines = Utility.GetInputLines(2023, 12, example);
 
-            int answer = 0;
+            ulong answer = 0;
 
             foreach (string line in lines)
             {
@@ -46,10 +47,12 @@ namespace AdventOfCode.Services
                 answer += GetPossibleCombinations(springs, values);
             }
 
+            // Too low 29408289237
+
             return answer.ToString();
         }
     
-        private int GetPossibleCombinations(string input, List<int> values) {
+        private ulong GetPossibleCombinations(string input, List<int> values) {
             // Try replacing next '?' with either a # or .
             // If a valid solution is still possible, continue
             int index = input.IndexOf('?');
@@ -57,12 +60,12 @@ namespace AdventOfCode.Services
             
             string testInput1 = testInput.Insert(index, "#");
             string testInput2 = testInput.Insert(index, ".");
-            int combinations1 = GetPossibleCombinationsHalf(testInput1, values);
-            int combinations2 = GetPossibleCombinationsHalf(testInput2, values);
+            ulong combinations1 = GetPossibleCombinationsHalf(testInput1, values);
+            ulong combinations2 = GetPossibleCombinationsHalf(testInput2, values);
             return combinations1 + combinations2;
         }
 
-        private int GetPossibleCombinationsHalf(string testInput, List<int> values) {
+        private ulong GetPossibleCombinationsHalf(string testInput, List<int> values) {
             string testInputKnown = new (testInput.TakeWhile(c => c != '?').ToArray());
 
             List<int> groups = testInputKnown.ChunkByExclusive(c => c == '.').Select(x => x.Count).ToList();
@@ -109,7 +112,16 @@ namespace AdventOfCode.Services
                                 newTestValues.RemoveAt(0);
                             }
                         }
-                        return GetPossibleCombinations(newTestInput, newTestValues);
+                        string key = newTestInput + string.Join(",", newTestValues);
+
+                        // Memoization
+                        if (!mappings.TryGetValue(key, out ulong combinations))
+                        {
+                            combinations = GetPossibleCombinations(newTestInput, newTestValues);
+                            mappings[key] = combinations;
+                        }
+
+                        return combinations;
                     }
                     else {
                         // We're at the end with a valid solution
