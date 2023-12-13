@@ -91,7 +91,25 @@ namespace AdventOfCode.Services
                 if (groupIsValid) {
                     if (testInput.Contains('?')) {
                         // There's still more to go, keep checking
-                        return GetPossibleCombinations(testInput, values);
+                        // Decrease the size of the problem by removing any groups we already have solved
+                        string newTestInput = testInput;
+                        List<int> newTestValues = values.ToList();
+                        foreach (int i in groups.Count) {
+                            if (groups[i] == values[i]) {
+                                string groupValue = new (Enumerable.Repeat('#', groups[i]).ToArray());
+                                int index = newTestInput.IndexOf(groupValue);
+                                string potentialNewTestInput = newTestInput.Substring(index + groups[i]);
+
+                                // Check if this was a valid break, stop looping
+                                if (potentialNewTestInput.StartsWith('?')) {
+                                    break;
+                                }
+
+                                newTestInput = potentialNewTestInput;
+                                newTestValues.RemoveAt(0);
+                            }
+                        }
+                        return GetPossibleCombinations(newTestInput, newTestValues);
                     }
                     else {
                         // We're at the end with a valid solution
