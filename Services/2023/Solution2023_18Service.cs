@@ -38,6 +38,7 @@ namespace AdventOfCode.Services
                     'D' => new(currentVertex.X, currentVertex.Y + length) { Value = 3 },
                     'L' => new(currentVertex.X - length, currentVertex.Y),
                     'U' => new(currentVertex.X, currentVertex.Y - length) { Value = 1 },
+                    _ => throw new Exception()
                 };
 
                 if (direction == 'D' || direction == 'U') {
@@ -92,6 +93,7 @@ namespace AdventOfCode.Services
                     '1' => new(currentVertex.X, currentVertex.Y + length) { Value = 3 },
                     '2' => new(currentVertex.X - length, currentVertex.Y),
                     '3' => new(currentVertex.X, currentVertex.Y - length) { Value = 1 },
+                    _ => throw new Exception()
                 };
 
                 if (direction == 'D' || direction == 'U') {
