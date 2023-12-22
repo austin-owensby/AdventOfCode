@@ -5,13 +5,20 @@ namespace AdventOfCode.Services
         public string FirstHalf(bool example)
         {
             List<string> lines = Utility.GetInputLines(2023, 21, example);
+            List<List<char>> grid = lines.Select(line => line.ToList()).ToList();
+            int startY = grid.FindIndex(row => row.Contains('S'));
+            int startX = grid[startY].FindIndex(cell => cell == 'S');
 
             int answer = 0;
 
-            foreach (string line in lines)
-            {
+            List<Point> points = [new(startX, startY)];
 
+            foreach (int i in 64)
+            {
+                points = points.SelectMany(point => grid.GetNeighbors(point.X, point.Y).Where(neighbor => grid[neighbor.Y][neighbor.X] != '#')).DistinctBy(point => $"{point.X} {point.Y}").ToList();
             }
+
+            answer = points.Count;
 
             return answer.ToString();
         }
