@@ -245,30 +245,6 @@ namespace AdventOfCode.Services
                         }
                     }
                 }
-
-                // Filter out extra paths
-                /*
-                List<int> pathsToDelete = [];
-                int bestPathSoFar = 0;
-                foreach (int i in pathsAreFinished.FindIndexes(a => a)) {
-                    if (distances[pathKeys[i].Last()].Item1.Y != grid.Count - 1) {
-                        pathsToDelete.Add(i);
-                    }
-                    else {
-                        int value = pathKeys[i].Sum(key => distances[key].Item2);
-
-                        if (bestPathSoFar > value) {
-                            pathsToDelete.Add(i);
-                        }
-                        else {
-                            bestPathSoFar = value;
-                        }
-                    }
-                }
-
-                pathKeys = pathKeys.Where((p, i) => !pathsToDelete.Contains(i)).ToList();
-                pathsAreFinished = pathsAreFinished.Where((p, i) => !pathsToDelete.Contains(i)).ToList();
-                */
             }
 
             answer = pathKeys.Max(path => path.Sum(key => distances[key].Item2));
