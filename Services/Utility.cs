@@ -407,29 +407,34 @@ namespace AdventOfCode.Services
         }
 
         public static T MatrixDeterminate<T>(List<List<T>> matrix) where T : notnull, INumber<T> {
-            if (matrix.Count == 0) {
-                return default!;
-            }
-
-            if (!matrix.All(row => row.Count == matrix.Count)) {
-                throw new Exception("Recieved a non-square matrix");
-            }
-
-            if (matrix.Count == 2) {
-                return matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0];
-            }
-            else {
-                T answer = default!;
-                foreach (int i in matrix.Count) {
-                    T value = matrix[0][i];
-
-                    List<List<T>> newMatrix = matrix.Skip(1).Select(row => row.Where((x, index) => index != i).ToList()).ToList();
-                    value *= MatrixDeterminate(newMatrix);
-                    
-                    answer += i % 2 == 0 ? value : -value;
+            checked {
+                if (matrix.Count == 0) {
+                    return default!;
                 }
-                return answer;
 
+                if (!matrix.All(row => row.Count == matrix.Count)) {
+                    throw new Exception("Recieved a non-square matrix");
+                }
+
+                if (matrix.Count == 2) {
+                    T value = matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0];
+                    return value;
+                }
+                else {
+                    T answer = default!;
+                    foreach (int i in matrix.Count) {
+                        T value = matrix[0][i];
+
+                        // Don't bother doing the calcs if it won't change the results
+                        if (value != default) {
+                            List<List<T>> newMatrix = matrix.Skip(1).Select(row => row.Where((x, index) => index != i).ToList()).ToList();
+                            value *= MatrixDeterminate(newMatrix);
+                            
+                            answer += i % 2 == 0 ? value : -value;
+                        }
+                    }
+                    return answer;
+                }
             }
         }
 

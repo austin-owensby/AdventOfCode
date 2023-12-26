@@ -75,36 +75,42 @@ namespace AdventOfCode.Services
             // tn = (Rx - Ax)/(Adx - Rdx)
 
             // This formula has an equivalent y and z version
-            // We can set them equal to each other to get 2 independent equations
+            // We can set them equal to each other to get 3 independent equations
             // (Rx - Ax)/(Adx - Rdx) = (Ry - Ay)/(Ady - Rdy)
             // (Rx - Ax)/(Adx - Rdx) = (Rz - Az)/(Adz - Rdz)
+            // (Ry - Ay)/(Ady - Rdy) = (Rz - Az)/(Adz - Rdz)
 
             // These equations can be rearranged...
             // (Rx - Ax)(Ady - Rdy) = (Ry - Ay)(Adx - Rdx)
             // (Rx - Ax)(Adz - Rdz) = (Rz - Az)(Adx - Rdx)
+            // (Ry - Ay)(Ady - Rdy) = (Rz - Az)(Adx - Rdx)
             // ...distributed...
             // Rx * Ady - Rx * Rdy - Ax * Ady + Ax * Rdy = Ry * Adx - Ry * Rdx - Ay * Adx + Ay * Rdx
             // Rx * Adz - Rx * Rdz - Ax * Adz + Ax * Rdz = Rz * Adx - Rz * Rdx - Az * Adx + Az * Rdx
+            // Ry * Adz - Ry * Rdz - Ay * Adz + Ay * Rdz = Rz * Ady - Rz * Rdy - Az * Ady + Az * Rdy
             // ...and then rearranged again so that the constant unknowns are on 1 side
             // -Rx * Rdy + Ry * Rdx = -Rx * Ady + Ry * Adx + Rdx * Ay - Rdy * Ax + Ax * Ady - Ay * Adx
             // -Rx * Rdz + Rz * Rdx = -Rx * Adz + Rz * Adx + Rdx * Az - Rdz * Ax + Ax * Adz - Az * Adx
+            // -Ry * Rdz + Rz * Rdy = -Ry * Adz + Rz * Ady + Rdy * Az - Rdz * Ay + Ay * Adz - Az * Ady
 
             // For any given hailstone, the left side of the equation will be the same so we can set them equal for hailstones A and B
             // This gives us independent linear equations
             // -Rx * Ady + Ry * Adx + Rdx * Ay - Rdy * Ax + Ax * Ady - Ay * Adx = -Rx * Bdy + Ry * Bdx + Rdx * By - Rdy * Bx + Bx * Bdy - By * Bdx
             // -Rx * Adz + Rz * Adx + Rdx * Az - Rdz * Ax + Ax * Adz - Az * Adx = -Rx * Bdz + Rz * Bdx + Rdx * Bz - Rdz * Bx + Bx * Bdz - Bz * Bdx
+            // -Ry * Adz + Rz * Ady + Rdy * Az - Rdz * Ay + Ay * Adz - Az * Ady = -Ry * Bdz + Rz * Bdy + Rdy * Bz - Rdz * By + By * Bdz - Bz * Bdy
             
             // These simplify to
             // (-Ady + Bdy) * Rx + (Adx - Bdx) * Ry + (Ay - By) * Rdx + (-Ax + Bx) * Rdy = (-Ax * Ady) + (Ay * Adx) + (Bx * Bdy) + (-By * Bdx)
             // (-Adz + Bdz) * Rx + (Adx - Bdx) * Rz + (Az - Bz) * Rdx + (-Ax + Bx) * Rdz = (-Ax * Adz) + (Az * Adx) + (Bx * Bdz) + (-Bz * Bdx)
+            // (-Adz + Bdz) * Ry + (Ady - Bdy) * Rz + (Az - Bz) * Rdy + (-Ay + By) * Rdz = (-Ay * Adz) + (Az * Ady) + (By * Bdz) + (-Bz * Bdy)
 
-            // In order to get a full 6 independent linear equations we can repeat this with A-C and B-C
+            // In order to get a full 6 independent linear equations we can repeat this with A-C
             // (-Ady + Bdy) * Rx + (Adx - Bdx) * Ry + (Ay - By) * Rdx + (-Ax + Bx) * Rdy = (-Ax * Ady) + (Ay * Adx) + (Bx * Bdy) + (-By * Bdx)
             // (-Adz + Bdz) * Rx + (Adx - Bdx) * Rz + (Az - Bz) * Rdx + (-Ax + Bx) * Rdz = (-Ax * Adz) + (Az * Adx) + (Bx * Bdz) + (-Bz * Bdx)
+            // (-Adz + Bdz) * Ry + (Ady - Bdy) * Rz + (Az - Bz) * Rdy + (-Ay + By) * Rdz = (-Ay * Adz) + (Az * Ady) + (By * Bdz) + (-Bz * Bdy)
             // (-Ady + Cdy) * Rx + (Adx - Cdx) * Ry + (Ay - Cy) * Rdx + (-Ax + Cx) * Rdy = (-Ax * Ady) + (Ay * Adx) + (Cx * Cdy) + (-Cy * Cdx)
             // (-Adz + Cdz) * Rx + (Adx - Cdx) * Rz + (Az - Cz) * Rdx + (-Ax + Cx) * Rdz = (-Ax * Adz) + (Az * Adx) + (Cx * Cdz) + (-Cz * Cdx)
-            // (-Bdy + Cdy) * Rx + (Bdx - Cdx) * Ry + (By - Cy) * Rdx + (-Bx + Cx) * Rdy = (-Bx * Bdy) + (By * Bdx) + (Cx * Cdy) + (-Cy * Cdx)
-            // (-Bdz + Cdz) * Rx + (Bdx - Cdx) * Rz + (Bz - Cz) * Rdx + (-Bx + Cx) * Rdz = (-Bx * Bdz) + (Bz * Bdx) + (Cx * Cdz) + (-Cz * Cdx)
+            // (-Adz + Cdz) * Ry + (Ady - Cdy) * Rz + (Az - Cz) * Rdy + (-Ay + Cy) * Rdz = (-Ay * Adz) + (Az * Ady) + (Cy * Cdz) + (-Cz * Cdy)
 
             long Ax = points[0][0];
             long Ay = points[0][1];
@@ -126,36 +132,37 @@ namespace AdventOfCode.Services
             long Cdz = points[2][5];
 
             // The columns are Rx, Ry, Rz, Rdx, Rdy, Rdz's coefficients
-            List<List<long>> equations = [
-                [(-Ady + Bdy), (Adx - Bdx),           0, (Ay - By), (-Ax + Bx),          0],
-                [(-Adz + Bdz),           0, (Adx - Bdx), (Az - Bz),          0, (-Ax + Bx)],
-                [(-Ady + Cdy), (Adx - Cdx),           0, (Ay - Cy), (-Ax + Cx),          0],
-                [(-Adz + Cdz),           0, (Adx - Cdx), (Az - Cz),          0, (-Ax + Cx)],
-                [(-Bdy + Cdy), (Bdx - Cdx),           0, (By - Cy), (-Bx + Cx),          0],
-                [(-Bdz + Cdz),           0, (Bdx - Cdx), (Bz - Cz),          0, (-Bx + Cx)]
+            // I'm having to use BigIntegers here otherwise calculating the Determinate results in an overflow
+            List<List<BigInteger>> equations = [
+                [(-Ady + Bdy),  (Adx - Bdx),           0, (Ay - By), (-Ax + Bx),          0],
+                [(-Adz + Bdz),            0, (Adx - Bdx), (Az - Bz),          0, (-Ax + Bx)],
+                [           0, (-Adz + Bdz), (Ady - Bdy),         0,  (Az - Bz), (-Ay + By)],
+                [(-Ady + Cdy),  (Adx - Cdx),           0, (Ay - Cy), (-Ax + Cx),          0],
+                [(-Adz + Cdz),            0, (Adx - Cdx), (Az - Cz),          0, (-Ax + Cx)],
+                [           0, (-Adz + Cdz), (Ady - Cdy),         0,  (Az - Cz), (-Ay + Cy)]
             ];
 
             // This is the right side values of the linear equations
             List<long> values = [
                 (-Ax * Ady) + (Ay * Adx) + (Bx * Bdy) + (-By * Bdx),
                 (-Ax * Adz) + (Az * Adx) + (Bx * Bdz) + (-Bz * Bdx),
+                (-Ay * Adz) + (Az * Ady) + (By * Bdz) + (-Bz * Bdy),
                 (-Ax * Ady) + (Ay * Adx) + (Cx * Cdy) + (-Cy * Cdx),
                 (-Ax * Adz) + (Az * Adx) + (Cx * Cdz) + (-Cz * Cdx),
-                (-Bx * Bdy) + (By * Bdx) + (Cx * Cdy) + (-Cy * Cdx),
-                (-Bx * Bdz) + (Bz * Bdx) + (Cx * Cdz) + (-Cz * Cdx)
+                (-Ay * Adz) + (Az * Ady) + (Cy * Cdz) + (-Cz * Cdy)
             ];
 
             // Use Cramer's Rule to solve the linear system of equations
-            long determinate = Utility.MatrixDeterminate(equations);
-            long xDeterminate = Utility.MatrixDeterminate(equations.Select((row, i) => row.Select((cell, j) => j == 0 ? values[i] : cell).ToList()).ToList());
-            long yDeterminate = Utility.MatrixDeterminate(equations.Select((row, i) => row.Select((cell, j) => j == 1 ? values[i] : cell).ToList()).ToList());
-            long zDeterminate = Utility.MatrixDeterminate(equations.Select((row, i) => row.Select((cell, j) => j == 2 ? values[i] : cell).ToList()).ToList());
+            BigInteger determinate = Utility.MatrixDeterminate(equations);
+            BigInteger xDeterminate = Utility.MatrixDeterminate(equations.Select((row, i) => row.Select((cell, j) => j == 0 ? values[i] : cell).ToList()).ToList());
+            BigInteger yDeterminate = Utility.MatrixDeterminate(equations.Select((row, i) => row.Select((cell, j) => j == 1 ? values[i] : cell).ToList()).ToList());
+            BigInteger zDeterminate = Utility.MatrixDeterminate(equations.Select((row, i) => row.Select((cell, j) => j == 2 ? values[i] : cell).ToList()).ToList());
 
-            long x = xDeterminate / determinate;
-            long y = yDeterminate / determinate;
-            long z = zDeterminate / determinate;
+            BigInteger x = xDeterminate / determinate;
+            BigInteger y = yDeterminate / determinate;
+            BigInteger z = zDeterminate / determinate;
 
-            long answer = x + y + z;
+            BigInteger answer = x + y + z;
 
             return answer.ToString();
         }
