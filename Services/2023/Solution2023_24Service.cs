@@ -1,4 +1,5 @@
 using System.Numerics;
+using System.Runtime.CompilerServices;
 
 namespace AdventOfCode.Services
 {
@@ -61,50 +62,100 @@ namespace AdventOfCode.Services
             List<string> lines = Utility.GetInputLines(2023, 24, example);
             List<List<long>> points = lines.Select(line => line.QuickRegex(@"(\d+), (\d+), (\d+) @ (-?\d+), (-?\d+), (-?\d+)").ToLongs()).ToList();
 
-            long answer = 0;
+            // Inspired by the solution here: https://github.com/DeadlyRedCube/AdventOfCode/blob/main/2023/AOC2023/D24.h
+
+            // We have 6 unknowns for the rock the x, y, and z starting points and velocities (Rx, Ry, Rz, Rdx, Rdy, Rdz)
+            // In order to solve these 6 variables, we need 6 independent linear equations
+
+            // The equation for the position of a rock or hailstone after a certain amount of time for a single axis is Rx + Rdx * tn
+            // The rock will collide with a specific hailstone (A) at a specific time when they end up at the same position
+            // Rx + Rdx * tn = Ax + Adx * tn
+
+            // We can then rearrange the formula so that time is on 1 side
+            // tn = (Rx - Ax)/(Adx - Rdx)
+
+            // This formula has an equivalent y and z version
+            // We can set them equal to each other to get 2 independent equations
+            // (Rx - Ax)/(Adx - Rdx) = (Ry - Ay)/(Ady - Rdy)
+            // (Rx - Ax)/(Adx - Rdx) = (Rz - Az)/(Adz - Rdz)
+
+            // These equations can be rearranged...
+            // (Rx - Ax)(Ady - Rdy) = (Ry - Ay)(Adx - Rdx)
+            // (Rx - Ax)(Adz - Rdz) = (Rz - Az)(Adx - Rdx)
+            // ...distributed...
+            // Rx * Ady - Rx * Rdy - Ax * Ady + Ax * Rdy = Ry * Adx - Ry * Rdx - Ay * Adx + Ay * Rdx
+            // Rx * Adz - Rx * Rdz - Ax * Adz + Ax * Rdz = Rz * Adx - Rz * Rdx - Az * Adx + Az * Rdx
+            // ...and then rearranged again so that the constant unknowns are on 1 side
+            // -Rx * Rdy + Ry * Rdx = -Rx * Ady + Ry * Adx + Rdx * Ay - Rdy * Ax + Ax * Ady - Ay * Adx
+            // -Rx * Rdz + Rz * Rdx = -Rx * Adz + Rz * Adx + Rdx * Az - Rdz * Ax + Ax * Adz - Az * Adx
+
+            // For any given hailstone, the left side of the equation will be the same so we can set them equal for hailstones A and B
+            // This gives us independent linear equations
+            // -Rx * Ady + Ry * Adx + Rdx * Ay - Rdy * Ax + Ax * Ady - Ay * Adx = -Rx * Bdy + Ry * Bdx + Rdx * By - Rdy * Bx + Bx * Bdy - By * Bdx
+            // -Rx * Adz + Rz * Adx + Rdx * Az - Rdz * Ax + Ax * Adz - Az * Adx = -Rx * Bdz + Rz * Bdx + Rdx * Bz - Rdz * Bx + Bx * Bdz - Bz * Bdx
             
-            // Test a potential line for the rock by taking a point from 2 different hailstones at 2 different times and then testing for an intersection for all other hailstones
-            int t1 = 1;
-            int t2 = 2;
+            // These simplify to
+            // (-Ady + Bdy) * Rx + (Adx - Bdx) * Ry + (Ay - By) * Rdx + (-Ax + Bx) * Rdy = (-Ax * Ady) + (Ay * Adx) + (Bx * Bdy) + (-By * Bdx)
+            // (-Adz + Bdz) * Rx + (Adx - Bdx) * Rz + (Az - Bz) * Rdx + (-Ax + Bx) * Rdz = (-Ax * Adz) + (Az * Adx) + (Bx * Bdz) + (-Bz * Bdx)
 
-            while (answer == 0) {
-                foreach (int i in points.Count - 1)
-                {
-                    for (int j = i + 1; j < points.Count; j++) {
-                        long point1X = points[i][0] + t1 * points[i][3];
-                        long point1Y = points[i][1] + t1 * points[i][4];
-                        long point1Z = points[i][2] + t1 * points[i][5];
-                        long point2X = points[j][0] + t2 * points[j][3];
-                        long point2Y = points[j][1] + t2 * points[j][4];
-                        long point2Z = points[j][2] + t2 * points[j][5];
-                        long deltaX = point2X - point1X;
-                        long deltaY = point2Y - point1Y;
-                        long deltaZ = point2Z - point1Z;
+            // In order to get a full 6 independent linear equations we can repeat this with A-C and B-C
+            // (-Ady + Bdy) * Rx + (Adx - Bdx) * Ry + (Ay - By) * Rdx + (-Ax + Bx) * Rdy = (-Ax * Ady) + (Ay * Adx) + (Bx * Bdy) + (-By * Bdx)
+            // (-Adz + Bdz) * Rx + (Adx - Bdx) * Rz + (Az - Bz) * Rdx + (-Ax + Bx) * Rdz = (-Ax * Adz) + (Az * Adx) + (Bx * Bdz) + (-Bz * Bdx)
+            // (-Ady + Cdy) * Rx + (Adx - Cdx) * Ry + (Ay - Cy) * Rdx + (-Ax + Cx) * Rdy = (-Ax * Ady) + (Ay * Adx) + (Cx * Cdy) + (-Cy * Cdx)
+            // (-Adz + Cdz) * Rx + (Adx - Cdx) * Rz + (Az - Cz) * Rdx + (-Ax + Cx) * Rdz = (-Ax * Adz) + (Az * Adx) + (Cx * Cdz) + (-Cz * Cdx)
+            // (-Bdy + Cdy) * Rx + (Bdx - Cdx) * Ry + (By - Cy) * Rdx + (-Bx + Cx) * Rdy = (-Bx * Bdy) + (By * Bdx) + (Cx * Cdy) + (-Cy * Cdx)
+            // (-Bdz + Cdz) * Rx + (Bdx - Cdx) * Rz + (Bz - Cz) * Rdx + (-Bx + Cx) * Rdz = (-Bx * Bdz) + (Bz * Bdx) + (Cx * Cdz) + (-Cz * Cdx)
 
-                        List<long> testPoint = [point1X - t1 * deltaX, point1Y - t1 * deltaY, point1Z - t1 * deltaZ, deltaX, deltaY, deltaZ];
+            long Ax = points[0][0];
+            long Ay = points[0][1];
+            long Az = points[0][2];
+            long Adx = points[0][3];
+            long Ady = points[0][4];
+            long Adz = points[0][5];
+            long Bx = points[1][0];
+            long By = points[1][1];
+            long Bz = points[1][2];
+            long Bdx = points[1][3];
+            long Bdy = points[1][4];
+            long Bdz = points[1][5];
+            long Cx = points[2][0];
+            long Cy = points[2][1];
+            long Cz = points[2][2];
+            long Cdx = points[2][3];
+            long Cdy = points[2][4];
+            long Cdz = points[2][5];
 
-                        bool hasIntersection = true;
-                        foreach (List<long> point in points) {
-                            // Check if our test point has an intersection for every hailstone
-                        }
+            // The columns are Rx, Ry, Rz, Rdx, Rdy, Rdz's coefficients
+            List<List<long>> equations = [
+                [(-Ady + Bdy), (Adx - Bdx),           0, (Ay - By), (-Ax + Bx),          0],
+                [(-Adz + Bdz),           0, (Adx - Bdx), (Az - Bz),          0, (-Ax + Bx)],
+                [(-Ady + Cdy), (Adx - Cdx),           0, (Ay - Cy), (-Ax + Cx),          0],
+                [(-Adz + Cdz),           0, (Adx - Cdx), (Az - Cz),          0, (-Ax + Cx)],
+                [(-Bdy + Cdy), (Bdx - Cdx),           0, (By - Cy), (-Bx + Cx),          0],
+                [(-Bdz + Cdz),           0, (Bdx - Cdx), (Bz - Cz),          0, (-Bx + Cx)]
+            ];
 
-                        if (hasIntersection) {
-                            answer = testPoint[0] + testPoint[1] + testPoint[2];
-                        }
-                    }
+            // This is the right side values of the linear equations
+            List<long> values = [
+                (-Ax * Ady) + (Ay * Adx) + (Bx * Bdy) + (-By * Bdx),
+                (-Ax * Adz) + (Az * Adx) + (Bx * Bdz) + (-Bz * Bdx),
+                (-Ax * Ady) + (Ay * Adx) + (Cx * Cdy) + (-Cy * Cdx),
+                (-Ax * Adz) + (Az * Adx) + (Cx * Cdz) + (-Cz * Cdx),
+                (-Bx * Bdy) + (By * Bdx) + (Cx * Cdy) + (-Cy * Cdx),
+                (-Bx * Bdz) + (Bz * Bdx) + (Cx * Cdz) + (-Cz * Cdx)
+            ];
 
-                    if (answer != 0) {
-                        break;
-                    }
-                }
+            // Use Cramer's Rule to solve the linear system of equations
+            long determinate = Utility.MatrixDeterminate(equations);
+            long xDeterminate = Utility.MatrixDeterminate(equations.Select((row, i) => row.Select((cell, j) => j == 0 ? values[i] : cell).ToList()).ToList());
+            long yDeterminate = Utility.MatrixDeterminate(equations.Select((row, i) => row.Select((cell, j) => j == 1 ? values[i] : cell).ToList()).ToList());
+            long zDeterminate = Utility.MatrixDeterminate(equations.Select((row, i) => row.Select((cell, j) => j == 2 ? values[i] : cell).ToList()).ToList());
 
-                if (answer != 0) {
-                    break;
-                }
+            long x = xDeterminate / determinate;
+            long y = yDeterminate / determinate;
+            long z = zDeterminate / determinate;
 
-                // We didn't find a solution between any hailstone at t1 and t2, try a new combination of t1 and t2
-                t2++;
-            }
+            long answer = x + y + z;
 
             return answer.ToString();
         }
