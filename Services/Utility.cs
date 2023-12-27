@@ -1,6 +1,5 @@
 using System.Text.RegularExpressions;
 using System.Numerics;
-using System.Runtime.CompilerServices;
 
 namespace AdventOfCode.Services
 {
@@ -375,37 +374,97 @@ namespace AdventOfCode.Services
             }
         }
 
-        public static int LCM(int a, int b)
+        /// <summary>
+        /// Given 2 numbers, find the Least Common Multiple between them
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        /// <remarks>Ex. Utility.LCM(24, 36) returns 72</remarks>
+        public static T LCM<T>(T a, T b) where T: notnull, INumber<T>
         {
             return a / GCF(a, b) * b;
         }
 
-        public static int GCF(int a, int b)
+        /// <summary>
+        /// Given 2 numbers, find the Least Common Multiple between them
+        /// </summary>
+        /// <param name="values"></param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        /// <remarks>Ex. Utility.LCM([24, 36]) returns 72</remarks>
+        public static T LCM<T>(List<T> values) where T: notnull, INumber<T>
         {
-            while (b != 0)
+            if (values.Count == 0) {
+                return default!;
+            }
+            else if (values.Count == 1) {
+                return values.First();
+            }
+            else {
+                T value = LCM(values[0], values[1]);
+
+                for (int i = 2; i < values.Count; i++) {
+                    value = LCM(value, values[i]);
+                }
+
+                return value;
+            }
+        }
+
+        /// <summary>
+        /// Given 2 numbers, find the Greatest Common Factor between them
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        /// <remarks>Ex. Utility.GCF(24, 36) returns 12</remarks>
+        public static T GCF<T>(T a, T b) where T: notnull, INumber<T>
+        {
+            while (b != default)
             {
-                int temp = b;
+                T temp = b;
                 b = a % b;
                 a = temp;
             }
             return a;
         }
-        public static long LCM(long a, long b)
-        {
-            return a / GCF(a, b) * b;
-        }
 
-        public static long GCF(long a, long b)
+        /// <summary>
+        /// Given 2 numbers, find the Greatest Common Factor between them
+        /// </summary>
+        /// <param name="values"></param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        /// <remarks>Ex. Utility.GCF([24, 36]) returns 12</remarks>
+        public static T GCF<T>(List<T> values) where T: notnull, INumber<T>
         {
-            while (b != 0)
-            {
-                long temp = b;
-                b = a % b;
-                a = temp;
+            if (values.Count == 0) {
+                return default!;
             }
-            return a;
+            else if (values.Count == 1) {
+                return values.First();
+            }
+            else {
+                T value = LCM(values[0], values[1]);
+
+                for (int i = 2; i < values.Count; i++) {
+                    value = LCM(value, values[i]);
+                }
+
+                return value;
+            }
         }
 
+        /// <summary>
+        /// Given a matrix, calculate it's determinate
+        /// </summary>
+        /// <param name="matrix"></param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        /// <remarks>Ex. Utility.MatrixDeterminate([[4, 1], [0, 2]]) returns 8</remarks>
         public static T MatrixDeterminate<T>(List<List<T>> matrix) where T : notnull, INumber<T> {
             if (matrix.Count == 0) {
                 return default!;
