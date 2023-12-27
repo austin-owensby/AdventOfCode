@@ -6,89 +6,79 @@ namespace AdventOfCode.Services
         {
             List<string> lines = Utility.GetInputLines(2023, 25, example);
 
-            Dictionary<string, List<string>> connectionsMap = [];
-            List<List<string>> connections = [];
+            Dictionary<string, List<string>> connections = [];
 
-            int answer = 0;
-
-            foreach (string line in lines)
-            {
-                string[] parts = line.Split(": ");
-                string start = parts[0];
-                List<string> ends = parts[1].Split(" ").ToList();
-
-                foreach (string end in ends) {
-                    List<string> connection = new List<string>(){start, end}.Order().ToList();
-                    connections.Add(connection);
-                }
-            }
-
+            // Catalog the list of verticies and their edges
             foreach (string line in lines)
             {
                 string[] parts = line.Split(": ");
                 string start = parts[0];
                 List<string> ends = parts[1].Split(" ").ToList();
                 
-                if (!connectionsMap.ContainsKey(start)) {
-                    connectionsMap[start] = [];
+                if (!connections.ContainsKey(start)) {
+                    connections[start] = [];
                 }
 
                 foreach (string end in ends) {
-                    if (connectionsMap.ContainsKey(end)) {
-                        connectionsMap[end].Add(start);
+                    if (connections.ContainsKey(end)) {
+                        connections[end].Add(start);
                     }
                     else {
-                        connectionsMap[end] = [start];
+                        connections[end] = [start];
                     }
 
-                    connectionsMap[start].Add(end);
-
-                    List<string> connection = new List<string>(){start, end}.Order().ToList();
-                    connections.Add(connection);
+                    connections[start].Add(end);
                 }
             }
 
-            connections = connections.DistinctBy(c => string.Join("", c)).ToList();
+            Dictionary<string, List<string>> connectionsCopy = connections.ToDictionary();
 
-            // Check the size of the group
-            for (int i = 0; i < connections.Count - 2; i++) {
-                for (int j = i + 1; j < connections.Count - 1; j++) {
-                    for (int k = j + 1; k < connections.Count; k++) {
-                        List<List<string>> removedConnections = [connections[i], connections[j], connections[k]];
+            // Use Karger's algorithm to find the min cut
+            int cuts = 0;
+            int answer = 0;
+            Random rnd = new();
 
-                        List<string> history = [];
-                        Queue<string> queue = [];
+            while (cuts != 3) {
+                connections = connectionsCopy.ToDictionary(kv => kv.Key, kv => kv.Value.ToList());
+                Dictionary<string, int> nodeSizes = connections.Keys.ToDictionary(k => k, k => 1);
 
-                        queue.Enqueue(connectionsMap.First().Key);
-                        history.Add(connectionsMap.First().Key);
+                // Keep merging nodes until we're down to the final 2
+                while (connections.Count > 2) {
+                    // Randomly merge an edge
+                    // Select 2 nodes to merge into 1 new node
+                    int index = rnd.Next(connections.Count);
+                    string node1 = connections.ElementAt(index).Key;
 
-                        while (queue.Count > 0) {
-                            string point = queue.Dequeue();
-                            List<string> nextPoints = connectionsMap[point].Where(s => !history.Contains(s)).ToList();
+                    index = rnd.Next(connections[node1].Count);
+                    string node2 = connections[node1][index];
 
-                            foreach (string nextPoint in nextPoints) {
-                                if (!removedConnections.Any(rc => rc.Contains(nextPoint) && rc.Contains(point))) {
-                                    queue.Enqueue(nextPoint);
-                                    history.Add(nextPoint);
-                                }
-                            }
-                        }
+                    // Create new node
+                    string newNode = $"{node1} {node2}";
+                    connections[newNode] = connections[node1].Where(c => c != node2).Concat(connections[node2].Where(c => c != node1)).ToList();
 
-                        answer = history.Count * (connectionsMap.Count - history.Count);
-
-                        if (answer != 0) {
-                            break;
+                    // Update connections from old nodes to new node
+                    foreach (string node in connections[node1]) {
+                        List<int> indexes = connections[node].FindIndexes(x => x == node1);
+                        foreach (int i in indexes) {
+                            connections[node][i] = newNode;
                         }
                     }
 
-                    if (answer != 0) {
-                        break;
+                    foreach (string node in connections[node2]) {
+                        List<int> indexes = connections[node].FindIndexes(x => x == node2);
+                        foreach (int i in indexes) {
+                            connections[node][i] = newNode;
+                        }
                     }
-                }
 
-                if (answer != 0) {
-                    break;
+                    nodeSizes[newNode] = nodeSizes[node1] + nodeSizes[node2];
+
+                    // Remove old nodes
+                    connections.Remove(node1);
+                    connections.Remove(node2);                    
                 }
+                cuts = connections.First().Value.Count;
+                answer = nodeSizes[connections.First().Key] * nodeSizes[connections.Last().Key];
             }
 
             return answer.ToString();
