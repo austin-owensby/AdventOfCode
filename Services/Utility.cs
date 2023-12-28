@@ -1,5 +1,6 @@
 using System.Text.RegularExpressions;
 using System.Numerics;
+using System.Diagnostics.CodeAnalysis;
 
 namespace AdventOfCode.Services
 {
@@ -493,6 +494,25 @@ namespace AdventOfCode.Services
                 }
                 return answer;
             }
+        }
+
+        /// <summary>
+        /// Given 2 values, calculate the manhatten distance
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
+        public static int ManhattenDistance(int x, int y) {
+            return Math.Abs(x) + Math.Abs(y);
+        }
+
+        /// <summary>
+        /// Given a point. calculate the manhatten distance
+        /// </summary>
+        /// <param name="point"></param>
+        /// <returns></returns>
+        public static int ManhattenDistance(this Point point) {
+            return Math.Abs(point.X) + Math.Abs(point.Y);
         }
 
         #endregion
