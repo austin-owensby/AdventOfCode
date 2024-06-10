@@ -49,37 +49,19 @@ namespace AdventOfCode.Services
 
                 bool validTest = true;
                 bool pairFound = false;
-                int pairCount = 0;
+                bool pairsValid = true;
                 foreach (int i in digits.Count - 1) {
                     if (digits[i] > digits[i + 1]) {
                         // Digits decrease, invalid number
                         validTest = false;
-                        break;
                     }
 
-                    if (digits[i] == digits[i + 1]) {
-                        // Digits are a pair
+                    if (digits[i] == digits[i + 1] && digits.Count(d => d == digits[i]) == 2) {
                         pairFound = true;
-
-                        pairCount = pairCount == 0 ? 2 : pairCount + 1;
-                    }
-                    else {
-                        // Digits are not a pair (Increase)
-                        if (pairCount % 2 != 0) {
-                            // If we were in the middle of processing a pair, check if it was valid now that it's ended
-                            validTest = false;
-                            break;
-                        }
-                        pairCount = 0;
                     }
                 }
 
-                if (pairCount % 2 != 0) {
-                    // If we were in the middle of processing a pair, check if it was valid now that it's ended
-                    validTest = false;
-                }
-
-                if (validTest && pairFound) {
+                if (validTest && pairFound && pairsValid) {
                     answer++;
                 }
             }
