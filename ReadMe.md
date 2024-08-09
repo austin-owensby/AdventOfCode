@@ -4,7 +4,7 @@
 ![](https://img.shields.io/badge/2022-50%20stars-239323)
 ![](https://img.shields.io/badge/2021-20%20stars-6e621d)
 ![](https://img.shields.io/badge/2020-21%20stars-6b651e)
-![](https://img.shields.io/badge/2019-5%20stars-ae3919)
+![](https://img.shields.io/badge/2019-12%20stars-8b501b)
 ![](https://img.shields.io/badge/2018-28%20stars-56721f)
 ![](https://img.shields.io/badge/2017-4%20stars-b53418)
 ![](https://img.shields.io/badge/2016-6%20stars-a83d19)
@@ -31,30 +31,32 @@ You may also reference the `aowensby-solutions` branch which contains my own sol
    - If using Visual Studio or VSCode, use the play button to build and run the code
    - If using a CLI, run `dotnet run` from the repo's base folder
 1. Run API calls
-   - You can use Swagger to execute the API calls, or use your own tool to call to the API
+   - You can use [Swagger](https://swagger.io/), an API documentation and execution library, to execute the API calls, or use your own tool to call to the API
    - Visual Studio
-      - The browser should open by default, to change this behavior, update the `Properties/launchSettings.json`
+      - The browser should open Swagger by default, to change this behavior, update the `Properties/launchSettings.json`
    - VSCode
-      - Use the `Launch (web)` or `Launch (web - no browser)` to toggle if you want the broswer to open automatically
+      - Use the `Launch (web)` or `Launch (web - no browser)` configuration to toggle if you want the browser to open automatically
       - If you'd prefer to remain within VSCode to make the API calls, I've used the [Thunder Client](https://marketplace.visualstudio.com/items?itemName=rangav.vscode-thunder-client) extension. You can inport the collection provided at `thunder_collection_AoC.json`.
    - Other
-      - Visit `https://localhost:5001/swagger` in your browser
+      - Visit https://localhost:5001/swagger in your browser
 
 ## Puzzle Helper
 This allows you to easily create the needed services as well as submitting answers.
 
-In the `PuzzleHelper` folder, create a `Cookie.txt` file and add your own cookie that gets created when logging into the Advent of Code website. If you open the Network tab in your browser's Dev Tools while on the site, you'll see the cookie in the API calls that are made. This typically expires after a month so you'll need to update it each year.
+In the `PuzzleHelper` folder, create a `Cookie.txt` file and add your own cookie that gets created when logging into the Advent of Code website. While on the Advent of Code website, if you open the Network tab in your browser's Dev Tools, you'll see the cookie in the header of API calls that are made while navigating the site. This typically expires after a month so you'll need to update it each year.
+
+Ensure that the Cookie.txt is all 1 line.
 
 If you would like to avoid this setup, you can always manually add you input and submit your solutions without having to create a Cookie.txt file.
-The file is only required with interacting with the Advent of Code website.
+The file is only required when interacting with the Advent of Code website.
 
 ### Automation
 The Puzzle Helper does follow the automation guidelines on the [/r/adventofcode community wiki](https://www.reddit.com/r/adventofcode/wiki/faqs/automation).
 
 Specifically:
 * Outbound calls are throttled to every 3 minutes in the AdventOfCodeGateway's `ThrottleCall()` function
-* Once inputs are downloaded, they are cached locally (PuzzleHelper's `WriteInputFile(int year, int day)` function) through either the `api/puzzle-helper-daily` endpoint described below.
-* If you suspect your input is corrupted, you can get a fresh copy by deleting the old file and re-running the `api/puzzle-helper-daily` endpoint.
+* Once inputs are downloaded, they are cached locally (PuzzleHelper's `WriteInputFile(int year, int day)` function) through either the `api/import-input-file` endpoint described below.
+* If you suspect your input is corrupted, you can get a fresh copy by deleting the old file and re-running the `api/import-input-file` endpoint.
 * The User-Agent header in the Program.cs's gateway configuration is set to me since I maintain this tool :)
 
 ## API
@@ -91,4 +93,4 @@ The program is idempotent (You can run this multiple times as it will only add f
 
 ## Extra Notes
 - The admin of Advent of Code have requested that puzzle inputs be cached (To reduce load on the system) and not be made publically available (To make it harder to completely copy the site)
-- This puzzle helper currently does not use the leaderboard api, but if you choose to copy this template and talk to the leaderboard, make sure to throttle the and cache the calls to not overload the server
+- This puzzle helper currently does not use the leaderboard api, but if you choose to copy this template and talk to the leaderboard, make sure to throttle (the recommendation is around 15 minutes) and cache the calls to not overload the server

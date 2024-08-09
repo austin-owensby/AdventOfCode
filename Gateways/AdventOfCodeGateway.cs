@@ -136,17 +136,28 @@ namespace AdventOfCode.Gateways
                 BaseAddress = new Uri("https://adventofcode.com")
             };
 
-            client.DefaultRequestHeaders.UserAgent.ParseAdd($".NET 8.0 (+via https://github.com/austin-owensby/AdventOfCode by austin_owensby@hotmail.com)");
+            client.DefaultRequestHeaders.UserAgent.ParseAdd(".NET 8.0 (+via https://github.com/austin-owensby/AdventOfCode by austin_owensby@hotmail.com)");
+
+            string[] fileData;
 
             try
             {
-                string cookie = File.ReadAllText(Path.Combine(Environment.CurrentDirectory, "PuzzleHelper/Cookie.txt"));
-                client.DefaultRequestHeaders.Add("Cookie", cookie);
+                fileData = File.ReadAllLines(Path.Combine(Environment.CurrentDirectory, "PuzzleHelper/Cookie.txt"));
             }
             catch (Exception)
             {
                 throw new Exception("Unable to read Cookie.txt. Make sure that it exists in the PuzzleHelper folder. See the ReadMe for more.");
             }
+            
+            if (fileData.Length == 0 || string.IsNullOrWhiteSpace(fileData[0])) {
+                throw new Exception("Cookie.txt is empty. Please ensure it is properly populated and saved. See the ReadMe for more.");
+            }
+            if (fileData.Length > 1) {
+                throw new Exception("Detected multiple lines in Cookie.txt, ensure that the whole cookie is on 1 line.");
+            }
+
+            string cookie = fileData[0];
+            client.DefaultRequestHeaders.Add("Cookie", cookie);
         }
     }
 }

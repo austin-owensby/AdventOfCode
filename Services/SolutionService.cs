@@ -32,10 +32,10 @@ namespace AdventOfCode.Services
                     string response = await adventOfCodeGateway.SubmitAnswer(year, day, secondHalf, answer);
                     answer = $"Submitted answer: {answer}.\nAdvent of Code response: {response}";
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
                     Console.WriteLine("An error occured while submitting the answer to Advent of Code");
-                    throw;
+                    answer = $"Submitted answer: {answer}.\nAdvent of Code response: {e.Message}";
                 }
             }
 
