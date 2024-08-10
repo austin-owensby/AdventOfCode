@@ -1,5 +1,7 @@
 namespace AdventOfCode.Services
 {
+    // (ctrl/command + click) the link to open the input file
+    // file://./../../Inputs/2023/19.txt
     public class Solution2023_19Service : ISolutionDayService
     {
         private class Rule {

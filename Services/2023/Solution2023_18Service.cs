@@ -2,6 +2,8 @@ using System.Linq;
 
 namespace AdventOfCode.Services
 {
+    // (ctrl/command + click) the link to open the input file
+    // file://./../../Inputs/2023/18.txt
     public class Solution2023_18Service : ISolutionDayService
     {
         private class LongPoint {

@@ -3,6 +3,8 @@ using System.Text;
 
 namespace AdventOfCode.Services
 {
+    // (ctrl/command + click) the link to open the input file
+    // file://./../../Inputs/2015/04.txt
     public class Solution2015_04Service : ISolutionDayService
     {
         public string FirstHalf(bool example)

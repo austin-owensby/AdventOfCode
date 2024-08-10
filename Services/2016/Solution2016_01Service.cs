@@ -2,6 +2,8 @@ using System.Security.Cryptography;
 
 namespace AdventOfCode.Services
 {
+    // (ctrl/command + click) the link to open the input file
+    // file://./../../Inputs/2016/01.txt
     public class Solution2016_01Service : ISolutionDayService
     {
         public string FirstHalf(bool example)

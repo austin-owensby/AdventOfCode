@@ -1,5 +1,7 @@
 namespace AdventOfCode.Services
 {
+    // (ctrl/command + click) the link to open the input file
+    // file://./../../Inputs/2019/08.txt
     public class Solution2019_08Service : ISolutionDayService
     {
         public string FirstHalf(bool example)

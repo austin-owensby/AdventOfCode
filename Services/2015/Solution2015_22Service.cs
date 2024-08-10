@@ -1,5 +1,7 @@
 namespace AdventOfCode.Services
 {
+    // (ctrl/command + click) the link to open the input file
+    // file://./../../Inputs/2015/22.txt
     public class Solution2015_22Service : ISolutionDayService
     {
                 private int bestSoFar {get; set;} = 0;

@@ -3,6 +3,8 @@ using System.Runtime.CompilerServices;
 
 namespace AdventOfCode.Services
 {
+    // (ctrl/command + click) the link to open the input file
+    // file://./../../Inputs/2023/24.txt
     public class Solution2023_24Service : ISolutionDayService
     {
         public string FirstHalf(bool example)

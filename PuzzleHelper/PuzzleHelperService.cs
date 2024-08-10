@@ -43,6 +43,8 @@ namespace AdventOfCode.PuzzleHelper
                         await serviceFile.WriteAsync($$"""
             namespace AdventOfCode.Services
             {
+                // (ctrl/command + click) the link to open the input file
+                // file://./../../Inputs/{{year}}/{{day:D2}}.txt
                 public class Solution{{year}}_{{day:D2}}Service : ISolutionDayService
                 {
                     public string FirstHalf(bool example)

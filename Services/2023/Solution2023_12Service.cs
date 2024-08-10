@@ -1,5 +1,7 @@
 namespace AdventOfCode.Services
 {
+    // (ctrl/command + click) the link to open the input file
+    // file://./../../Inputs/2023/12.txt
     public class Solution2023_12Service : ISolutionDayService
     {
         public Dictionary<string, ulong> mappings = [];
