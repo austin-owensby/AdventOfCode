@@ -343,7 +343,7 @@ namespace AdventOfCode.Services
         /// </summary>
         /// <param name="num"></param>
         /// <param name="mod"></param>
-        /// <remarks>This is only needed if you'll be dealing with negative numbers. Ex. Mod(-5, 4) returns -3 while -5 % 4 returns -1</remarks>
+        /// <remarks>This is only needed if you'll be dealing with negative numbers. Ex. Mod(-5, 4) returns 3 while -5 % 4 returns -1</remarks>
         /// <returns></returns>
         public static int Mod(int num, int mod)
         {
@@ -360,7 +360,7 @@ namespace AdventOfCode.Services
         /// </summary>
         /// <param name="num"></param>
         /// <param name="mod"></param>
-        /// <remarks>This is only needed if you'll be dealing with negative numbers. Ex. Mod(-5, 4) returns -3 while -5 % 4 returns -1</remarks>
+        /// <remarks>This is only needed if you'll be dealing with negative numbers. Ex. Mod(-5, 4) returns 3 while -5 % 4 returns -1</remarks>
         /// <returns></returns>
         public static long Mod(long num, long mod)
         {
@@ -1163,7 +1163,7 @@ namespace AdventOfCode.Services
         /// <param name="year"></param>
         /// <param name="day"></param>
         /// <param name="example">Defaults to false, if true will pull an example file you've manually added</param>
-        /// <remarks>Ex. GetInputLines(2017, 2) reads the data from "/Inputs/2017/02.txt". GetInputLines(2019, 5) reads the data from "/Inputs/2019/05_example.txt"</remarks>
+        /// <remarks>Ex. GetInputLines(2017, 2) reads the data from "/Inputs/2017/02.txt". GetInputLines(2019, 5, true) reads the data from "/Inputs/2019/05_example.txt"</remarks>
         /// <returns></returns>
         public static List<string> GetInputLines(int year, int day, bool example = false)
         {
