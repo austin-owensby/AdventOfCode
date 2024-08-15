@@ -73,6 +73,7 @@ namespace AdventOfCode.Services
             int bestX = 0;
             int bestY = 0;
 
+            // First calculate the best starting point
             // Loop over each row
             foreach (int ySource in height)
             {
@@ -129,11 +130,60 @@ namespace AdventOfCode.Services
             // Now that we have the best starting point, vaporize asteroids in order
             int vaporizedCount = 0;
 
+            Point start = new(bestX, bestY);
+
+            List<Asteroid> asteroids = lines
+                .SelectMany((line, y) => line.FindIndexes(c => c == '#') // Select each asteroid
+                .Select(x => new Asteroid(x, y, start))) // Create an asteroid class that calculates distance and angle to the best asteroid
+                .Where(p => p.Distance != 0) // Filter out the origin
+                .OrderBy(a => a.Distance) // The closest asteroids should be first
+                .ToList();
+
+            List<double> angles = asteroids.Select(a => a.Angle).Distinct().Order().ToList();
+            int index = 0;
+
             while (vaporizedCount < 200) {
-                
+                Asteroid? asteroid = asteroids.Where(a => a.Angle == angles[index]).FirstOrDefault();
+
+                if (asteroid != null) {
+                    vaporizedCount++;
+                    asteroids.Remove(asteroid);
+
+                    answer = asteroid.X * 100 + asteroid.Y;
+                    Console.WriteLine($"{asteroid.X},{asteroid.Y}");
+                }
+
+                index++;
+                index %= angles.Count;
             }
+
+            // 312 is too low
 
             return answer.ToString();
         }
+    
+        private class Asteroid
+        {
+            public int X { get; set; }
+            public int Y { get; set; }
+
+            public double Distance { get; set; }
+            public double Angle { get; set;}
+
+            public Asteroid(int x, int y, Point origin) {
+                X = x;
+                Y = y;
+
+                int diffX = X - origin.X;
+                int diffY = origin.Y - Y;
+
+                Distance = Math.Sqrt(Math.Pow(diffX, 2) + Math.Pow(diffY, 2));
+                Angle = Math.Atan2(diffX,diffY); // Swap x and y to give us Acot2 since we start pointing upwards and move clockwise
+
+                if (Angle < 0) {
+                    Angle += Math.PI * 2;
+                }
+            }
+    }
     }
 }
