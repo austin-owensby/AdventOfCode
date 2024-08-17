@@ -253,6 +253,7 @@ namespace AdventOfCode.Services
 
                             output = newOutput;
 
+                            // Adjust this value as needed to smoothly render the output
                             Thread.Sleep(100);
                         }
 
@@ -316,6 +317,35 @@ namespace AdventOfCode.Services
                     default:
                         throw new Exception($"Unknown opcode: {opcodeValue}");
                     }
+            }
+
+            // Output 1 last time to show the end state
+            if (display) {
+                List<long[]> values = output.Chunk(3).ToList();
+                long maxX = values.Select(v => v[0]).Max();
+                long maxY = values.Select(v => v[1]).Max();
+
+                Console.Clear();
+
+                // Build a new output so we don't have to store every output ever received
+                List<long> newOutput = [];
+
+                answer = values.LastOrDefault(v => v[0] == -1 && v[1] == 0)?[2] ?? 0;
+                newOutput.AddRange([-1, 0, answer]);
+                Console.WriteLine($"Score: {answer}");
+
+                for (long yCoordinate = 0; yCoordinate <= maxY; yCoordinate++) {
+                    string row = string.Empty;
+                    for (long xCoordinate = 0; xCoordinate <= maxX; xCoordinate++) {
+                        long value = values.LastOrDefault(v => v[0] == xCoordinate && v[1] == yCoordinate)?[2] ?? 0;
+                        newOutput.AddRange([xCoordinate, yCoordinate, value]);
+
+                        row += value;
+                    }
+
+                    row = row.Replace('0', ' ').Replace('1', '█').Replace('2','#').Replace('3','-').Replace('4', 'O');
+                    Console.WriteLine(row);
+                }
             }
 
             answer = output.Chunk(3).LastOrDefault(v => v[0] == -1 && v[1] == 0)?[2] ?? 0;
