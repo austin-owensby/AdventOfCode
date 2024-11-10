@@ -31,7 +31,7 @@ namespace AdventOfCode.PuzzleHelper
                 }
 
                 // Create/update files for each day that is missing one
-                for (int day = 1; day <= Globals.CRISTMAS_DATE; day++)
+                for (int day = 1; day <= Globals.NUMBER_OF_PUZZLES; day++)
                 {
                     string dayFilePath = Path.Combine(yearFolderPath, $"Solution{year}_{day:D2}Service.cs");
 
@@ -64,7 +64,7 @@ namespace AdventOfCode.PuzzleHelper
                     public string SecondHalf(bool example)
                     {
                         {{(
-                            day == Globals.CRISTMAS_DATE ?
+                            day == Globals.NUMBER_OF_PUZZLES ?
                             """
                             return "There is no problem for Day 25 part 2, solve all other problems to get the last star.";
                             """ :
@@ -167,7 +167,7 @@ namespace AdventOfCode.PuzzleHelper
                 }
                 catch (Exception)
                 {
-                    Console.WriteLine("An error occured while getting the puzzle input from Advent of Code");
+                    Console.WriteLine("An error occurred while getting the puzzle input from Advent of Code");
                     throw;
                 }
 
@@ -190,19 +190,19 @@ namespace AdventOfCode.PuzzleHelper
             DateTime now = DateTime.UtcNow.AddHours(Globals.SERVER_UTC_OFFSET);
             int latestPuzzleYear, latestPuzzleDay;
 
-            // If we're in December, then the latest available puzzle is today
-            if (now.Month == Globals.DECEMBER)
+            // If we're in the event month, then the latest available puzzle is today
+            if (now.Month == Globals.EVENT_MONTH)
             {
                 latestPuzzleYear = now.Year;
 
-                // If it's December 26th-31st the latest day is the 25th
-                latestPuzzleDay = Math.Min(now.Day, Globals.CRISTMAS_DATE);
+                // If it's event month, but after the final puzzle, default to the final puzzle
+                latestPuzzleDay = Math.Min(now.Day, Globals.NUMBER_OF_PUZZLES);
             }
             else
             {
                 // Otherwise the latest puzzle is from the end of the previous event
                 latestPuzzleYear = now.Year - 1;
-                latestPuzzleDay = Globals.CRISTMAS_DATE;
+                latestPuzzleDay = Globals.NUMBER_OF_PUZZLES;
             }
 
             return Tuple.Create(latestPuzzleYear, latestPuzzleDay);

@@ -21,7 +21,7 @@ builder.Services.AddSwaggerGen(c =>
 builder.Services.AddSingleton<AdventOfCodeGateway>();
 
 // Adding all services as Transient because on each request, we should only call the service once.
-// We could use Singleton for preformance improvement on succesive calls,
+// We could use Singleton for performance improvement on successive calls,
 //    but because we want to avoid spamming the AoC server, we'll assume that this performance is negligible.
 builder.Services.AddTransient<SolutionService>();
 builder.Services.AddTransient<PuzzleHelperService>();

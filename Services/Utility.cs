@@ -471,7 +471,7 @@ namespace AdventOfCode.Services
             }
 
             if (!matrix.All(row => row.Count == matrix.Count)) {
-                throw new Exception("Recieved a non-square matrix");
+                throw new Exception("Received a non-square matrix");
             }
 
             if (matrix.Count == 2) {

@@ -4,7 +4,7 @@
 ![](https://img.shields.io/badge/2022-50%20stars-239323)
 ![](https://img.shields.io/badge/2021-20%20stars-6e621d)
 ![](https://img.shields.io/badge/2020-21%20stars-6b651e)
-![](https://img.shields.io/badge/2019-12%20stars-8b501b)
+![](https://img.shields.io/badge/2019-26%20stars-5c6e1f)
 ![](https://img.shields.io/badge/2018-28%20stars-56721f)
 ![](https://img.shields.io/badge/2017-4%20stars-b53418)
 ![](https://img.shields.io/badge/2016-6%20stars-a83d19)
@@ -36,7 +36,7 @@ You may also reference the `aowensby-solutions` branch which contains my own sol
       - The browser should open Swagger by default, to change this behavior, update the `Properties/launchSettings.json`
    - VSCode
       - Use the `Launch (web)` or `Launch (web - no browser)` configuration to toggle if you want the browser to open automatically
-      - If you'd prefer to remain within VSCode to make the API calls, I've used the [Thunder Client](https://marketplace.visualstudio.com/items?itemName=rangav.vscode-thunder-client) extension. You can inport the collection provided at `thunder_collection_AoC.json`.
+      - If you'd prefer to remain within VSCode to make the API calls, I've used the [Thunder Client](https://marketplace.visualstudio.com/items?itemName=rangav.vscode-thunder-client) extension. You can import the collection provided at `thunder_collection_AoC.json`.
    - Other
       - Visit https://localhost:5001/swagger in your browser
 
@@ -55,7 +55,7 @@ The Puzzle Helper does follow the automation guidelines on the [/r/adventofcode 
 
 Specifically:
 * Outbound calls are throttled to every 3 minutes in the AdventOfCodeGateway's `ThrottleCall()` function
-* Once inputs are downloaded, they are cached locally (PuzzleHelper's `WriteInputFile(int year, int day)` function) through either the `api/import-input-file` endpoint described below.
+* Once inputs are downloaded, they are cached locally (PuzzleHelper's `WriteInputFile(int year, int day)` function) through the `api/import-input-file` endpoint described below.
 * If you suspect your input is corrupted, you can get a fresh copy by deleting the old file and re-running the `api/import-input-file` endpoint.
 * The User-Agent header in the Program.cs's gateway configuration is set to me since I maintain this tool :)
 
@@ -92,5 +92,5 @@ You'll likely only need to use this once per year and only if either your source
 The program is idempotent (You can run this multiple times as it will only add files if they are needed.)
 
 ## Extra Notes
-- The admin of Advent of Code have requested that puzzle inputs be cached (To reduce load on the system) and not be made publically available (To make it harder to completely copy the site)
-- This puzzle helper currently does not use the leaderboard api, but if you choose to copy this template and talk to the leaderboard, make sure to throttle (the recommendation is around 15 minutes) and cache the calls to not overload the server
+- The admin of Advent of Code have requested that puzzle inputs be cached (To reduce load on the system) and not be made publicly available (To make it harder to completely copy the site)
+- This puzzle helper currently does not use the leader board api, but if you choose to copy this template and talk to the leader board, make sure to throttle (the recommendation is around 15 minutes) and cache the calls to not overload the server

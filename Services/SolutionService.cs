@@ -34,7 +34,7 @@ namespace AdventOfCode.Services
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine("An error occured while submitting the answer to Advent of Code");
+                    Console.WriteLine("An error occurred while submitting the answer to Advent of Code");
                     answer = $"Submitted answer: {answer}.\nAdvent of Code response: {e.Message}";
                 }
             }

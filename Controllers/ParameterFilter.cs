@@ -12,8 +12,8 @@ namespace AdventOfCode.Controllers
             // This does not check if the currently selected year has that date
             if (parameter.Name.Equals("day", StringComparison.InvariantCultureIgnoreCase))
             {
-                List<int> daysInDecember = Enumerable.Range(1, Globals.CRISTMAS_DATE).ToList();
-                parameter.Schema.Enum = daysInDecember.Select(d => new OpenApiString(d.ToString())).ToList<IOpenApiAny>();
+                List<int> days = Enumerable.Range(1, Globals.NUMBER_OF_PUZZLES).ToList();
+                parameter.Schema.Enum = days.Select(d => new OpenApiString(d.ToString())).ToList<IOpenApiAny>();
             }
 
             // Ensure that the input year is a valid value (2015 - this year)
@@ -21,8 +21,8 @@ namespace AdventOfCode.Controllers
             {
                 DateTime now = DateTime.UtcNow.AddHours(Globals.SERVER_UTC_OFFSET);
 
-                List<int> daysInDecember = Enumerable.Range(Globals.START_YEAR, now.Year - Globals.START_YEAR + 1).ToList();
-                parameter.Schema.Enum = daysInDecember.Select(d => new OpenApiString(d.ToString())).ToList<IOpenApiAny>();
+                List<int> days = Enumerable.Range(Globals.START_YEAR, now.Year - Globals.START_YEAR + 1).ToList();
+                parameter.Schema.Enum = days.Select(d => new OpenApiString(d.ToString())).ToList<IOpenApiAny>();
             }
         }
     }
