@@ -7,12 +7,15 @@ namespace AdventOfCode.Services
         public string FirstHalf(bool example)
         {
             List<string> lines = Utility.GetInputLines(2024, 1, example);
+            List<List<int>> inputs = lines.Select(l => l.Split("   ").ToInts()).ToList();
+            List<int> leftList = inputs.Select(i => i[0]).Order().ToList();
+            List<int> rightList = inputs.Select(i => i[1]).Order().ToList();
 
             int answer = 0;
 
-            foreach (string line in lines)
+            foreach (int i in leftList.Count)
             {
-
+                answer += Math.Abs(leftList[i] - rightList[i]);
             }
 
             return answer.ToString();
@@ -21,12 +24,15 @@ namespace AdventOfCode.Services
         public string SecondHalf(bool example)
         {
             List<string> lines = Utility.GetInputLines(2024, 1, example);
+            List<List<int>> inputs = lines.Select(l => l.Split("   ").ToInts()).ToList();
+            List<int> leftList = inputs.Select(i => i[0]).Order().ToList();
+            List<int> rightList = inputs.Select(i => i[1]).Order().ToList();
 
             int answer = 0;
 
-            foreach (string line in lines)
+            foreach (int x in leftList)
             {
-
+                answer += x * rightList.Count(y => y == x);
             }
 
             return answer.ToString();
