@@ -1,3 +1,5 @@
+using System.Text.RegularExpressions;
+
 namespace AdventOfCode.Services
 {
     // (ctrl/command + click) the link to open the input file
@@ -12,6 +14,17 @@ namespace AdventOfCode.Services
 
             foreach (string line in lines)
             {
+                string regex = @"mul\(\d+,\d+\)";
+
+                Regex rx = new(regex);
+
+                MatchCollection matches = rx.Matches(line);
+
+                foreach (Match match in matches)
+                {
+                    List<int> values = match.Value.Replace("mul(", "").Replace(")","").Split(",").ToInts();
+                    answer += values[0] * values[1];
+                }
 
             }
 
@@ -24,8 +37,28 @@ namespace AdventOfCode.Services
 
             int answer = 0;
 
+            bool enabled = true;
+
             foreach (string line in lines)
             {
+                string regex = @"mul\(\d+,\d+\)|do\(\)|don't\(\)";
+
+                Regex rx = new(regex);
+
+                MatchCollection matches = rx.Matches(line);
+
+                foreach (Match match in matches)
+                {
+                    if (match.Value.StartsWith("do")) {
+                        enabled = match.Value == "do()";
+                        continue;
+                    }
+                    
+                    if (enabled) {
+                        List<int> values = match.Value.Replace("mul(", "").Replace(")","").Split(",").ToInts();
+                        answer += values[0] * values[1];
+                    }
+                }
 
             }
 
