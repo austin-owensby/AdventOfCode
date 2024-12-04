@@ -26,7 +26,6 @@ namespace AdventOfCode.Services
                         foreach (Point point in points)
                         {
                             // Check the direction of the point and then check if the next letter in that direction is an 'A' and then 'S'
-                            // Up
                             int xDelta = point.X - x;
                             int yDelta = point.Y - y;
 
