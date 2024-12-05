@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using AdventOfCode.Gateways;
 
 namespace AdventOfCode.Services
@@ -21,8 +22,11 @@ namespace AdventOfCode.Services
         {
             ISolutionDayService service = FindSolutionService(year, day);
 
+            Stopwatch sw = Stopwatch.StartNew();
             // Run the specific solution
             string answer = secondHalf ? service.SecondHalf(example) : service.FirstHalf(example);
+            sw.Stop();
+            Console.WriteLine($"Elapsed time: {sw.Elapsed}");
 
             // Optionally submit the answer to AoC
             if (send)
