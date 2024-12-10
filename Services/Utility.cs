@@ -278,6 +278,33 @@ namespace AdventOfCode.Services
 
             return neighbors;
         }
+
+        /// <summary>
+        /// Converts a list of strings to a 2D list of chars
+        /// </summary>
+        /// <param name="lines"></param>
+        /// <returns></returns>
+        public static List<List<char>> ToGrid(this List<string> lines) {
+            return lines.Select(l => l.ToList()).ToList();
+        }
+
+        /// <summary>
+        /// Converts a list of strings to a 2D list of ints
+        /// </summary>
+        /// <param name="lines"></param>
+        /// <returns></returns>
+        public static List<List<int>> ToIntGrid(this List<string> lines) {
+            return lines.Select(l => l.Select(c => c.ToInt()).ToList()).ToList();
+        }
+
+        /// <summary>
+        /// Converts a list of strings to a 2D list of longs
+        /// </summary>
+        /// <param name="lines"></param>
+        /// <returns></returns>
+        public static List<List<long>> ToLongGrid(this List<string> lines) {
+            return lines.Select(l => l.Select(c => c.ToLong()).ToList()).ToList();
+        }
         #endregion
 
         #region String Operations
@@ -594,6 +621,17 @@ namespace AdventOfCode.Services
         public static int ToInt(this char value)
         {
             return int.Parse(value.ToString());
+        }
+
+        /// <summary>
+        /// Converts a char to an long
+        /// </summary>
+        /// <param name="value"></param>
+        /// <remarks> Ex. '1'.ToLong() returns 1</remarks>
+        /// <returns></returns>
+        public static long ToLong(this char value)
+        {
+            return long.Parse(value.ToString());
         }
 
         #endregion
