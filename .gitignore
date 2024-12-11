@@ -2,7 +2,7 @@ bin/
 obj/
 .DS_Store
 .vs
-PuzzleHelper/Cookie.txt
+**/PuzzleHelper/Cookie.txt
 /AdventOfCode.csproj.user
 
 # Ignore user generated inputs since AoC rules request they not be included
