@@ -8,9 +8,9 @@
             "name": "Launch (web)",
             "type": "coreclr",
             "request": "launch",
-            "preLaunchTask": "build",
-            "program": "${workspaceFolder}/bin/Debug/net8.0/AdventOfCode.dll",
-            "cwd": "${workspaceFolder}",
+            "preLaunchTask": "build_web",
+            "program": "${workspaceFolder}/WebAPI/bin/Debug/net8.0/WebAPI.dll",
+            "cwd": "${workspaceFolder}/WebAPI",
             "serverReadyAction": {
                 "action": "openExternally",
                 "pattern": "\\bNow listening on:\\s+(https?://\\S+)",
@@ -28,9 +28,24 @@
             "name": "Launch (web - no browser)",
             "type": "coreclr",
             "request": "launch",
-            "preLaunchTask": "build",
-            "program": "${workspaceFolder}/bin/Debug/net8.0/AdventOfCode.dll",
-            "cwd": "${workspaceFolder}",
+            "preLaunchTask": "build_web",
+            "program": "${workspaceFolder}/WebAPI/bin/Debug/net8.0/WebAPI.dll",
+            "cwd": "${workspaceFolder}/WebAPI",
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            },
+            "logging": {
+                "moduleLoad": false
+            },
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "Launch (console)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build_console",
+            "program": "${workspaceFolder}/Console/bin/Debug/net8.0/Console.dll",
+            "cwd": "${workspaceFolder}/Console",
             "env": {
                 "ASPNETCORE_ENVIRONMENT": "Development"
             },
