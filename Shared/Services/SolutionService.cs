@@ -1,4 +1,4 @@
-using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection; // This is needed for the Console App
 using System.Diagnostics;
 using AdventOfCode.Gateways;
 
@@ -21,13 +21,14 @@ namespace AdventOfCode.Services
         /// <exception cref="SolutionNotFoundException"></exception>
         public async Task<string> GetSolution(int year, int day, bool secondHalf, bool send, bool example)
         {
+            System.Console.WriteLine($"Running solution for year: {year}, day: {day}, part: {(secondHalf ? '1': '2')}, example: {(example ? "yes" : "no")}, submit: {(send ? "yes" : "no")}");
             ISolutionDayService service = FindSolutionService(year, day);
 
             Stopwatch sw = Stopwatch.StartNew();
             // Run the specific solution
             string answer = secondHalf ? service.SecondHalf(example) : service.FirstHalf(example);
             sw.Stop();
-            Console.WriteLine($"Elapsed time: {sw.Elapsed}");
+            System.Console.WriteLine($"Elapsed time: {sw.Elapsed}");
 
             // Optionally submit the answer to AoC
             if (send)
@@ -39,7 +40,7 @@ namespace AdventOfCode.Services
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine("An error occurred while submitting the answer to Advent of Code");
+                    System.Console.WriteLine("An error occurred while submitting the answer to Advent of Code");
                     answer = $"Submitted answer: {answer}.\nAdvent of Code response: {e.Message}";
                 }
             }

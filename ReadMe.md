@@ -12,7 +12,7 @@
 
 This repository is setup to assist with solving challenges from the [Advent of Code](https://adventofcode.com/).
 
-It allows you to easily run solutions in C#, submit answers and see the response, pull down your inputs, and run test inputs via an API described below.
+It allows you to easily run solutions in C#, submit answers and see the response, pull down your inputs, and run test inputs via a Web API or Console app described below.
 This also includes some utilities to make some solutions easier. See the `Services/Utility.cs` file for more info.
 
 The `main` branch contains a ready to use template to start your own solutions.
@@ -21,16 +21,18 @@ You may also reference the `aowensby-solutions` branch which contains my own sol
 ## Quick Start
 1. Run the Program (See [Setup](#setup) below)
 1. (Optional) Create a Cookie.txt file to enable puzzle input/submission (See [Puzzle Helper](#puzzle-helper) below)
-1. (Optional) Make the `import-input-file` API call to get your input for the day you're trying to solve (See [API](#post-apiimport-input-file) below)
+1. (Optional) Make the `import-input-file` API call or use the equivalent in the console app to get your input for the day you're trying to solve (See [API](#post-apiimport-input-file) below)
 1. Code your solution in one of the Service files
-1. Make the `run-solution` API call and optionally submit the solution (See [API](#get-apirun-solution) below)
+1. Make the `run-solution` API call or use the equivalent in the console app and optionally submit the solution (See [API](#get-apirun-solution) below)
 
 ## Setup
 1. If not already installed, install [.NET 8.0 SDK](https://dotnet.microsoft.com/en-us/download)
 1. Run the program
-   - If using Visual Studio or VSCode, use the play button to build and run the code
+   - You have 2 options, either as a Web API with endpoints you can hit or a console app
+   - If using Visual Studio or VSCode, use the play button to build and run the code after selecting your desired startup method
    - If using a CLI, run `dotnet run` from the repo's base folder
-1. Run API calls
+   - If using the console app, you will be prompted for inputs, you can bypass these by setting default values in the `Console/Program.cs` file.
+1. Run API calls (Only needed if running the Wbe API project)
    - You can use [Swagger](https://swagger.io/), an API documentation and execution library, to execute the API calls, or use your own tool to call to the API
    - Visual Studio
       - The browser should open Swagger by default, to change this behavior, update the `Properties/launchSettings.json`
@@ -43,7 +45,7 @@ You may also reference the `aowensby-solutions` branch which contains my own sol
 ## Puzzle Helper
 This allows you to easily create the needed services as well as submitting answers.
 
-In the `PuzzleHelper` folder, create a `Cookie.txt` file and add your own cookie that gets created when logging into the Advent of Code website. While on the Advent of Code website, if you open the Network tab in your browser's Dev Tools, you'll see the cookie in the header of API calls that are made while navigating the site. This typically expires after a month so you'll need to update it each year.
+In the `Shared/PuzzleHelper` folder, create a `Cookie.txt` file and add your own cookie that gets created when logging into the Advent of Code website. While on the Advent of Code website, if you open the Network tab in your browser's Dev Tools, you'll see the cookie in the header of API calls that are made while navigating the site. This typically expires after a month so you'll need to update it each year.
 
 Ensure that the Cookie.txt is all 1 line.
 

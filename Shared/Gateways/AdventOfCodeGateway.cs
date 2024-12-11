@@ -91,7 +91,7 @@ namespace AdventOfCode.Gateways
                 }
                 catch (Exception)
                 {
-                    Console.WriteLine("Error parsing html response.");
+                    System.Console.WriteLine("Error parsing html response.");
                 }
             }
 

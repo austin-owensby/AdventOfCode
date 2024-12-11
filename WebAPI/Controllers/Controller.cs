@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 using AdventOfCode.PuzzleHelper;
 using AdventOfCode.Services;
 
-namespace AdventOfCode.Controllers
+namespace AdventOfCode.WebAPI.Controllers
 {
     /// <summary>
     /// Base Controller for the Web API

@@ -27,7 +27,7 @@ namespace AdventOfCode.PuzzleHelper
                 if (!Directory.Exists(yearFolderPath))
                 {
                     Directory.CreateDirectory(yearFolderPath);
-                    Console.WriteLine($"Created folder for {year}.");
+                    System.Console.WriteLine($"Created folder for {year}.");
                     output += $"Created folder for {year}.\n";
                     update = true;
                 }
@@ -88,7 +88,7 @@ namespace AdventOfCode.PuzzleHelper
             }
             """);
 
-                        Console.WriteLine($"Created solution file for Year: {year}, Day: {day}.");
+                        System.Console.WriteLine($"Created solution file for Year: {year}, Day: {day}.");
                         output += $"Created solution file for Year: {year}, Day: {day}.\n";
                         update = true;
                     }
@@ -97,7 +97,7 @@ namespace AdventOfCode.PuzzleHelper
 
             if (!update)
             {
-                Console.WriteLine("No updates applied.");
+                System.Console.WriteLine("No updates applied.");
                 output += "No updates applied.\n";
             }
 
@@ -120,7 +120,7 @@ namespace AdventOfCode.PuzzleHelper
 
             if (latestPuzzleYear < year || latestPuzzleYear == year && latestPuzzleDay < day)
             {
-                Console.WriteLine("No updates applied.");
+                System.Console.WriteLine("No updates applied.");
                 output += "No updates applied.\n";
             }
             else
@@ -133,7 +133,7 @@ namespace AdventOfCode.PuzzleHelper
                 }
                 else
                 {
-                    Console.WriteLine("No updates applied.");
+                    System.Console.WriteLine("No updates applied.");
                     output += "No updates applied.\n ";
                 }
             }
@@ -170,14 +170,14 @@ namespace AdventOfCode.PuzzleHelper
                 }
                 catch (Exception)
                 {
-                    Console.WriteLine("An error occurred while getting the puzzle input from Advent of Code");
+                    System.Console.WriteLine("An error occurred while getting the puzzle input from Advent of Code");
                     throw;
                 }
 
                 using StreamWriter inputFile = new(inputFilePath);
                 await inputFile.WriteAsync(response);
 
-                Console.WriteLine($"Created input file for Year: {year}, Day: {day}.");
+                System.Console.WriteLine($"Created input file for Year: {year}, Day: {day}.");
                 update = true;
             }
 

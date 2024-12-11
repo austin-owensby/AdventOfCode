@@ -646,7 +646,7 @@ namespace AdventOfCode.Services
         /// </summary>
         /// <param name="count"></param>
         /// <param name="action"></param>
-        /// <remarks>Ex. 3.ForEach((i) => Console.Write(i)) would print 012</remarks>
+        /// <remarks>Ex. 3.ForEach((i) => System.Console.Write(i)) would print 012</remarks>
         public static void ForEach<T>(this T count, Action<T> action) where T : notnull, INumber<T>
         {
             foreach (T i in count)
@@ -660,7 +660,7 @@ namespace AdventOfCode.Services
         /// </summary>
         /// <param name="count"></param>
         /// <typeparam name="T"></typeparam>
-        /// <remarks>Ex. foreach(int i in 10) { Console.Write(i) } would print 012</remarks>
+        /// <remarks>Ex. foreach(int i in 10) { System.Console.Write(i) } would print 012</remarks>
         /// <returns></returns>
         public static IEnumerator<T> GetEnumerator<T>(this T count) where T : notnull, INumber<T>
         {
@@ -704,7 +704,7 @@ namespace AdventOfCode.Services
             foreach (char[] outputLine in outputRows)
             {
                 string value = new(outputLine);
-                Console.WriteLine(value.Replace('#', '█').Replace('.', ' '));
+                System.Console.WriteLine(value.Replace('#', '█').Replace('.', ' '));
             }
 
             IEnumerable<string> pivotedOutput = outputRows.Pivot().Select(r => r.CharsToString());
