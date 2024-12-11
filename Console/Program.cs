@@ -23,6 +23,9 @@ while (mode == null) {
     }
 
     if(int.TryParse(input, out int modeValue)) {
+        if (modeValue < 1 || modeValue > 3) {
+            continue;
+        }
         mode = modeValue;
     }
 }
