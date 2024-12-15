@@ -21,7 +21,7 @@ namespace AdventOfCode.Services
         /// <exception cref="SolutionNotFoundException"></exception>
         public async Task<string> GetSolution(int year, int day, bool secondHalf, bool send, bool example)
         {
-            System.Console.WriteLine($"Running solution for year: {year}, day: {day}, part: {(secondHalf ? '1': '2')}, example: {(example ? "yes" : "no")}, submit: {(send ? "yes" : "no")}");
+            System.Console.WriteLine($"Running solution for year: {year}, day: {day}, part: {(secondHalf ? '2': '1')}, example: {(example ? "yes" : "no")}, submit: {(send ? "yes" : "no")}");
             ISolutionDayService service = FindSolutionService(year, day);
 
             Stopwatch sw = Stopwatch.StartNew();
