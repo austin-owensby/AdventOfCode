@@ -551,21 +551,21 @@ namespace AdventOfCode.Services
         }
 
         /// <summary>
-        /// Given 2 values, calculate the manhatten distance
+        /// Given 2 values, calculate the manhattan distance
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
         /// <returns></returns>
-        public static int ManhattenDistance(int x, int y) {
+        public static int ManhattanDistance(int x, int y) {
             return Math.Abs(x) + Math.Abs(y);
         }
 
         /// <summary>
-        /// Given a point. calculate the manhatten distance
+        /// Given a point. calculate the manhattan distance
         /// </summary>
         /// <param name="point"></param>
         /// <returns></returns>
-        public static int ManhattenDistance(this Point point) {
+        public static int ManhattanDistance(this Point point) {
             return Math.Abs(point.X) + Math.Abs(point.Y);
         }
 

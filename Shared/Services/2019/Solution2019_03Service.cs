@@ -60,7 +60,7 @@ namespace AdventOfCode.Services
                 }
             }
 
-            int answer = path1.IntersectBy(path2.Select(p => $"{p.X} {p.Y}"), p => $"{p.X} {p.Y}").Select(p => p.ManhattenDistance()).Min();
+            int answer = path1.IntersectBy(path2.Select(p => $"{p.X} {p.Y}"), p => $"{p.X} {p.Y}").Select(p => p.ManhattanDistance()).Min();
 
             return answer.ToString();
         }
