@@ -77,7 +77,13 @@ namespace AdventOfCode.Services
 
             long answer = 0;
 
-            long iteration = 0;
+            // TODO, there must be a more elegant solution
+            // The iteration and loop values are based off of observations while running the code
+            long iteration = 4144625026562;
+
+            int i = 0;
+            //List<int> loop = [20217, 1028359, 8192, 12025, 1028359];
+            List<long> loop = [20217, 3307124797703, 20217, 1090921672967, 20217, 4398046490887];
 
             while (answer == 0) {
                 long regA = iteration;
@@ -150,7 +156,8 @@ namespace AdventOfCode.Services
                     answer = iteration;
                 }
 
-                iteration++;
+                iteration += loop[i % loop.Count];
+                i++;
             }
             return answer.ToString();
         }
