@@ -569,6 +569,15 @@ namespace AdventOfCode.Services
             return Math.Abs(point.X) + Math.Abs(point.Y);
         }
 
+        /// <summary>
+        /// Given 2 points. calculate the manhattan distance
+        /// </summary>
+        /// <param name="point"></param>
+        /// <returns></returns>
+        public static int ManhattanDistance(this Point pointA, Point pointB) {
+            return Math.Abs(pointA.X - pointB.X) + Math.Abs(pointA.Y - pointB.Y);
+        }
+
         #endregion
 
         #region Conversion
