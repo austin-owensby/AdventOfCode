@@ -96,8 +96,6 @@ namespace AdventOfCode.Services
 
             int answer = 0;
 
-            Dictionary<int, int> map = [];
-
             for (int i = 0; i < track.Count; i++) {
                 Point point = track[i];
 
