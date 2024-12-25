@@ -550,6 +550,34 @@ namespace AdventOfCode.Services
             }
         }
 
+        /// <summary>
+        /// Given 2 values, calculate the manhattan distance
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
+        public static int ManhattanDistance(int x, int y) {
+            return Math.Abs(x) + Math.Abs(y);
+        }
+
+        /// <summary>
+        /// Given a point. calculate the manhattan distance
+        /// </summary>
+        /// <param name="point"></param>
+        /// <returns></returns>
+        public static int ManhattanDistance(this Point point) {
+            return Math.Abs(point.X) + Math.Abs(point.Y);
+        }
+
+        /// <summary>
+        /// Given 2 points. calculate the manhattan distance
+        /// </summary>
+        /// <param name="point"></param>
+        /// <returns></returns>
+        public static int ManhattanDistance(this Point pointA, Point pointB) {
+            return Math.Abs(pointA.X - pointB.X) + Math.Abs(pointA.Y - pointB.Y);
+        }
+
         #endregion
 
         #region Conversion
