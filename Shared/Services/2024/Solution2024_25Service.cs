@@ -7,12 +7,28 @@ namespace AdventOfCode.Services
         public string FirstHalf(bool example)
         {
             List<string> lines = Utility.GetInputLines(2024, 25, example);
+            List<List<string>> schematics = lines.ChunkByExclusive((l) => string.IsNullOrEmpty(l)).ToList();
+            List<List<int>> keys = schematics.Where(s => s[0] == ".....").Select(s => s.Pivot().Select(x => x.Count(y => y == '#')).ToList()).ToList();
+            List<List<int>> locks = schematics.Where(s => s[0] == "#####").Select(s => s.Pivot().Select(x => x.Count(y => y == '#')).ToList()).ToList();
+
+            int height = schematics.First().Count;
 
             int answer = 0;
 
-            foreach (string line in lines)
-            {
+            foreach (List<int> key in keys) {
+                foreach (List<int> lockItem in locks) {
+                    bool fits = true;
+                    foreach (int pin in key.Count) {
+                        if (key[pin] + lockItem[pin] > height) {
+                            fits = false;
+                            break;
+                        }
+                    }
 
+                    if (fits) {
+                        answer++;
+                    }
+                }
             }
 
             return answer.ToString();
