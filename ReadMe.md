@@ -1,5 +1,6 @@
 # Advent Of Code
 <!-- Generated via https://github.com/alexandru-dinu/advent-of-code/blob/main/.scripts/gen_badges.py -->
+![](https://img.shields.io/badge/2024-50%20stars-239323)
 ![](https://img.shields.io/badge/2023-50%20stars-239323)
 ![](https://img.shields.io/badge/2022-50%20stars-239323)
 ![](https://img.shields.io/badge/2021-20%20stars-6e621d)
