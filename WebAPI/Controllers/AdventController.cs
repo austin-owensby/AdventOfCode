@@ -12,7 +12,7 @@ namespace AdventOfCode.WebAPI.Controllers
     /// <param name="puzzleHelperService"></param>
     [ApiController]
     [Route("api")]
-    public class Controller(SolutionService solutionService, PuzzleHelperService puzzleHelperService) : ControllerBase
+    public class AdventController(SolutionService solutionService, PuzzleHelperService puzzleHelperService) : ControllerBase
     {
         private readonly SolutionService solutionService = solutionService;
         private readonly PuzzleHelperService puzzleHelperService = puzzleHelperService;

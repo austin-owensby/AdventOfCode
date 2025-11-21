@@ -1,4 +1,4 @@
-using Microsoft.OpenApi.Models;
+using Microsoft.OpenApi;
 using AdventOfCode.Gateways;
 using AdventOfCode.PuzzleHelper;
 using AdventOfCode.Services;
