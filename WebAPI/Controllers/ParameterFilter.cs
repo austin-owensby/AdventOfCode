@@ -10,7 +10,7 @@ namespace AdventOfCode.Controllers
     public class ParameterFilter : IParameterFilter
     {
         /// <summary>
-        /// Applys parameter filters to the API calls in Swagger
+        /// Applies parameter filters to the API calls in Swagger
         /// </summary>
         /// <param name="parameter"></param>
         /// <param name="context"></param>

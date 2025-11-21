@@ -27,7 +27,7 @@ You may also reference the `aowensby-solutions` branch which contains my own sol
 1. Make the `run-solution` API call or use the equivalent in the console app and optionally submit the solution (See [API](#get-apirun-solution) below)
 
 ## Setup
-1. If not already installed, install [.NET 8.0 SDK](https://dotnet.microsoft.com/en-us/download)
+1. If not already installed, install [.NET 10.0 SDK](https://dotnet.microsoft.com/en-us/download)
 1. Run the program
    - You have 2 options, either as a Web API with endpoints you can hit or a console app
    - If using Visual Studio or VSCode, use the play button to build and run the code after selecting your desired startup method

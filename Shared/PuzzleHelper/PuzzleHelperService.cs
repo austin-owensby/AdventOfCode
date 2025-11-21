@@ -32,8 +32,16 @@ namespace AdventOfCode.PuzzleHelper
                     update = true;
                 }
 
+                int puzzles = Globals.NUMBER_OF_PUZZLES;
+
+                if (year >= Globals.NEW_PUZZLE_NUMBER_YEAR)
+                {
+                    // Update the number of puzzles starting this year
+                    puzzles = Globals.NEW_NUMBER_OF_PUZZLES;
+                }
+
                 // Create/update files for each day that is missing one
-                for (int day = 1; day <= Globals.NUMBER_OF_PUZZLES; day++)
+                for (int day = 1; day <= puzzles; day++)
                 {
                     string dayFilePath = Path.Combine(yearFolderPath, $"Solution{year}_{day:D2}Service.cs");
 
@@ -66,9 +74,9 @@ namespace AdventOfCode.PuzzleHelper
                     public string SecondHalf(bool example)
                     {
                         {{(
-                            day == Globals.NUMBER_OF_PUZZLES ?
-                            """
-                            return "There is no problem for Day 25 part 2, solve all other problems to get the last star.";
+                            day == puzzles ?
+                            $"""
+                            return "There is no problem for Day {puzzles} part 2, solve all other problems to get the last star.";
                             """ :
                             $$"""
                             List<string> lines = Utility.GetInputLines({{year}}, {{day}}, example);
@@ -198,14 +206,31 @@ namespace AdventOfCode.PuzzleHelper
             {
                 latestPuzzleYear = now.Year;
 
+                int puzzles = Globals.NUMBER_OF_PUZZLES;
+
+                if (latestPuzzleYear >= Globals.NEW_PUZZLE_NUMBER_YEAR)
+                {
+                    // Update the number of puzzles starting this year
+                    puzzles = Globals.NEW_NUMBER_OF_PUZZLES;
+                }
+
                 // If it's event month, but after the final puzzle, default to the final puzzle
-                latestPuzzleDay = Math.Min(now.Day, Globals.NUMBER_OF_PUZZLES);
+                latestPuzzleDay = Math.Min(now.Day, puzzles);
             }
             else
             {
                 // Otherwise the latest puzzle is from the end of the previous event
                 latestPuzzleYear = now.Year - 1;
-                latestPuzzleDay = Globals.NUMBER_OF_PUZZLES;
+
+                int puzzles = Globals.NUMBER_OF_PUZZLES;
+
+                if (latestPuzzleYear >= Globals.NEW_PUZZLE_NUMBER_YEAR)
+                {
+                    // Update the number of puzzles starting this year
+                    puzzles = Globals.NEW_NUMBER_OF_PUZZLES;
+                }
+
+                latestPuzzleDay = puzzles;
             }
 
             return Tuple.Create(latestPuzzleYear, latestPuzzleDay);
