@@ -1,0 +1,11 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".gitattributes" />
+    <File Path=".gitignore" />
+    <File Path="LICENSE" />
+    <File Path="ReadMe.md" />
+  </Folder>
+  <Project Path="Console/Console.csproj" />
+  <Project Path="Shared/Shared.csproj" />
+  <Project Path="WebAPI/WebAPI.csproj" />
+</Solution>

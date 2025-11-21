@@ -22,9 +22,17 @@ namespace AdventOfCode.Console.Controllers
                 System.Console.WriteLine("You're attempting to submit your answer to AOC while using an example input, this is likely a mistake.");
             }
 
-            if (day == 25 && secondHalf)
+            int puzzles = Globals.NUMBER_OF_PUZZLES;
+
+            if (year >= Globals.NEW_PUZZLE_NUMBER_YEAR)
             {
-                System.Console.WriteLine("There is no problem for Day 25 part 2, solve all other problems to get the last star.");
+                // Update the number of puzzles starting this year
+                puzzles = Globals.NEW_NUMBER_OF_PUZZLES;
+            }
+
+            if (day == puzzles && secondHalf)
+            {
+                System.Console.WriteLine($"There is no problem for Day {puzzles} part 2, solve all other problems to get the last star.");
             }
             
             SolutionService solutionService = SetupSolutionService();

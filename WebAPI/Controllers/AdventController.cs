@@ -12,7 +12,7 @@ namespace AdventOfCode.WebAPI.Controllers
     /// <param name="puzzleHelperService"></param>
     [ApiController]
     [Route("api")]
-    public class Controller(SolutionService solutionService, PuzzleHelperService puzzleHelperService) : ControllerBase
+    public class AdventController(SolutionService solutionService, PuzzleHelperService puzzleHelperService) : ControllerBase
     {
         private readonly SolutionService solutionService = solutionService;
         private readonly PuzzleHelperService puzzleHelperService = puzzleHelperService;
@@ -34,9 +34,17 @@ namespace AdventOfCode.WebAPI.Controllers
                 return BadRequest("You're attempting to submit your answer to AOC while using an example input, this is likely a mistake.");
             }
 
-            if (day == 25 && secondHalf)
+            int puzzles = Globals.NUMBER_OF_PUZZLES;
+
+            if (year >= Globals.NEW_PUZZLE_NUMBER_YEAR)
             {
-                return NotFound("There is no problem for Day 25 part 2, solve all other problems to get the last star.");
+                // Update the number of puzzles starting this year
+                puzzles = Globals.NEW_NUMBER_OF_PUZZLES;
+            }
+
+            if (day == puzzles && secondHalf)
+            {
+                return NotFound($"There is no problem for Day {puzzles} part 2, solve all other problems to get the last star.");
             }
 
             try
