@@ -50,12 +50,7 @@ namespace AdventOfCode.Services
                         answer++;
                     }
                 }
-
-                Console.WriteLine($"{dial} {step} {change} {answer}");
-
             }
-
-            // 7276
 
             return answer.ToString();
         }
