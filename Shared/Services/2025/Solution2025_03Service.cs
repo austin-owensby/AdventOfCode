@@ -50,28 +50,15 @@ namespace AdventOfCode.Services
 
                 for (int i = joltageList.Count; i < bank.Count; i++)
                 {
-                    bool removed = false;
+                    joltageList.Add(bank[i]);
 
-                    for (int j = 0; j < joltageList.Count - 1; j++)
+                    for (int j = 0; j < joltageList.Count; j++)
                     {
-                        if (joltageList[j] < joltageList[j + 1])
+                        if (j == joltageList.Count - 1 || joltageList[j] < joltageList[j + 1])
                         {
                             joltageList.RemoveAt(j);
-                            removed = true;
                             break;
                         }
-                    }
-
-                    int c = bank[i];
-
-                    if (removed)
-                    {
-                        joltageList.Add(c);
-                    }
-                    else if (c > joltageList.Last())
-                    {
-                        joltageList.RemoveAt(11);
-                        joltageList.Add(c);
                     }
                 }
 
