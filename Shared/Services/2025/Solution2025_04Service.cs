@@ -7,12 +7,25 @@ namespace AdventOfCode.Services
         public string FirstHalf(bool example)
         {
             List<string> lines = Utility.GetInputLines(2025, 4, example);
+            List<List<char>> grid = lines.ToGrid();
 
             int answer = 0;
 
-            foreach (string line in lines)
+            foreach (int y in grid.Count)
             {
+                foreach (int x in grid[y].Count)
+                {
+                    if (grid[y][x] == '@')
+                    {
+                        List<Point> neighbors = grid.GetNeighbors(x, y, true);
+                        int fullNeighbors = neighbors.Count(p => grid[p.Y][p.X] == '@');
 
+                        if (fullNeighbors < 4)
+                        {
+                            answer++;
+                        }
+                    }
+                }
             }
 
             return answer.ToString();
@@ -21,12 +34,35 @@ namespace AdventOfCode.Services
         public string SecondHalf(bool example)
         {
             List<string> lines = Utility.GetInputLines(2025, 4, example);
+            List<List<char>> grid = lines.ToGrid();
 
             int answer = 0;
 
-            foreach (string line in lines)
-            {
+            bool removed = true;
 
+            while (removed)
+            {
+                removed = false;
+
+                foreach (int y in grid.Count)
+                {
+                    foreach (int x in grid[y].Count)
+                    {
+                        if (grid[y][x] == '@')
+                        {
+                            List<Point> neighbors = grid.GetNeighbors(x, y, true);
+                            int fullNeighbors = neighbors.Count(p => grid[p.Y][p.X] == '@');
+
+                            if (fullNeighbors < 4)
+                            {
+                                answer++;
+                                removed = true;
+                                grid[y][x] = '.';
+                            }
+                        }
+                    }
+                }
+                
             }
 
             return answer.ToString();
