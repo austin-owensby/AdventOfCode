@@ -87,15 +87,104 @@ namespace AdventOfCode.Services
             return answer.ToString();
         }
 
+        private static long GetInvalidIdSum(string lower, string upper)
+        {
+            List<long> invalidIds = [];
+
+            // Check each group size
+            for (int groupSize = 1; groupSize <= lower.Length / 2; groupSize++)
+            {
+                // Check if this is a valid group size
+                if (lower.Length % groupSize != 0)
+                {
+                    continue;
+                }
+                
+                int part = int.Parse(lower[..groupSize]);
+
+                StringBuilder invalidIdBuilder = new();
+                
+                foreach (int i in lower.Length / groupSize)
+                {
+                    invalidIdBuilder.Append(part);
+                }
+
+                string invalidId = invalidIdBuilder.ToString();
+                long invalidIdNumber = long.Parse(invalidId);
+
+                if (invalidIdNumber < long.Parse(lower))
+                {
+                    // Move to the next invalid Id so that we're within the range
+                    part++;
+
+                    invalidIdBuilder.Clear();
+                
+                    foreach (int i in lower.Length / groupSize)
+                    {
+                        invalidIdBuilder.Append(part);
+                    }
+
+                    invalidId = invalidIdBuilder.ToString();
+                    invalidIdNumber = long.Parse(invalidId);
+                }
+
+                long upperNumber = long.Parse(upper);
+
+                while (invalidIdNumber <= upperNumber)
+                {
+                    invalidIds.Add(invalidIdNumber);
+
+                    // Move on to the next id
+                    part++;
+
+                    invalidIdBuilder.Clear();
+                
+                    foreach (int i in lower.Length / groupSize)
+                    {
+                        invalidIdBuilder.Append(part);
+                    }
+
+                    invalidId = invalidIdBuilder.ToString();
+                    invalidIdNumber = long.Parse(invalidId);
+                }
+            }
+
+            return invalidIds.Distinct().Sum();
+        }
+
         public string SecondHalf(bool example)
         {
             List<string> lines = Utility.GetInputLines(2025, 2, example);
+            string[] ranges = lines.First().Split(",");
 
             long answer = 0;
 
-            foreach (string line in lines)
+            foreach (string range in ranges)
             {
+                string[] parts = range.Split("-");
+                string lower = parts.First();
+                string upper = parts.Last();
 
+                if (lower.Length == upper.Length)
+                {
+                    answer += GetInvalidIdSum(lower, upper);
+                }
+                else
+                {
+                    // Split into 2 ranges with the same size groupings
+                    StringBuilder newUpper = new();
+                    StringBuilder newLower = new();
+                    newLower.Append('1');
+                    
+                    for (int i = 0; i < lower.Length; i++)
+                    {
+                        newUpper.Append('9');
+                        newLower.Append('0');
+                    }
+
+                    answer += GetInvalidIdSum(lower, newUpper.ToString());
+                    answer += GetInvalidIdSum(newLower.ToString(), upper);
+                }
             }
 
             return answer.ToString();
