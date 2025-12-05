@@ -38,13 +38,39 @@ namespace AdventOfCode.Services
         public string SecondHalf(bool example)
         {
             List<string> lines = Utility.GetInputLines(2025, 5, example);
+            List<(long lower, long upper)> ranges = lines.TakeWhile(l => !string.IsNullOrWhiteSpace(l)).Select(p => p.Split('-')).Select(p => (long.Parse(p.First()), long.Parse(p.Last()))).OrderBy(p => p.Item1).ToList();
 
-            int answer = 0;
+            long answer = 0;
 
-            foreach (string line in lines)
+            (long lower, long upper) = ranges.First();
+
+            for (int i = 1; i < ranges.Count; i++)
             {
+                (long nextLower, long nextUpper) = ranges[i];
 
+                if (upper >= nextLower)
+                {
+                    // These ranges overlap
+                    if (upper < nextUpper)
+                    {
+                        // This extend our current range with the next range's end
+                        // |----A----|
+                        //   |--B------|
+                        upper = nextUpper;
+                    }
+                    // Otherwise, this range completely overlaps the current range
+                }
+                else
+                {
+                    // There is no overlap between these ranges, move on to the next range
+                    answer += upper - lower + 1;
+                    lower = nextLower;
+                    upper = nextUpper;
+                }
             }
+
+            // Add the last range
+            answer += upper - lower + 1;
 
             return answer.ToString();
         }
