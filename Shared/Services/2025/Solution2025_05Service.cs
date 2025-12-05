@@ -7,12 +7,29 @@ namespace AdventOfCode.Services
         public string FirstHalf(bool example)
         {
             List<string> lines = Utility.GetInputLines(2025, 5, example);
+            List<List<string>> parts = lines.ChunkByExclusive(l => string.IsNullOrWhiteSpace(l));
+            List<(long, long)> ranges = parts.First().Select(p => p.Split('-')).Select(p => (long.Parse(p.First()), long.Parse(p.Last()))).ToList();
+            List<long> ids = parts.Last().ToLongs();
 
             int answer = 0;
 
-            foreach (string line in lines)
+            foreach (long id in ids)
             {
+                bool fresh = false;
 
+                foreach ((long lower, long upper) in ranges)
+                {
+                    if (lower <= id && id <= upper)
+                    {
+                        fresh = true;
+                        break;
+                    }
+                }
+
+                if (fresh)
+                {
+                    answer++;
+                }
             }
 
             return answer.ToString();
