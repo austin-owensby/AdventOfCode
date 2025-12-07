@@ -52,12 +52,35 @@ namespace AdventOfCode.Services
         public string SecondHalf(bool example)
         {
             List<string> lines = Utility.GetInputLines(2025, 6, example);
+            List<string> signs = lines.Last().ToList().ChunkByExclusive(c => c == ' ').Select(c => new string(c.ToArray())).ToList();
+            // Parse the values in a totally human-readable, easy to debug, and extensible way
+            List<List<long>> equationValues = lines.SkipLast(1).Select(s => s.ToList()).Pivot().Select(x => new string(x.ToArray())).ChunkByExclusive(s => string.IsNullOrWhiteSpace(s)).Select(g => g.Select(s => long.Parse(s.Trim())).ToList()).ToList();
 
-            int answer = 0;
-
-            foreach (string line in lines)
+            long answer = 0;
+            
+            foreach (int i in equationValues.Count)
             {
+                string sign = signs[i];
+                long result = equationValues[i][0];
 
+                if (sign == "+")
+                {
+                    for (int j = 1; j < equationValues[i].Count; j++)
+                    {
+                        long value = equationValues[i][j];
+                        result += value;
+                    }
+                }
+                else
+                {
+                    for (int j = 1; j < equationValues[i].Count; j++)
+                    {
+                        long value = equationValues[i][j];
+                        result *= value;
+                    }
+                }
+
+                answer += result;
             }
 
             return answer.ToString();
