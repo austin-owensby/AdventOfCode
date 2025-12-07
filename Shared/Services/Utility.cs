@@ -295,7 +295,7 @@ namespace AdventOfCode.Services
         /// </summary>
         /// <param name="lines"></param>
         /// <returns></returns>
-        public static List<List<char>> ToGrid(this List<string> lines) {
+        public static List<List<char>> ToGrid(this IEnumerable<string> lines) {
             return lines.Select(l => l.ToList()).ToList();
         }
 
