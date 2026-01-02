@@ -550,6 +550,243 @@ namespace AdventOfCode.Services
             }
         }
 
+
+        /// <summary>
+        /// Compare 2 lists of numbers and returns a int to indicate sorting order
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <returns></returns>
+        public static int CompareLists<T>(List<T> a, List<T> b) where T : notnull, INumber<T>
+        {
+            foreach (int i in a.Count)
+            {
+                if (a[i] != b[i])
+                {
+                    return a[i].CompareTo(b[i]);
+                }
+            }
+
+            return 0;
+        }
+
+        /// <summary>
+        /// For debugging purposes, prints an augmented matrix in a readable way
+        /// </summary>
+        /// <param name="augmentedMatrix"></param>
+        /// <returns></returns>
+        public static void PrintAugmentedMatrix<T>(List<List<T>> augmentedMatrix) where T : notnull, INumber<T>
+        {
+            List<int> spacing = [];
+
+            foreach (int i in augmentedMatrix[0].Count)
+            {
+                int value = augmentedMatrix.Max(row => row[i].ToString()?.Length ?? 0);
+                spacing.Add(value);
+            }
+
+            foreach (List<T> equation in augmentedMatrix)
+            {
+                string line = "";
+
+                foreach (int i in equation.Count)
+                {
+                    if (i == equation.Count - 1)
+                    {
+                        line += " |";
+                    }
+
+                    line += string.Format($"{{0,{spacing[i] + 1}}}", equation[i]);
+                }
+
+                Console.WriteLine(line);
+            }
+        }
+
+        /// <summary>
+        /// Given an augmented matrix, simplify it using Gaussian Elimination
+        /// </summary>
+        /// <param name="augmentedMatrix"></param>
+        /// <returns></returns>
+        /// <remarks>
+        /// Ex.
+        /// 
+        /// Utility.GaussianElimination([
+        ///     [1 1 1 0 | 10],
+        ///     [1 0 1 1 | 11],
+        ///     [1 0 1 1 | 11],
+        ///     [1 1 0 0 | 5],
+        ///     [1 1 1 0 | 10],
+        ///     [0 0 1 0 | 5]
+        /// ]);
+        /// 
+        /// Returns
+        /// [
+        ///     [1 0 0  1 |  6],
+        ///     [0 1 0 -1 | -1],
+        ///     [0 0 1  0 |  5]
+        /// ]
+        /// </remarks>
+        public static List<List<double>> GaussianElimination(List<List<double>> augmentedMatrix)
+        {
+            // This handles some floating point precision errors
+            double epsilon = 0.00000000001;
+
+            bool change = false;
+            List<List<double>> simplifiedMatrix;
+            List<List<double>> originalMatrix = augmentedMatrix.ToList();
+
+            do
+            {
+                simplifiedMatrix = [];
+
+                // First remove duplicate rows from the matrix
+                for (int i = 0; i < originalMatrix.Count; i++)
+                {
+                    bool unique = true;
+
+                    for (int j = i + 1; j < originalMatrix.Count; j++)
+                    {
+                        bool match = true;
+
+                        foreach (int x in originalMatrix[i].Count)
+                        {
+                            if (Math.Abs(originalMatrix[i][x] - originalMatrix[j][x]) > epsilon)
+                            {
+                                match = false;
+                                break;
+                            }
+                        }
+
+                        if (match)
+                        {
+                            unique = false;
+                            break;
+                        }
+                    }
+
+                    if (unique)
+                    {
+                        simplifiedMatrix.Add(originalMatrix[i]);
+                    }
+                }
+
+                // Sort the matrix
+                simplifiedMatrix.Sort((a, b) => CompareLists(a, b));
+
+                // Reverse the matrix so that leading values are at the top
+                simplifiedMatrix.Reverse();
+
+                // Simply to having leading 1s
+                foreach (int i in simplifiedMatrix.Count)
+                {
+                    double product = 1;
+                    foreach (double x in simplifiedMatrix[i])
+                    {
+                        if (Math.Abs(x) > epsilon)
+                        {
+                            product = x;
+                            break;
+                        }
+                    }
+
+                    simplifiedMatrix[i] = simplifiedMatrix[i].Select(x => x / product).ToList();
+                }
+
+                // Subtract later rows from earlier rows until we're fully reduced
+                int currentRowIndex = 0;
+
+                for (int column = 0; column < simplifiedMatrix[0].Count - 1; column++)
+                {
+                    List<double> columnValues = simplifiedMatrix.Skip(currentRowIndex).Select(row => row[column]).ToList();
+                    List<int> indexes = columnValues.FindIndexes(x => Math.Abs(x - 1) < epsilon);
+
+                    if (indexes.Count == 1)
+                    {
+                        // Subtract this row from earlier rows since it's a leading 1
+                        List<int> indexesToSubtract = simplifiedMatrix.Take(currentRowIndex).FindIndexes(row => Math.Abs(row[column]) > epsilon);
+
+                        foreach (int targetRowIndex in indexesToSubtract)
+                        {
+                            double product = simplifiedMatrix[targetRowIndex][column];
+                            simplifiedMatrix[targetRowIndex] = simplifiedMatrix[targetRowIndex].Select((x, i) => x - product * simplifiedMatrix[currentRowIndex][i]).ToList();
+                        }
+
+                        // This row is already good, move on to the next row
+                        currentRowIndex++;
+                    }
+                    else if (indexes.Count != 0)
+                    {
+                        // Simplify by subtracting the current row from a later row
+                        int targetRowIndex = indexes[1] + currentRowIndex;
+                        simplifiedMatrix[targetRowIndex] = simplifiedMatrix[targetRowIndex].Select((x, i) => x - simplifiedMatrix[currentRowIndex][i]).ToList();
+                        break;
+                    }
+                }
+
+                // Remove empty rows
+                simplifiedMatrix.RemoveAll(x => x.All(i => Math.Abs(i) < epsilon));
+            
+                // Check if our matrix has changed
+                foreach (int row in simplifiedMatrix.Count)
+                {
+                    foreach (int col in simplifiedMatrix[row].Count)
+                    {
+                        change = simplifiedMatrix[row][col] != originalMatrix[row][col];
+
+                        if (change)
+                        {
+                            break;
+                        }
+                    }
+
+                    if (change)
+                    {
+                        break;
+                    }
+                }
+
+                originalMatrix = simplifiedMatrix;
+            }
+            while (change == true);
+
+            return simplifiedMatrix;
+        }
+        
+        /// <summary>
+        /// Given an augmented matrix, simplify it using Gaussian Elimination
+        /// </summary>
+        /// <param name="augmentedMatrix"></param>
+        /// <returns></returns>
+        /// <remarks>
+        /// Ex.
+        /// 
+        /// Utility.GaussianElimination([
+        ///     [1 1 1 0 | 10],
+        ///     [1 0 1 1 | 11],
+        ///     [1 0 1 1 | 11],
+        ///     [1 1 0 0 | 5],
+        ///     [1 1 1 0 | 10],
+        ///     [0 0 1 0 | 5]
+        /// ]);
+        /// 
+        /// Returns
+        /// [
+        ///     [1 0 0  1 |  6],
+        ///     [0 1 0 -1 | -1],
+        ///     [0 0 1  0 |  5]
+        /// ]
+        /// </remarks>
+        public static List<List<double>> GaussianElimination(List<List<int>> augmentedMatrix)
+        {
+            List<List<double>> augmentedDoubles = augmentedMatrix.Select(x => x.Select(y => (double)y).ToList()).ToList();
+        
+            List<List<double>> results = GaussianElimination(augmentedDoubles);
+
+            return results;
+        }
+
         /// <summary>
         /// Given 2 values, calculate the manhattan distance
         /// </summary>
